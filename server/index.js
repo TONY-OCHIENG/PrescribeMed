@@ -2,6 +2,8 @@ import express from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
+import databaseConnection from './configs/db.js'
+databaseConnection 
 dotenv.config()
 
 const app = express()
