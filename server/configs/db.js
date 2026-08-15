@@ -16,7 +16,6 @@ databaseConnection.getConnection((err, connection) => {
     if (err) {
         console.log("Error in connecting database")
         console.log(err)
-        console.log(process.env.MYSQL_PASSWORD,process.env.MYSQL_DATABASE, process.env.MYSQL_HOST)
     } else {
         console.log("Database connected")
         connection.release()
