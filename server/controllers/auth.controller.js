@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken'
 import databaseConnection from '../configs/db.js'
-import { comparePassword } from '../configs/hashPassword.js'
-import jwt from 'jsonwebtoken'
+import { comparePassword } from '../configs/hashPassword.js' 
 
 export const adminLogin = (request,response) => {
     const { email, password} = request.body
