@@ -1,7 +1,6 @@
 import React from 'react'
 import Input from '../components/Input'
 import { Lock, Mail } from 'lucide-react'
-import auth from '../store/auth'
 import { useState } from 'react'
 
 function AdminLogin() {
@@ -9,7 +8,6 @@ function AdminLogin() {
         email:"",
         password:""
     })
-    const { loginAdmin, isLoading,message,success} = auth()
     const handleChange = (event) => {
         const { name, value} = event.target
         setValues((prev) => ({
@@ -20,9 +18,6 @@ function AdminLogin() {
     
     const handleSubmit = async (event) => {
         event.preventDefault()
-       await loginAdmin(values)
-        console.log(message)
-        console.log(success)
     }
  
   return (
