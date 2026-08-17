@@ -38,3 +38,6 @@ export const adminLogin = (request,response) => {
     }
 }
 
+export const authAdmin = (request,response) => {
+    return response.status(200).json({success: true, adminID: request.adminID})
+}
