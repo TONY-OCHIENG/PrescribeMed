@@ -1,8 +1,54 @@
+import { BookmarkX, BriefcaseMedicalIcon, CircleCheckBig, CircleDashed, NotebookPenIcon, Users2 } from 'lucide-react'
 import React from 'react'
 
 function Dashboard() {
   return (
-    <div>Dashboard</div>
+    <div className='w-full md:max-w-[80%] px-2 mx-auto '>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-25'>
+        <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
+            <BriefcaseMedicalIcon className='h-10 w-10 text-blue-500'/>
+            <div className='flex flex-col'>
+                <h1 className='md:text-4xl text-3xl font-extrabold'>10</h1>
+                <p>Doctors</p>
+            </div>
+        </div>
+       <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
+            <Users2 className='h-10 w-10 text-blue-500'/>
+            <div className='flex flex-col'>
+                <h1 className='md:text-4xl text-3xl font-extrabold'>10</h1>
+                <p>Patients</p>
+            </div>
+        </div>
+         <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
+            <NotebookPenIcon className='h-10 w-10 text-blue-500'/>
+            <div className='flex flex-col'>
+                <h1 className='md:text-4xl text-3xl font-extrabold'>10</h1>
+                <p>Appointments</p>
+            </div>
+        </div>
+          <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
+            <CircleDashed className='h-10 w-10 text-blue-500'/>
+            <div className='flex flex-col'>
+                <h1 className='md:text-4xl text-3xl font-extrabold'>10</h1>
+                <p>Pending</p>
+            </div>
+        </div>
+       <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
+            <CircleCheckBig className='h-10 w-10 text-blue-500'/>
+            <div className='flex flex-col'>
+                <h1 className='md:text-4xl text-3xl font-extrabold'>10</h1>
+                <p>Completed</p>
+            </div>
+        </div>
+         <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
+            <BookmarkX className='h-10 w-10 text-blue-500'/>
+            <div className='flex flex-col'>
+                <h1 className='md:text-4xl text-3xl font-extrabold'>10</h1>
+                <p>Canceled</p>
+            </div>
+        </div>
+    </div>
+    </div>    
   )
 }
 
