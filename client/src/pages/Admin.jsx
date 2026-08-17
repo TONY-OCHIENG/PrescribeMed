@@ -1,6 +1,7 @@
 import axios from 'axios'
-import { BriefcaseMedical, icons, LayoutDashboard, NotebookPenIcon, SquarePlus } from 'lucide-react'
+import { BriefcaseMedical, icons, LayoutDashboard, NotebookPenIcon, Power, SquarePlus } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/auth" : "/api/auth"
 function Admin() {
@@ -23,8 +24,22 @@ function Admin() {
         {name:"Doctors",link:"/admin/doctors",icon:BriefcaseMedical},
         {name:"Add doctors",link:"/admin/add-doctors",icon:SquarePlus}
     ]
+    const handleLogout = () => {
+        axios.get(`${API_URL}/logoutAdmin`)
+        .then((response) => {
+            if (response.data.success) {
+                toast.success(response.data.message)
+                navigate('/login')
+            } else {
+                toast.error("An error occured")
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }
   return (
-    <div className='flex w-full h-screen'>
+    <div className='flex w-[100%] h-screen'>
         <div className='bg-white inset-y-0 left-0 w-[20%] md:w-[15%] border border-l'>
             <h1 className='text-center mt-4 md:block hidden text-md font-extrabold mb-4'>PRESCRIBEMED</h1>
             {
@@ -42,7 +57,13 @@ function Admin() {
               ))
             }
         </div>
-        <div>
+        <div className='w-full'>
+            <div className='w-full h-[8%] shadow-md p-4 flex items-center bg-white border-b'>
+                <div onClick={handleLogout} className='py-2 px-6 absolute right-1 md:right-20 cursor-pointer bg-blue-500 flex justify-between items-center rounded-full'>
+                     <Power className='mr-2 text-white'/>
+                     <p className='text-white font-extrabold'>Logout</p>
+                </div>
+            </div>
             <Outlet/>
         </div>
     </div>
