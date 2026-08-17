@@ -2,12 +2,16 @@ import React from 'react'
 import Input from '../components/Input'
 import { Lock, Mail } from 'lucide-react'
 import { useState } from 'react'
+import axios from 'axios'
+import { toast } from 'react-hot-toast'
+const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/auth" : "/api/auth"
 
 function AdminLogin() {
     const [values,setValues] = useState({
         email:"",
         password:""
     })
+
     const handleChange = (event) => {
         const { name, value} = event.target
         setValues((prev) => ({
@@ -15,9 +19,22 @@ function AdminLogin() {
             [name]: value
         }))
     }
-    
+
+    axios.defaults.withCredentials = true
+
     const handleSubmit = async (event) => {
         event.preventDefault()
+        axios.post(`${API_URL}/login`,values)
+        .then((response) => {
+            if (response.data.success) {
+                toast.success(response.data.message)
+            } else {
+                toast.error(response.data.message)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })    
     }
  
   return (
