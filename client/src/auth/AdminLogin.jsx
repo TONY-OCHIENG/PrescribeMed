@@ -4,6 +4,7 @@ import { Lock, Mail } from 'lucide-react'
 import { useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/auth" : "/api/auth"
 
 function AdminLogin() {
@@ -11,7 +12,7 @@ function AdminLogin() {
         email:"",
         password:""
     })
-
+    const navigate = useNavigate()
     const handleChange = (event) => {
         const { name, value} = event.target
         setValues((prev) => ({
@@ -28,6 +29,7 @@ function AdminLogin() {
         .then((response) => {
             if (response.data.success) {
                 toast.success(response.data.message)
+                navigate("/admin")
             } else {
                 toast.error(response.data.message)
             }
