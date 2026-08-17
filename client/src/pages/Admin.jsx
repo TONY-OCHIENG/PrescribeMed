@@ -59,10 +59,10 @@ function Admin() {
         </div>
         <div className='w-full'>
             <div className='w-full h-[8%] shadow-md p-4 flex items-center bg-white border-b'>
-                <div onClick={handleLogout} className='py-2 px-6 absolute right-1 md:right-20 cursor-pointer bg-blue-500 flex justify-between items-center rounded-full'>
+                <button onClick={handleLogout} className='py-2 px-6 absolute right-1 md:right-20 cursor-pointer bg-blue-500 flex justify-between items-center rounded-full'>
                      <Power className='mr-2 text-white'/>
                      <p className='text-white font-extrabold'>Logout</p>
-                </div>
+                </button>
             </div>
             <Outlet/>
         </div>

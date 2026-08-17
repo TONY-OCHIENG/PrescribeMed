@@ -1,6 +1,6 @@
 import React from 'react'
 import Input from '../components/Input'
-import { Lock, Mail } from 'lucide-react'
+import { Loader, Lock, Mail } from 'lucide-react'
 import { useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
@@ -12,6 +12,7 @@ function AdminLogin() {
         email:"",
         password:""
     })
+    const [loading,setLoading] = useState(false)
     const navigate = useNavigate()
     const handleChange = (event) => {
         const { name, value} = event.target
@@ -25,16 +26,20 @@ function AdminLogin() {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+        setLoading(true)
         axios.post(`${API_URL}/login`,values)
         .then((response) => {
             if (response.data.success) {
+                setLoading(false)
                 toast.success(response.data.message)
                 navigate("/admin")
             } else {
+                setLoading(false)
                 toast.error(response.data.message)
             }
         })
         .catch((error) => {
+            setLoading(loading)
             console.log(error)
         })    
     }
@@ -58,9 +63,9 @@ function AdminLogin() {
                 placeholder="Password"
                 onChange={handleChange}
             />
-            <button className='w-full text-white bg-gradient-to-r from-blue-400 to-blue-600 py-2
-            font-extrabold cursor-pointer rounded-md text-xl
-            '>Login</button>
+            <button disabled={loading} className='w-full text-white bg-gradient-to-r from-blue-400 to-blue-600 py-2
+            font-extrabold cursor-pointer rounded-md text-xl flex justify-center items-center
+            '>{loading ? <Loader className='animate-spin'/> : "Login"}</button>
         </form>      
     </div>
   )
