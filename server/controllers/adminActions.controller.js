@@ -17,5 +17,8 @@ export const addDoctors = (request,response) => {
 
     const hpassword = hashPassword(password)
 
+    if (password.length < 6) {
+        return response.status(200).json({success: false,message:"Password must be greater than five characters"})
+    }
     
 }
