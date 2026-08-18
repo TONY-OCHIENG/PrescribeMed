@@ -35,7 +35,13 @@ export const addDoctors = (request,response) => {
             if (result.length > 0) {
                 return response.status(200).json({success: false, message: "Email already exists"})
             } else {
-                
+                const insertDoctor = "INSERT INTO doctors(firstName,lastName,phone,email,password,speciality,experience,appointmentFee,image,about) VALUES(?,?,?,?,?,?,?,?,?,?)"
+                databaseConnection.query(insertDoctor,[firstName,lastName,phone,email,hpassword,speciality,experience,appointmentFee,image,about],
+                    (erro, results) => {
+                        if (error) return response.status(500).json({success: false, message: error})
+                        return response.status(201).json({success: true, message: "Doctor added successfully"})
+                    }
+                )                
             }
         })
     } catch (error) {
