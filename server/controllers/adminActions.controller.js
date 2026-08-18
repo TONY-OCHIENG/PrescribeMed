@@ -20,5 +20,10 @@ export const addDoctors = (request,response) => {
     if (password.length < 6) {
         return response.status(200).json({success: false,message:"Password must be greater than five characters"})
     }
+
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     
+    if (!regex.test(email)) {
+        return response.status(200).json({success: false, message: "Enter a valid Email address"})
+    }
 }
