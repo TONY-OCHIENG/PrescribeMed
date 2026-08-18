@@ -11,6 +11,6 @@ export const addDoctors = (request,response) => {
         !email || !password || !speciality ||
         !experience || !appointmentFee || !about || !image
     ) {
-        return response.status(200).json({success: false, message: "Fill all fields"})
+        return response.status(200).json({success: false, message: "Please fill all fields"})
     }
 }

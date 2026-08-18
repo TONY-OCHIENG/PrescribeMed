@@ -3,6 +3,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 import authRoutes from './routes/auth.route.js'
+import adminActions from './routes/adminActions.route.js'
 dotenv.config()
 
 const app = express()
@@ -14,6 +15,7 @@ app.use(cors({
 })) 
 app.use(cookieParser())
 app.use("/api/auth/",authRoutes)
+app.use("/api/actions/",adminActions)
 app.listen(process.env.PORT, () => {
     console.log("Server is running")
 })
