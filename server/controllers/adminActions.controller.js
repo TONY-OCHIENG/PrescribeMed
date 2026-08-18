@@ -1,3 +1,4 @@
+import databaseConnection from "../configs/db.js"
 import { hashPassword } from "../configs/hashPassword.js"
 
 export const addDoctors = (request,response) => {
@@ -22,8 +23,23 @@ export const addDoctors = (request,response) => {
     }
 
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-    
+
     if (!regex.test(email)) {
         return response.status(200).json({success: false, message: "Enter a valid Email address"})
+    }
+
+    try {
+        const checkEmail = "SELECT email FROM doctors WHERE email = ?"
+        databaseConnection.query(checkEmail,[email],(error, result) => {
+            if (error) return response.status(500).json({success: false, message: error})
+            if (result.length > 0) {
+                return response.status(200).json({success: false, message: "Email already exists"})
+            } else {
+                
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        return response.status(500).json({success: false, message:"Internal server error"})
     }
 }
