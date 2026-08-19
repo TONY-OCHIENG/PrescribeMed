@@ -5,6 +5,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/auth" : "/api/auth"
 
 function AdminLogin() {
@@ -23,6 +24,17 @@ function AdminLogin() {
     }
 
     axios.defaults.withCredentials = true
+
+    useEffect(() => {
+            axios.get(`${API_URL}/authAdmin`)
+            .then((response) => {
+                if (response.data.success) {
+                    navigate("/admin")
+                } else {
+                    navigate('/login')
+                }
+            })
+    },[])
 
     const handleSubmit = async (event) => {
         event.preventDefault()

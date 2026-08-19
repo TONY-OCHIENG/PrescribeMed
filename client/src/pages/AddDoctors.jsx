@@ -4,7 +4,7 @@ import { Calendar, Camera, DollarSignIcon, Lock, Mail, Phone, Stethoscope, User 
 
 function AddDoctors() {
   return (
-    <div className='w-full md:max-w-[90%] px-2 mx-auto'>
+    <div className='w-full md:max-w-[90%] px-2 mx-auto flex items-center justify-center'>
       <div className='bg-white rounded-md shadow-md p-4 mt-25 w-full md:w-[60%] flex justify-center items-center'>
         <form action="">
           <div className='flex gap-10 w-full'>
@@ -51,7 +51,7 @@ function AddDoctors() {
             />     
              <Input
               icon={DollarSignIcon}
-              type="text"
+              type="number"
               placeholder="Appointment fee"
             />       
           </div>  
@@ -62,7 +62,7 @@ function AddDoctors() {
               placeholder="Image"
             />        
           </div>
-          <textarea name="" placeholder='About..' id="" className='p-2 border-blue-500 border outline:border-blue-500 w-full rounded-md h-[100px]'></textarea> 
+          <textarea name="" placeholder="Doctor's description..." id="" className='p-2 border-blue-500 border outline:border-blue-500 w-full rounded-md h-[100px]'></textarea> 
           <button className='py-2 px-8 bg-blue-500 text-white rounded-md font-extrabold mt-4 cursor-pointer'>Add Doctor</button>          
         </form>
       </div>
