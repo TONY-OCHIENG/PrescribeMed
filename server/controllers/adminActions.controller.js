@@ -5,13 +5,13 @@ export const addDoctors = (request,response) => {
     const {firstName,lastName, phone, email,password,speciality,experience,
         appointmentFee,
         about,
-        image
     } = request.body
-
+     const { filename } = request.file
+    console.log(request.body)
     if (
         !firstName || !lastName || !phone ||
         !email || !password || !speciality ||
-        !experience || !appointmentFee || !about || !image
+        !experience || !appointmentFee || !about || !filename
     ) {
         return response.status(200).json({success: false, message: "Please fill all fields"})
     }
@@ -36,7 +36,7 @@ export const addDoctors = (request,response) => {
                 return response.status(200).json({success: false, message: "Email already exists"})
             } else {
                 const insertDoctor = "INSERT INTO doctors(firstName,lastName,phone,email,password,speciality,experience,appointmentFee,image,about) VALUES(?,?,?,?,?,?,?,?,?,?)"
-                databaseConnection.query(insertDoctor,[firstName,lastName,phone,email,hpassword,speciality,experience,appointmentFee,image,about],
+                databaseConnection.query(insertDoctor,[firstName,lastName,phone,email,hpassword,speciality,experience,appointmentFee,filename,about],
                     (erro, results) => {
                         if (error) return response.status(500).json({success: false, message: error})
                         return response.status(201).json({success: true, message: "Doctor added successfully"})
