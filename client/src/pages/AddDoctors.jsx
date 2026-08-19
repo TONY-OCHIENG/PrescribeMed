@@ -1,8 +1,29 @@
 import React from 'react'
 import Input from '../components/Input'
 import { Calendar, Camera, DollarSignIcon, Lock, Mail, Phone, Stethoscope, User } from 'lucide-react'
+import { useState } from 'react'
 
 function AddDoctors() {
+  const [value,setValues] = useState({
+    firstName:'',
+    lastName:'',
+    phone:'',
+    email:'',
+    password:'',
+    speciality:'',
+    experience:'',
+    appointmentFee:'',
+    about:'',
+    image:''
+  })
+
+  const handleValueChange = (event) => {
+    const { name, value} = event.target
+    setValues((prev) => ({
+      ...prev,
+      [name] : value
+    }))
+  }
   return (
     <div className='w-full md:max-w-[90%] px-2 mx-auto flex items-center justify-center'>
       <div className='bg-white rounded-md shadow-md p-4 mt-25 w-full md:w-[60%] flex justify-center items-center'>
