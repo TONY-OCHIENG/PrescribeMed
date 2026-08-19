@@ -6,7 +6,6 @@ export const addDoctors = (request,response) => {
         appointmentFee,
         about,
     } = request.body
-     const { filename } = request.file
     console.log(request.body)
     if (
         !firstName || !lastName || !phone ||
