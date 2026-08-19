@@ -2,6 +2,8 @@ import React from 'react'
 import Input from '../components/Input'
 import { Calendar, Camera, DollarSignIcon, Lock, Mail, Phone, Stethoscope, User } from 'lucide-react'
 import { useState } from 'react'
+import axios from 'axios'
+import toast from 'react-hot-toast'
 
 function AddDoctors() {
   const [value,setValues] = useState({
@@ -37,6 +39,18 @@ function AddDoctors() {
     formData.append('appointmentFee',value.appointmentFee)
     formData.append('about',value.about)
     formData.append('image',value.image)
+
+    axios.post('http://localhost:5000/api/actions/addDoctor',formData)
+    .then((response) => {
+      if (response.data.success) {
+        toast.success(response.data.message)
+      } else {
+        toast.error(response.data.message)
+      }
+    })
+    .catch((error) => {
+      console.log(error)
+    })
   }
   return (
     <div className='w-full md:max-w-[90%] px-2 mx-auto flex items-center justify-center'>
