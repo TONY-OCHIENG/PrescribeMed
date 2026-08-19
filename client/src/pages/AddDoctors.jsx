@@ -24,7 +24,20 @@ function AddDoctors() {
       [name] : value
     }))
   }
-  console.log(value)
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const formData = new FormData()
+    formData.append('firstName',value.firstName)
+    formData.append('lastName',value.lastName)
+    formData.append('phone',value.phone)
+    formData.append('email',value.email)
+    formData.append('password',value.password)
+    formData.append('speciality',value.speciality)
+    formData.append('experience',value.experience)
+    formData.append('appointmentFee',value.appointmentFee)
+    formData.append('about',value.about)
+    formData.append('image',value.image)
+  }
   return (
     <div className='w-full md:max-w-[90%] px-2 mx-auto flex items-center justify-center'>
       <div className='bg-white rounded-md shadow-md p-4 mt-25 w-full md:w-[60%] flex justify-center items-center'>
