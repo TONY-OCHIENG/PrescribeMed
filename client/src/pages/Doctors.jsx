@@ -41,17 +41,41 @@ function Doctors() {
       toast.error(error)
     })
   }
-
   return (
     <div className='relative'>
       <div className='relative mt-20 max-w-[90%] mx-auto screen flex justify-center items-center'>
-      <div className='absolute top-20 z-10 h-[500px] w-full md:w-[50%] bg-white rounded-xl shadow-md p-4'>
+      <div className='absolute top-20 z-10 md:h-[500px] w-full md:w-[50%] bg-white rounded-xl shadow-md p-4'>
         <h1 className='text-center font-extrabold'>Doctor's Details</h1>
         <X className='absolute top-5 right-5 text-blue-600 cursor-pointer'/>
+        <div>
+          {
+            singleDoctor.map((item) => (
+              <div className='mt-4 flex md:flex-row flex-col gap-10'>
+               <div className='md:w-[40%]'>
+                 <img src={`http://localhost:5000/images/`+ item.image}  alt="" className='h-[200px] w-full' />
+               </div>
+               <div className='md:w-[80%]'>
+                  <h1 className='text-gray-800 font-extrabold mt-2'>Dr, <span className='text-sm'>{item.firstName} {item.lastName}</span></h1>
+                  <h3 className='text-gray-600 font-bold text-sm'>Specialization:  {item.speciality}</h3>
+                  <h3 className='text-gray-600 font-bold text-sm'>Phone: {item.phone}</h3>
+                  <h3 className='text-gray-600 font-bold text-sm'>Email: {item.email}</h3>
+                  <h3 className='text-gray-600 font-bold text-sm'>Experience: {item.experience} years</h3>
+                  <h3 className='text-gray-600 font-bold text-sm'>Fee: {item.appointmentFee} KSH</h3>
+                  <span className='flex items-center text-sm gap-2 text-gray-600'>
+                      <input type="checkbox" disabled={item.isAvaliable === 0} checked={item.isAvaliable === 1}/>
+                      Available
+                  </span>
+                  <h3 className='text-gray-600 font-bold text-sm mt-3 border-b w-full'>About</h3>
+                  <p className='text-sm mt-2 text-gray-500'>{item.about}</p>
+               </div>
+              </div>
+            ))
+          }
+        </div>
       </div>
       <div className='grid grid-cols-2 md:grid-cols-5 gap-5'>
         {loading ? <LoaderPage/> : doctor.map((item) => (
-             <div key={item.doctors_id} className='rounded-md shadow-md p-2 cursor-pointer bg-white'>
+             <div onClick={() => fetchSingleDoctor(item.doctors_id)} key={item.doctors_id} className='rounded-md shadow-md p-2 cursor-pointer bg-white'>
                   <img src={`http://localhost:5000/images/`+ item.image}  alt="" className='w-full h-50 object-cover'/>
                   <h1 className='text-gray-800 font-extrabold mt-2'>Dr, <span className='text-sm'>{item.firstName} {item.lastName}</span></h1>
                   <h3 className='text-gray-600 font-bold text-sm'>{item.speciality}</h3>
