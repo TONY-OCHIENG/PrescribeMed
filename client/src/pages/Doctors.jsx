@@ -9,6 +9,7 @@ import DoctorsCard from '../components/DoctorsCard'
 function Doctors() {
   const [doctor,setDoctor] = useState([])
   const [loading,setloading] = useState(true)
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/actions/getAllDoctors')
@@ -27,9 +28,10 @@ function Doctors() {
   },[])
 
   return (
-    <div className='mt-20 max-w-[90%] mx-auto screen'>
+    <div className='relative mt-20 max-w-[90%] mx-auto screen flex justify-center items-center'>
+      <div className='absolute top-20 h-[500px] w-full md:w-[50%] bg-white rounded-xl shadow-md'></div>
       <div className='grid grid-cols-2 md:grid-cols-5 gap-5'>
-        {loading ? <LoaderPage/> : <DoctorsCard doctor={doctor}/>}
+        {loading ? <LoaderPage/> : doctor.map((item) => <DoctorsCard item={item}/>)}
       </div>      
     </div>
   )
