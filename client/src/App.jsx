@@ -6,13 +6,11 @@ import Dashboard from './pages/Dashboard'
 import Appointments from './pages/Appointments'
 import Doctors from './pages/Doctors'
 import AddDoctors from './pages/AddDoctors'
-import Filter from './pages/Filter'
 
 function App() {
   return (
     <div className='bg-gray-100 h-[100vh]'>
       <Routes>
-        <Route path='/' element={<Filter/>}/>
         <Route path='/login' element={<AdminLogin/>}/>
         <Route path='/admin' element={<Admin/>}>
          <Route path='' element={<Dashboard/>}/>

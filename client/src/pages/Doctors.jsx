@@ -11,7 +11,7 @@ function Doctors() {
   const [loading,setloading] = useState(true)
   const [open, setOpen] = useState(false)
   const [singleDoctor,setSingleDoctor] = useState([])
-
+  const menuItems = [...new Set(doctor.map((speciality) => speciality.speciality))]
   useEffect(() => {
     axios.get('http://localhost:5000/api/actions/getAllDoctors')
     .then((response) => {
@@ -42,9 +42,24 @@ function Doctors() {
       toast.error(error)
     })
   }
+
+  const filterItems = (special) => {
+    const newItems = doctor.filter((speciality) => speciality.speciality === special)
+    setDoctor(newItems)
+  }
   return (
     <div className='relative'>
-      <div className='relative mt-20 max-w-[90%] mx-auto screen flex justify-center items-center'>
+      <div className='relative mt-20 max-w-[90%] mx-auto screen flex flex-col justify-center items-center'>
+        <div className='w-full p-2 mb-10 grid grid-cols-3 md:grid-cols-6 gap-5'>
+          <button className='py-2 px-8 border-blue-600 border rounded-full text-blue-600 font-extrabold cursor-pointer'>All</button>
+           <button className='py-2 px-8 border-blue-600 border rounded-full text-blue-600 font-extrabold cursor-pointer'>All</button>
+            <button className='py-2 px-8 border-blue-600 border rounded-full text-blue-600 font-extrabold cursor-pointer'>All</button>
+             <button className='py-2 px-8 border-blue-600 border rounded-full text-blue-600 font-extrabold cursor-pointer'>All</button>
+              <button className='py-2 px-8 border-blue-600 border rounded-full text-blue-600 font-extrabold cursor-pointer'>All</button>
+               <button className='py-2 px-8 border-blue-600 border rounded-full text-blue-600 font-extrabold cursor-pointer'>All</button>
+                <button className='py-2 px-8 border-blue-600 border rounded-full text-blue-600 font-extrabold cursor-pointer'>All</button>
+                 <button className='py-2 px-8 border-blue-600 border rounded-full text-blue-600 font-extrabold cursor-pointer'>All</button>
+        </div>
       <div className={`absolute top-20 z-10 md:h-[500px] w-full md:w-[50%] bg-white rounded-xl shadow-md p-4 ${open ? "block" : "hidden"}`}>
         <h1 className='text-center font-extrabold'>Doctor's Details</h1>
         <X onClick={() => setOpen(!open)} className='absolute top-5 right-5 text-blue-600 cursor-pointer'/>
