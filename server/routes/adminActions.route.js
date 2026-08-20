@@ -5,5 +5,5 @@ import { upload } from '../configs/imageUpload.js'
 const adminActions = express.Router()
 adminActions.post("/addDoctor",upload.single('image'), addDoctors)
 adminActions.get("/getAllDoctors",getDoctors)
-adminActions.get("getSingleDoctor/:id",getSingleDoctor)
+adminActions.get("/getSingleDoctor/:id",getSingleDoctor)
 export default adminActions

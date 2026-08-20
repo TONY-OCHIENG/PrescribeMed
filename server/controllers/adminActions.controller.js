@@ -51,7 +51,7 @@ export const addDoctors = (request,response) => {
 
 export const getDoctors = (request,response) => {
     try {
-        const fetchDoctor = "SELECT firstName,lastName,phone,email,speciality,experience,appointmentFee,image,about,isAvaliable FROM doctors"
+        const fetchDoctor = "SELECT doctors_id,firstName,lastName,phone,email,speciality,experience,appointmentFee,image,about,isAvaliable FROM doctors"
         databaseConnection.query(fetchDoctor,(error, results) => {
             if (error) return response.status(500).json({success: false, message: error})
             if (results.length > 0) {
