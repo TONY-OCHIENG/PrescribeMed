@@ -5,7 +5,6 @@ export const addDoctors = (request,response) => {
    const { firstName, lastName, phone, email, password, speciality, experience, appointmentFee,
      about,
     } = request.body 
-    
     const { filename } = request.file
 
     if (
@@ -47,5 +46,20 @@ export const addDoctors = (request,response) => {
     } catch (error) {
         console.log(error)
         return response.status(500).json({success: false, message:"Internal server error"})
+    }
+}
+
+export const getDoctors = (request,response) => {
+    try {
+        const fetchDoctor = "SELECT firstName,lastName,phone,email,speciality,experience,appointmentFee,image,about FROM doctors"
+        databaseConnection.query(fetchDoctor,(error, results) => {
+            if (error) return response.status(500).json({success: false, message: error})
+            if (results.length > 0) {
+                return response.status(200).json({success: true, results: results})
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        return response.status(500).json({success: false, message: "internal server error"})
     }
 }
