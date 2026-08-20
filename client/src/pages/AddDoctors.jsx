@@ -44,7 +44,9 @@ function AddDoctors() {
     axios.post('http://localhost:5000/api/actions/addDoctor',formData) 
     .then((response) => {
       if (response.data.success) {
+        setLoading(false)
         toast.success(response.data.message)
+        setTimeout(() => { window.location.reload()},3000)
       } else {
         toast.error(response.data.message)
         setLoading(false)
@@ -64,6 +66,7 @@ function AddDoctors() {
              <Input
               icon={User}
               type="text"
+              required
               name="firstName"
               id="firstName"
               onChange={handleValueChange}
@@ -72,6 +75,7 @@ function AddDoctors() {
              <Input
               icon={User}
               type="text"
+              required
               name="lastName"
               onChange={handleValueChange}
               placeholder="Last name"
@@ -81,6 +85,7 @@ function AddDoctors() {
              <Input
               icon={Phone}
               type="text"
+              required
               name="phone"
               onChange={handleValueChange}
               placeholder="Phone number"
@@ -89,6 +94,7 @@ function AddDoctors() {
               icon={Mail}
               type="email"
               name="email"
+              required
               onChange={handleValueChange}
               placeholder="Email"
             />       
@@ -98,6 +104,7 @@ function AddDoctors() {
               icon={Lock}
               type="Password"
               name="password"
+              required
               onChange={handleValueChange}
               placeholder="Password"
             />     
@@ -105,6 +112,7 @@ function AddDoctors() {
               icon={Stethoscope}
               type="text"
               name="speciality"
+              required
               onChange={handleValueChange}
               placeholder="Speciality"
             />       
@@ -114,6 +122,7 @@ function AddDoctors() {
               icon={Calendar}
               type="number"
               name="experience"
+              required
               onChange={handleValueChange}
               placeholder="Years of expirience"
             />     
@@ -121,6 +130,7 @@ function AddDoctors() {
               icon={DollarSignIcon}
               type="number"
               name="appointmentFee"
+              required
               onChange={handleValueChange}
               placeholder="Appointment fee"
             />       
@@ -130,10 +140,11 @@ function AddDoctors() {
               icon={Camera}
               type="file"
               name="image"
+              required
               onChange={(event) => {setValues({...value, image: event.target.files[0]})}}
             />        
           </div>
-          <textarea name="about" onChange={handleValueChange} placeholder="Doctor's description..." id="" className='p-2 border-blue-500 border outline:border-blue-500 w-full rounded-md h-[100px]'></textarea> 
+          <textarea required name="about" onChange={handleValueChange} placeholder="Doctor's description..." id="" className='p-2 border-blue-500 border outline:border-blue-500 w-full rounded-md h-[100px]'></textarea> 
           <button disabled={loading} className='py-2 px-8 bg-blue-500 text-white rounded-md font-extrabold mt-4 cursor-pointer disabled:opacity-80' type='submit'>
             {
               loading ? <Loader className='flex justify-center items-center animate-spin'/> : "Add Doctor"
