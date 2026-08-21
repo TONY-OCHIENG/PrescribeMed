@@ -6,5 +6,5 @@ const adminActions = express.Router()
 adminActions.post("/addDoctor",upload.single('image'), addDoctors)
 adminActions.get("/getAllDoctors",getDoctors)
 adminActions.get("/getSingleDoctor/:id",getSingleDoctor)
-adminActions.get("/deleteSingleDoctor/:id",deleteDoctor)
+adminActions.delete("/deleteSingleDoctor/:id",deleteDoctor)
 export default adminActions

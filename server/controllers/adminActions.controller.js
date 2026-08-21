@@ -67,7 +67,7 @@ export const getDoctors = (request,response) => {
 export const getSingleDoctor = (request,response) => {
     const { id } = request.params
     try {
-        const singleDoctor = "SELECT firstName,lastName,phone,email,speciality,experience,appointmentFee,image,about,isAvaliable FROM doctors WHERE doctors_id = ?"
+        const singleDoctor = "SELECT doctors_id,firstName,lastName,phone,email,speciality,experience,appointmentFee,image,about,isAvaliable FROM doctors WHERE doctors_id = ?"
         databaseConnection.query(singleDoctor,[id],(error,result) => {
             if (error) return response.status(500).json({success: false, message: error})
             if (result.length > 0) {
@@ -89,7 +89,7 @@ export const deleteDoctor = (request,response) => {
         const deleteDoctor = "DELETE FROM doctors WHERE doctors_id = ?"
         databaseConnection.query(deleteDoctor,[id], (error,result) => {
             if (error) return response.status(500).json({success: false, message: error})
-            return response.status(200).json({success: true, message: "Doctor deleted successfully"})
+            return response.status(200).json({success: true, message:"Doctor deleted successfully"})
         })
     } catch (error) {
         console.log(error)
