@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Loader, X } from 'lucide-react'
+import { Delete, Loader, X } from 'lucide-react'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -12,7 +12,7 @@ function Doctors() {
   const [open, setOpen] = useState(false)
   const [singleDoctor,setSingleDoctor] = useState([])
   const [category,setCategory] = useState([])
-  const [active,setActive] = useState(true)
+  const [active,setActive] = useState(false)
   useEffect(() => {
     fetchAllDoctors()
   },[])
@@ -54,14 +54,29 @@ function Doctors() {
     const newItem = category.filter((categories) => categories.speciality === item)
     setDoctor(newItem)
   }
+
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:5000/api/actions/deleteSingleDoctor/${id}`)
+    .then((response) => {
+      if (response.data.success) {
+          toast.success(response.data.message)
+      } else {
+        toast.error(response.data.message)
+      }
+    })
+    .catch((error) => {
+      toast.error(error)
+    })
+    setTimeout(() => { window.location.reload()},3000)
+  }
   return (
     <div className='relative'>
       <div className='relative mt-20 max-w-[90%] mx-auto screen flex flex-col justify-center items-center'>
            <div className='w-full p-2 mb-10 grid grid-cols-1 md:grid-cols-6 gap-4'>
-               <button className='border border-blue-600 rounded-full text-blue-600 p-2' onClick={() => fetchAllDoctors()}>All</button>     
+               <button className={`border ${active ? "bg-blue-600 text-white" : ""} border-blue-600 rounded-full text-blue-600 p-2`} onClick={() => fetchAllDoctors()}>All</button>     
                   {
                       menuItems.map((val) => (
-                          <button key={val} className='border border-blue-600 cursor-pointer text-blue-600 font-bold p-4 rounded-full' onClick={() => filterItems(val)}>{val}</button>
+                          <button key={val} className={`border ${active ? "bg-blue-600 text-white" : "" } border-blue-600 cursor-pointer text-blue-600 font-bold p-2 rounded-full`} onClick={() => {filterItems(val)}}>{val}</button>
                       ))
                   }                    
           </div>          
@@ -88,6 +103,7 @@ function Doctors() {
                   </span>
                   <h3 className='text-gray-600 font-bold text-sm mt-3 border-b w-full'>About</h3>
                   <p className='text-sm mt-2 text-gray-500'>{item.about}</p>
+                  <button onClick={() => {handleDelete(item.doctors_id),setOpen(!open)}} className='mt-4 px-6 py-1 cursor-pointer rounded-md bg-red-400 text-white font-extrabold text-sm'>Delete</button>
                </div>
               </div>
             ))
