@@ -48,6 +48,10 @@ function Doctors() {
     })
   }
   const newItems = [...new Set(category.map((name) => name.speciality))]
+  const filterItems = (item) => {
+    const newItem = doctor.filter((categories) => categories.speciality === item)
+    setDoctor(newItem)
+  }
   return (
     <div className='relative'>
       <div className='relative mt-20 max-w-[90%] mx-auto screen flex flex-col justify-center items-center'>
