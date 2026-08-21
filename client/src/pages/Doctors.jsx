@@ -11,6 +11,7 @@ function Doctors() {
   const [loading,setloading] = useState(true)
   const [open, setOpen] = useState(false)
   const [singleDoctor,setSingleDoctor] = useState([])
+  const [category,setCategory] = useState([])
   useEffect(() => {
     fetchAllDoctors()
   },[])
@@ -21,6 +22,7 @@ function Doctors() {
       if (response.data.success) {
         setloading(false)
         setDoctor(response.data.results)
+        setCategory(response.data.results)
       } else {
         setloading(true)
       }
@@ -45,7 +47,7 @@ function Doctors() {
       toast.error(error)
     })
   }
- 
+  const newItems = [...new Set(category.map((name) => name.speciality))]
   return (
     <div className='relative'>
       <div className='relative mt-20 max-w-[90%] mx-auto screen flex flex-col justify-center items-center'>

@@ -1,8 +1,8 @@
 import React from 'react'
 import Card from './Card'
-import { categories } from './Data.js'
 import { useState } from 'react'
-import Buttons from './Buttons.jsx'
+import Buttons from '../components/Buttons.jsx'
+import { categories } from './Data.js'
 
 function Filter() {
     const [item,setItem] = useState(categories)
