@@ -12,6 +12,7 @@ function Doctors() {
   const [open, setOpen] = useState(false)
   const [singleDoctor,setSingleDoctor] = useState([])
   const [category,setCategory] = useState([])
+  const [active,setActive] = useState(true)
   useEffect(() => {
     fetchAllDoctors()
   },[])
@@ -47,15 +48,23 @@ function Doctors() {
       toast.error(error)
     })
   }
-  const newItems = [...new Set(category.map((name) => name.speciality))]
+
+  const menuItems = [...new Set(category.map((name) => name.speciality))]
   const filterItems = (item) => {
-    const newItem = doctor.filter((categories) => categories.speciality === item)
+    const newItem = category.filter((categories) => categories.speciality === item)
     setDoctor(newItem)
   }
   return (
     <div className='relative'>
       <div className='relative mt-20 max-w-[90%] mx-auto screen flex flex-col justify-center items-center'>
-           <div className='w-full p-2 mb-10 grid grid-cols-1 md:grid-cols-6 gap-4'></div>          
+           <div className='w-full p-2 mb-10 grid grid-cols-1 md:grid-cols-6 gap-4'>
+               <button className='border border-blue-600 rounded-full text-blue-600 p-2' onClick={() => fetchAllDoctors()}>All</button>     
+                  {
+                      menuItems.map((val) => (
+                          <button key={val} className='border border-blue-600 cursor-pointer text-blue-600 font-bold p-4 rounded-full' onClick={() => filterItems(val)}>{val}</button>
+                      ))
+                  }                    
+          </div>          
       <div className={`absolute top-20 z-10 md:h-[500px] w-full md:w-[50%] bg-white rounded-xl shadow-md p-4 ${open ? "block" : "hidden"}`}>
         <h1 className='text-center font-extrabold'>Doctor's Details</h1>
         <X onClick={() => setOpen(!open)} className='absolute top-5 right-5 text-blue-600 cursor-pointer'/>
@@ -74,7 +83,7 @@ function Doctors() {
                   <h3 className='text-gray-600 font-bold text-sm'>Experience: {item.experience} years</h3>
                   <h3 className='text-gray-600 font-bold text-sm'>Fee: {item.appointmentFee} KSH</h3>
                   <span className='flex items-center text-sm gap-2 text-gray-600'>
-                      <input type="checkbox" disabled={item.isAvaliable === 0} checked={item.isAvaliable === 1}/>
+                      <input type="checkbox" disabled={item.isAvaliable === 0} checked={item.isAvaliable === 1} readOnly/>
                       Available
                   </span>
                   <h3 className='text-gray-600 font-bold text-sm mt-3 border-b w-full'>About</h3>
