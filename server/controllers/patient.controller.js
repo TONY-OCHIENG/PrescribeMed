@@ -1,3 +1,4 @@
+import databaseConnection from "../configs/db.js"
 import { hashPassword } from "../configs/hashPassword.js"
 
 export const registerPatient = (request,response) => {
@@ -19,5 +20,15 @@ export const registerPatient = (request,response) => {
     }
 
     const hpassword = hashPassword(password_p)
+
+    try {
+        const checkEmail = "SELECT email_p FROM patients WHERE email_p = ?"
+        databaseConnection.query(checkEmail,[email_p],(error,result) => {
+            if (error) return response.status(500).json({success: false, message: error})
+        })
+    } catch (error) {
+        console.log(error)
+        return response.status(500).json({success: false, message: error})
+    }
 
 }
