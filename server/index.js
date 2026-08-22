@@ -17,6 +17,7 @@ app.use(cors({
 app.use(cookieParser())
 app.use("/api/auth",authRoutes)
 app.use("/api/actions",adminActions)
+app.use("/api/patients")
 app.listen(process.env.PORT, () => {
     console.log("Server is running")
 })
