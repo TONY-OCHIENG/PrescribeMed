@@ -21,7 +21,7 @@ function PatientRegistration() {
       [name] : value
     }))
   }
-  
+
   return (
     <div className='flex justify-center items-center w-full h-full'>
         <form className='md:max-w-md px-2 w-full bg-white/50 p-4 rounded-xl shadow-md'>
@@ -31,12 +31,14 @@ function PatientRegistration() {
             icon={User}
             name="fisrt_name"
             type="text"
+            onChange={handleChange}
             placeholder="First name"
             required
             />
              <Input
             icon={User}
             name='last_name'
+            onChange={handleChange}
             type="text"
             placeholder="Last name"
             required
@@ -46,6 +48,7 @@ function PatientRegistration() {
             placeholder="Email"
             type="email"
             name="email_p"
+            onChange={handleChange}
             required
             />
              <Input
@@ -53,24 +56,28 @@ function PatientRegistration() {
             placeholder="Phone"
             type="text"
             name="phone_p"
+            onChange={handleChange}
             required
             />
              <Input
             icon={Camera}
             type="file"
             name="image_p"
+            onChange={(event) => {setPatients({...value, image_p: event.target.files[0]})}} 
             placeholder="Image"
             />
             <Input
             icon={Calendar}
             type="number"
             name="age"
+            onChange={handleChange}
             placeholder="Age"
             />
              <Input
             icon={Lock}
             type="password"
             name="password_p"
+            onChange={handleChange}
             placeholder="Password"
             />
            <button className='w-full text-white bg-gradient-to-r from-blue-400 to-blue-600 py-2
