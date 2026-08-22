@@ -2,9 +2,10 @@ import databaseConnection from "../configs/db.js"
 import { hashPassword } from "../configs/hashPassword.js"
 
 export const registerPatient = (request,response) => {
-    const {first_name,last_name,email_p,phone_p,image_p,age,password_p} = request.body
+    const {first_name,last_name,email_p,phone_p,age,password_p} = request.body
+    const { filename } = request.file
     if (!first_name || !last_name || !email_p
-        || !phone_p || !image_p || !password_p || !age
+        || !phone_p || !filename || !password_p || !age
     ) {
         return response.status(200).json({success: false, message: "Please fill all required fields"})
     }
@@ -29,7 +30,7 @@ export const registerPatient = (request,response) => {
                 return response.status(200).json({success: false, message: 'Email already exists'})
             } else {
                 const insertPatient = "INSERT INTO patients(first_name,last_name,email_p,phone_p,image_p,age,password) VALUES(?,?,?,?,?,?)"
-                databaseConnection.query(insertPatient,[first_name,last_name,email_p,phone_p,image_p,age,hpassword],
+                databaseConnection.query(insertPatient,[first_name,last_name,email_p,phone_p,filename,age,hpassword],
                     (erro,results) => {
                         if (erro) return response.status(500).json({success: false, message: erro})
                         if (results) {
