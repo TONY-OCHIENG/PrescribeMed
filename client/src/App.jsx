@@ -8,6 +8,7 @@ import Doctors from './pages/Doctors'
 import AddDoctors from './pages/AddDoctors'
 import Filter from './pages/Filter'
 import PatientRegistration from './auth/PatientRegistration'
+import VerificationPage from './pages/VerificationPage'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Filter/>}/>
         <Route path='/register' element={<PatientRegistration/>}/>
+        <Route path='/verify' element={<VerificationPage/>}/>
         <Route path='/login' element={<AdminLogin/>}/>
         <Route path='/admin' element={<Admin/>}>
          <Route path='' element={<Dashboard/>}/>

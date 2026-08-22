@@ -35,8 +35,9 @@ function PatientRegistration() {
     formData.append("age",patients.age)
     formData.append("password",patients.password)
 
-    axios.post("http://loclhost:5000/api/patients/registerPatient",formData)
+    axios.post("http://localhost:5000/api/patients/registerPatient",formData)
     .then((response) => {
+      console.log(response)
       if (response.data.success){
           toast.success(response.data.message)
       } else {
@@ -48,17 +49,17 @@ function PatientRegistration() {
       toast.error("An error occured")
     })
   }
-
+  console.log(patients)
   return (
     <div className='flex justify-center items-center w-full h-full'>
-        <form className='md:max-w-md px-2 w-full bg-white/50 p-4 rounded-xl shadow-md'>
+        <form onSubmit={handleSubmit} className='md:max-w-md px-2 w-full bg-white/50 p-4 rounded-xl shadow-md'>
            <h1 className='text-3xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 to-blue-600
             text-transparent bg-clip-text'>Register Account</h1>
             <Input
             icon={User}
-            name="fisrt_name"
-            type="text"
+            name="first_name"
             onChange={handleChange}
+            type="text"           
             placeholder="First name"
             required
             />
@@ -103,7 +104,7 @@ function PatientRegistration() {
              <Input
             icon={Lock}
             type="password"
-            name="password_p"
+            name="password"
             onChange={handleChange}
             placeholder="Password"
             />
