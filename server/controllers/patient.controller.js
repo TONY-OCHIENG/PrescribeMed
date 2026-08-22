@@ -6,6 +6,11 @@ export const registerPatient = (request,response) => {
     ) {
         return response.status(200).json({success: false, message: "Please fill all required fields"})
     }
-
     
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+
+    if (!regex.test(email_p)) {
+        return response.status(200).json({success: false, message: "Enter a valid email address"})
+    }
+
 }
