@@ -25,6 +25,19 @@ export const registerPatient = (request,response) => {
         const checkEmail = "SELECT email_p FROM patients WHERE email_p = ?"
         databaseConnection.query(checkEmail,[email_p],(error,result) => {
             if (error) return response.status(500).json({success: false, message: error})
+            if (result.length > 0) {
+                return response.status(200).json({success: false, message: 'Email already exists'})
+            } else {
+                const insertPatient = "INSERT INTO patients(first_name,last_name,email_p,phone_p,image_p,age,password) VALUES(?,?,?,?,?,?)"
+                databaseConnection.query(insertPatient,[first_name,last_name,email_p,phone_p,image_p,age,hpassword],
+                    (erro,results) => {
+                        if (erro) return response.status(500).json({success: false, message: erro})
+                        if (results) {
+                            return response.status(201).json({success: true, message:"Account registered successfully"})
+                        }
+                    }
+                )
+            }
         })
     } catch (error) {
         console.log(error)
