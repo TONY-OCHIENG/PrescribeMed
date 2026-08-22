@@ -1,8 +1,27 @@
 import React from 'react'
 import Input from '../components/Input'
 import { Calendar, Camera, Lock, Mail, Phone, User } from 'lucide-react'
+import { useState } from 'react'
 
 function PatientRegistration() {
+  const [patients,setPatients] = useState({
+    first_name:"",
+    last_name:"",
+    email_p:"",
+    phone_p:"",
+    image_p:"",
+    age:"",
+    password:""
+  })
+
+  const handleChange = (event) => {
+    const { name, value} = event.target
+    setPatients((prev) => ({
+      ...prev,
+      [name] : value
+    }))
+  }
+  
   return (
     <div className='flex justify-center items-center w-full h-full'>
         <form className='md:max-w-md px-2 w-full bg-white/50 p-4 rounded-xl shadow-md'>
@@ -33,6 +52,7 @@ function PatientRegistration() {
             icon={Phone}
             placeholder="Phone"
             type="text"
+            name="phone_p"
             required
             />
              <Input
