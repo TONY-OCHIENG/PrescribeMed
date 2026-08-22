@@ -2,6 +2,8 @@ import React from 'react'
 import Input from '../components/Input'
 import { Calendar, Camera, Lock, Mail, Phone, User } from 'lucide-react'
 import { useState } from 'react'
+import axios from 'axios'
+import toast from 'react-hot-toast'
 
 function PatientRegistration() {
   const [patients,setPatients] = useState({
@@ -20,6 +22,31 @@ function PatientRegistration() {
       ...prev,
       [name] : value
     }))
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const formData = new FormData()
+    formData.append("first_name",patients.first_name)
+    formData.append("last_name",patients.last_name)
+    formData.append('email_p',patients.email_p)
+    formData.append("phone_p",patients.phone_p)
+    formData.append("image_p",patients.image_p)
+    formData.append("age",patients.age)
+    formData.append("password",patients.password)
+
+    axios.post("http://loclhost:5000/api/patients/registerPatient",formData)
+    .then((response) => {
+      if (response.data.success){
+          toast.success(response.data.message)
+      } else {
+          toast.error(response.data.message)
+      }
+    })
+    .catch((error) => {
+      console.log(error)
+      toast.error("An error occured")
+    })
   }
 
   return (
@@ -63,7 +90,7 @@ function PatientRegistration() {
             icon={Camera}
             type="file"
             name="image_p"
-            onChange={(event) => {setPatients({...value, image_p: event.target.files[0]})}} 
+            onChange={(event) => {setPatients({...patients, image_p: event.target.files[0]})}} 
             placeholder="Image"
             />
             <Input
