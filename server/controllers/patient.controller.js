@@ -13,4 +13,10 @@ export const registerPatient = (request,response) => {
         return response.status(200).json({success: false, message: "Enter a valid email address"})
     }
 
+    if (password_p.length < 6) {
+        return response.status(200).json({success: false, message: 'Password must be greater than five characters'})
+    }
+
+    
+
 }
