@@ -24,7 +24,7 @@ export const registerPatient = (request,response) => {
 
     const hpassword = hashPassword(password)
     const verificationToken = generateVerificationCode()
-    const verificationTokenExpiresAT = new Date(Date.now() + 1 * 60 * 60 * 1000)
+    const verificationTokenExpiresAT = new Date(Date.now() + 24 * 60 * 60 * 1000)
 
     try {
         const checkEmail = "SELECT email_p FROM patients WHERE email_p = ?"
@@ -33,8 +33,8 @@ export const registerPatient = (request,response) => {
             if (result.length > 0) {
                 return response.status(200).json({success: false, message: 'Email already exists'})
             } else {
-                const insertPatient = "INSERT INTO patients(first_name,last_name,email_p,phone_p,image_p,age,password) VALUES(?,?,?,?,?,?,?)"
-                databaseConnection.query(insertPatient,[first_name,last_name,email_p,phone_p,filename,age,hpassword],
+                const insertPatient = "INSERT INTO patients(first_name,last_name,email_p,phone_p,image_p,age,password,verificationToken,verificationTokenexpiresAT) VALUES(?,?,?,?,?,?,?,?,?)"
+                databaseConnection.query(insertPatient,[first_name,last_name,email_p,phone_p,filename,age,hpassword,verificationToken,verificationTokenExpiresAT],
                     (erro,results) => {
                         console.log(erro)
                         if (erro) return response.status(200).json({success: false, message: erro})
