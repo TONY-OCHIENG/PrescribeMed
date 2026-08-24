@@ -7,6 +7,29 @@ function VerificationPage() {
     const inputRef = useRef([])
     const [loading,setLoading] = useState(false)
 
+    const handleChange = (index,value) => {
+        const newCode = [...verificationCode]
+        //handling pasted content
+        if (value.length > 1) {
+            const pasteCode = value.slice(0,6).split("");
+            for (let i = 0; i < 6 ; i++) {
+                newCode[i] = pasteCode[i] || ""
+            }
+
+            setCode(newCode)
+            // Focus on the last non-empty input or the first empty one
+			const lastFilledIndex = newCode.findLastIndex((digit) => digit !== "");
+			const focusIndex = lastFilledIndex < 5 ? lastFilledIndex + 1 : 5;
+			inputRef.current[focusIndex].focus();
+        } else {
+            newCode[index] = value
+            setCode(newCode)
+            //Move the focus to the next input field if the value is entered
+            if (value && index < 5) {
+                inputRef.current[index + 1].focus()
+            }
+        }      
+    }
   return (
     <div className='w-full h-screen flex justify-center items-center'>
         <div className='p-4 bg-white rounded-md shadow-md'>
@@ -23,8 +46,9 @@ function VerificationPage() {
                               ref={(el) => (inputRef.current[index] = el)}
                               type='text'
 							  maxLength='6'
-							  value={digit}							  
-							  className='w-12 h-12 text-center text-2xl font-bold bg-gray-100 text-blue-600 border-2 border-blue-600 rounded-lg focus:border-blue-600 focus:outline-none'
+							  value={digit}
+                              onChange={(event) => handleChange(index,event.target.value)}							  
+							  className='w-12 h-12 text-center text-2xl font-bold bg-gray-100 text-blue-600 border-2 border-blue-600 rounded-lg focus:border-black focus:outline-none'
                             />
                         ))
                     }
