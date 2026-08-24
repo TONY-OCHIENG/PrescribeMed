@@ -23,6 +23,7 @@ export const verificationCodeEmail = async (email,verificationCode) => {
 
         const info = await transporter.sendMail(message)
     } catch (error) {
-        
+        console.log(error)
+        throw new Error(error)        
     }
 }
