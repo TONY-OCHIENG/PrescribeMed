@@ -15,6 +15,13 @@ export const verificationCodeEmail = async (email,verificationCode) => {
                 pass: process.env.APP_PASSWORD
             }
         })
+        const message = {
+            to: email,
+            subject: "Verification Code",
+            html:""
+        };
+
+        const info = await transporter.sendMail(message)
     } catch (error) {
         
     }
