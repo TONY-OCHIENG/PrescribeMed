@@ -30,6 +30,12 @@ function VerificationPage() {
             }
         }      
     }
+
+    const handlekey = (index,e) => {
+      if (e.key === "Backspace" && !verificationCode[index] && index > 0) {
+			inputRef.current[index - 1].focus();
+		 }
+    }
   return (
     <div className='w-full h-screen flex justify-center items-center'>
         <div className='p-4 bg-white rounded-md shadow-md'>
@@ -47,7 +53,8 @@ function VerificationPage() {
                               type='text'
 							  maxLength='6'
 							  value={digit}
-                              onChange={(event) => handleChange(index,event.target.value)}							  
+                              onChange={(event) => handleChange(index,event.target.value)}	
+                              onKeyDown={(e) => handlekey(index, e)}						  
 							  className='w-12 h-12 text-center text-2xl font-bold bg-gray-100 text-blue-600 border-2 border-blue-600 rounded-lg focus:border-black focus:outline-none'
                             />
                         ))
