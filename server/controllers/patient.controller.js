@@ -58,4 +58,19 @@ export const codeVerification = (request,response) => {
     if (!code) {
         return response.status(200).json({success: false, message:"Enter a valid code"})
     }
+
+    try {
+        const checkCode = "SELECT verificationToken, verificationTokenExpiresAT FROM patients WHERE verificationToken = ?"
+        databaseConnection.query(checkCode,[code],(error,result) => {
+            if (error) return response.status(500).json({success: false, message: error})
+            if (result.length > 0 ) {
+
+            } else {
+                return response.status(200).json({success: false, message: "Invalid Token"})
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        return response.status(500).json({success: false, message: "Internal server error"})
+    }
 }
