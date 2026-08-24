@@ -1,5 +1,6 @@
 import databaseConnection from "../configs/db.js"
 import { hashPassword } from "../configs/hashPassword.js"
+import { generateVerificationCode } from "../configs/OTP.js"
 
 export const registerPatient = (request,response) => {
     const {first_name,last_name,email_p,phone_p,age,password} = request.body
@@ -22,6 +23,8 @@ export const registerPatient = (request,response) => {
     }
 
     const hpassword = hashPassword(password)
+    const verificationToken = generateVerificationCode()
+    const verificationTokenExpiresAT = new Date(Date.now() + 1 * 60 * 60 * 1000)
 
     try {
         const checkEmail = "SELECT email_p FROM patients WHERE email_p = ?"
