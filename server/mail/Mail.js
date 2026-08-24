@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 import dotenv from 'dotenv'
-import { VERIFICATION_CODE } from './EmailTamplates'
+import { VERIFICATION_CODE } from './EmailTamplates.js'
 dotenv.config()
 
 //Function that sends email containing verification code
