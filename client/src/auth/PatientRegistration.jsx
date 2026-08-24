@@ -4,6 +4,7 @@ import { Calendar, Camera, Lock, Mail, Phone, User } from 'lucide-react'
 import { useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 function PatientRegistration() {
   const [patients,setPatients] = useState({
@@ -15,6 +16,7 @@ function PatientRegistration() {
     age:"",
     password:""
   })
+  const navigate = useNavigate()
 
   const handleChange = (event) => {
     const { name, value} = event.target
@@ -40,6 +42,7 @@ function PatientRegistration() {
       console.log(response)
       if (response.data.success){
           toast.success(response.data.message)
+          navigate("/verify")
       } else {
           toast.error(response.data.message)
       }

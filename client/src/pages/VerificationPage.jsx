@@ -53,7 +53,7 @@ function VerificationPage() {
                               type='text'
 							  maxLength='6'
 							  value={digit}
-                              onChange={(event) => handleChange(index,event.target.value)}	
+                              onChange={(e) => handleChange(index, e.target.value)}	
                               onKeyDown={(e) => handlekey(index, e)}						  
 							  className='w-12 h-12 text-center text-2xl font-bold bg-gray-100 text-blue-600 border-2 border-blue-600 rounded-lg focus:border-black focus:outline-none'
                             />
