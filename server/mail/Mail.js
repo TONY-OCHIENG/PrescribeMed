@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer'
 import dotenv from 'dotenv'
+import { VERIFICATION_CODE } from './EmailTamplates'
 dotenv.config()
 
 //Function that sends email containing verification code
@@ -18,10 +19,11 @@ export const verificationCodeEmail = async (email,verificationCode) => {
         const message = {
             to: email,
             subject: "Verification Code",
-            html:""
+            html:VERIFICATION_CODE.replace("{VERIFICATION_CODE}",verificationCode)
         };
 
         const info = await transporter.sendMail(message)
+        console.log("Message sent, ", info.messageId)
     } catch (error) {
         console.log(error)
         throw new Error(error)        
