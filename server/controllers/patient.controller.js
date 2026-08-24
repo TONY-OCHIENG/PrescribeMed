@@ -67,11 +67,10 @@ export const codeVerification = (request,response) => {
                 if (result[0].verificationToken && result[0].verificationTokenExpiresAT >= Date.now()) {
                     const verifyEmail = "UPDATE patients SET isVerified = true WHERE verificationToken = ?"
                     databaseConnection.query(verifyEmail,[code],(err,results) => {
-                        if (err) return response.status(500).json({success: false, message: err})
-                        
+                        if (err) return response.status(500).json({success: false, message: err})                        
                     })
                 } else {
-                    return response.status(200).json({success: false, message: "Invalid or Token expired"})
+                    return response.status(200).json({success: false, message: "Invalid or expired Token"})
                 }
             } else {
                 return response.status(200).json({success: false, message: "Invalid Token"})
