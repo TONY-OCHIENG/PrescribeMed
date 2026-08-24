@@ -52,3 +52,10 @@ export const registerPatient = (request,response) => {
     }
 
 }
+
+export const codeVerification = (request,response) => {
+    const { code } = request.body
+    if (!code) {
+        return response.status(200).json({success: false, message:"Enter a valid code"})
+    }
+}
