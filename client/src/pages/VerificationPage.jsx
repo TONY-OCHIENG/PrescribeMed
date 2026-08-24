@@ -1,3 +1,4 @@
+import { Loader } from 'lucide-react'
 import React from 'react'
 import { useRef } from 'react'
 import { useState } from 'react'
@@ -36,6 +37,13 @@ function VerificationPage() {
 			inputRef.current[index - 1].focus();
 		 }
     }
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        const code = verificationCode.join("")
+        setLoading(true)
+        console.log(code)
+    }
   return (
     <div className='w-full h-screen flex justify-center items-center'>
         <div className='p-4 bg-white rounded-md shadow-md'>
@@ -43,7 +51,7 @@ function VerificationPage() {
 		       Verify Your Email
 		    </h2>
             <p className='text-sm text-gray-600'>Enter the 6-digit verification code sent to your email address.</p>
-            <form action="" className='space-y-6'>
+            <form action="" className='space-y-6' onSubmit={handleSubmit}>
                 <div className='flex justify-between mt-4'>
                     {
                         verificationCode.map((digit,index) => (
@@ -54,13 +62,16 @@ function VerificationPage() {
 							  maxLength='6'
 							  value={digit}
                               onChange={(e) => handleChange(index, e.target.value)}	
-                              onKeyDown={(e) => handlekey(index, e)}						  
+                              onKeyDown={(e) => handlekey(index, e)}					  
 							  className='w-12 h-12 text-center text-2xl font-bold bg-gray-100 text-blue-600 border-2 border-blue-600 rounded-lg focus:border-black focus:outline-none'
                             />
                         ))
                     }
                 </div>
-                <button className='w-full py-2 mt-2 bg-blue-600 text-white rounded-md font-extrabold'>Verify email</button>
+                <button disabled={loading || verificationCode.some((digit) => !digit)} className='cursor-pointer flex justify-center disabled:opacity-65 items-center w-full py-2 mt-2 bg-blue-600 text-white rounded-md font-extrabold'>{
+                     loading ? <Loader className='animate-spin text-xl'/> : "Verify Email"
+                    }                    
+                </button>
             </form>
         </div>
     </div>
