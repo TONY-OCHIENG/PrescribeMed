@@ -34,6 +34,24 @@ export const verificationCodeEmail = async (email,verificationCode) => {
 
 export const welcomeEmail = async (email, fullname) => {
     try {
+        const transporter = nodemailer.createTransport({
+            host: process.env.EMAIL_HOST,
+            port: process.env.EMAIL_PORT,
+            secure: true,
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.APP_PASSWORD
+            }
+        })
+        
+        const message = {
+            to: email,
+            subject: "Welcome Onboard",
+            html:VERIFICATION_CODE.replace("{FULLNAME}",fullname)
+        };
+
+        const info = await transporter.sendMail(message)
+        console.log("Message sent, ", info.messageId)
         
     } catch (error) {
         console.log(error)
