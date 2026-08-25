@@ -73,11 +73,12 @@ export const codeVerification = (request,response) => {
                             databaseConnection.query(fullNames,[code], (errors, names) => {
                                 if (errors) return response.status(500).json({success: false, message: errors})
                                 if (names.length > 0) {
-                                    const fullnames = names[0].fullname
+                                    const fullname = names[0].fullname
                                     const email = names[0].email_p
                                 }
                             })
-                        }                   
+                        } 
+                        return response.status(200).json({success: true, message: "Email verified successfully"})                  
                     })
                 } else {
                     return response.status(200).json({success: false, message: "Invalid or expired Token"})
