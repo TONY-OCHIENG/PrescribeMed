@@ -44,7 +44,7 @@ function VerificationPage() {
         event.preventDefault()
         const code = verificationCode.join("")
         setLoading(true)
-        axios.post("http://localhost:5000/api/patients/verifyEmail",code)
+        axios.post("http://localhost:5000/api/patients/verifyEmail",{code})
         .then((response) => {
             if (response.data.success) {
                 setLoading(false)
@@ -53,6 +53,11 @@ function VerificationPage() {
                 setLoading(false)
                 toast.error(response.data.message)
             }
+        })
+        .catch((error) => {
+            setLoading(false)
+            console.log(error)
+            toast.error("An error occured")
         })
         
         
