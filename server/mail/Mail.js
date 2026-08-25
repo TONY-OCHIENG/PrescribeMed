@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 import dotenv from 'dotenv'
-import { VERIFICATION_CODE } from './EmailTamplates.js'
+import { VERIFICATION_CODE, WELCOME_EMAIL } from './EmailTamplates.js'
 dotenv.config()
 
 //Function that sends email containing verification code
@@ -47,7 +47,7 @@ export const welcomeEmail = async (email, fullname) => {
         const message = {
             to: email,
             subject: "Welcome Onboard",
-            html:VERIFICATION_CODE.replace("{FULLNAME}",fullname)
+            html:WELCOME_EMAIL.replace("{FULLNAME}",fullname)
         };
 
         const info = await transporter.sendMail(message)
