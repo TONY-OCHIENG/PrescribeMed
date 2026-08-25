@@ -4,7 +4,7 @@ import { Calendar, Camera, Lock, Mail, Phone, User } from 'lucide-react'
 import { useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function PatientRegistration() {
   const [patients,setPatients] = useState({
@@ -114,7 +114,7 @@ function PatientRegistration() {
            <button className='w-full text-white bg-gradient-to-r from-blue-400 to-blue-600 py-2
             font-extrabold cursor-pointer rounded-md text-xl flex justify-center items-center
             '>Register</button>
-            <p className='text-xs mt-4 text-gray-600'>Already have an Account? <span className='font-extrabold'>Click to login</span></p>
+            <p className='text-xs mt-4 text-gray-600'>Already have an Account? <Link to={"/patient-login"} className='font-extrabold'>Click to login</Link></p>
         </form>
     </div>
   )
