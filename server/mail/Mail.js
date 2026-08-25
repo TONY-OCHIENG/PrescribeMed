@@ -29,3 +29,14 @@ export const verificationCodeEmail = async (email,verificationCode) => {
         throw new Error(error)        
     }
 }
+
+// A function that sends welcome email
+
+export const welcomeEmail = async (email, fullname) => {
+    try {
+        
+    } catch (error) {
+        console.log(error)
+        throw new Error(error)
+    }
+}
