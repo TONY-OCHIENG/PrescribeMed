@@ -4,11 +4,13 @@ import { useRef } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 function VerificationPage() {
     const [verificationCode,setCode] = useState(["","","","","",""])
     const inputRef = useRef([])
     const [loading,setLoading] = useState(false)
+    const navigate = useNavigate()
 
     const handleChange = (index,value) => {
         const newCode = [...verificationCode]
@@ -49,6 +51,7 @@ function VerificationPage() {
             if (response.data.success) {
                 setLoading(false)
                 toast.success(response.data.message)
+                navigate("/patient-login")
             } else {
                 setLoading(false)
                 toast.error(response.data.message)

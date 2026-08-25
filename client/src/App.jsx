@@ -9,6 +9,7 @@ import AddDoctors from './pages/AddDoctors'
 import Filter from './pages/Filter'
 import PatientRegistration from './auth/PatientRegistration'
 import VerificationPage from './pages/VerificationPage'
+import PatientLogin from './auth/PatientLogin'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/register' element={<PatientRegistration/>}/>
         <Route path='/verify' element={<VerificationPage/>}/>
         <Route path='/login' element={<AdminLogin/>}/>
+        <Route path='/patient-login' element={<PatientLogin/>}/>
         <Route path='/admin' element={<Admin/>}>
          <Route path='' element={<Dashboard/>}/>
          <Route path='/admin/appointments' element={<Appointments/>}/>
