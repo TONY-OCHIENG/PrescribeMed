@@ -2,6 +2,8 @@ import { Loader } from 'lucide-react'
 import React from 'react'
 import { useRef } from 'react'
 import { useState } from 'react'
+import axios from 'axios'
+import { toast } from 'react-hot-toast'
 
 function VerificationPage() {
     const [verificationCode,setCode] = useState(["","","","","",""])
@@ -42,7 +44,18 @@ function VerificationPage() {
         event.preventDefault()
         const code = verificationCode.join("")
         setLoading(true)
-        console.log(code)
+        axios.post("http://localhost:5000/api/patients/verifyEmail",code)
+        .then((response) => {
+            if (response.data.success) {
+                setLoading(false)
+                toast.success(response.data.message)
+            } else {
+                setLoading(false)
+                toast.error(response.data.message)
+            }
+        })
+        
+        
     }
   return (
     <div className='w-full h-screen flex justify-center items-center'>
