@@ -1,7 +1,7 @@
 import databaseConnection from "../configs/db.js"
 import { hashPassword } from "../configs/hashPassword.js"
 import { generateVerificationCode } from "../configs/OTP.js"
-import { verificationCodeEmail } from "../mail/Mail.js"
+import { verificationCodeEmail, welcomeEmail } from "../mail/Mail.js"
 
 export const registerPatient = (request,response) => {
     const {first_name,last_name,email_p,phone_p,age,password} = request.body
@@ -75,6 +75,7 @@ export const codeVerification = (request,response) => {
                                 if (names.length > 0) {
                                     const fullname = names[0].fullname
                                     const email = names[0].email_p
+                                    welcomeEmail(email,fullname)
                                 }
                             })
                         } 
