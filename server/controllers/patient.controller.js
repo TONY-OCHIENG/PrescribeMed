@@ -115,6 +115,9 @@ export const resetPasswordLink = (request,response) => {
                 //assigning tokens and expiry date 
                 const resetPasswordToken = crypto.randomBytes(20).toString('hex')
                 const resetPasswordTokenExpiresAT = new Date( Date.now() + 1 * 60 * 60 * 1000)
+
+                const updateResetTokens = "UPDATE patients SET resetPasswordToken = ? , resetPasswordTokenExpiresAT = ? WHERE email_p = ?"
+                
             }
         })
     } catch (error) {
