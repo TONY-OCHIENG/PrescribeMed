@@ -102,8 +102,19 @@ export const resetPasswordLink = (request,response) => {
     }
 
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-    
+
     if (!regex.test(email)) {
         return response.status(200).json({success: false, message: "Enter a valid email address"})
+    }
+
+    try {
+        const checkEmail = "SELECT email_p FROM patients WHERE email_p = ?"
+        databaseConnection.query(checkEmail,[email], (error,result) => {
+            if (error) return response.status(500).json({success: false, message: error})
+            
+        })
+    } catch (error) {
+        console.log(error)
+        return response.status(500).json({success: false, message: "Internal server error"})
     }
 }
