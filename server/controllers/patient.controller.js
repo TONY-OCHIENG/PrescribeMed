@@ -152,6 +152,8 @@ export const changePassword = (request,response) => {
         return response.status(200).json({success: false, message: "Password must be greater than five characters"})
     }
 
+    const hpassword = hashPassword(password)
+
     try {
         const checkTokens = "SELECT verificationToken, verificationTokenExpiresAT FROM patients WHERE verificationToken = ?"
         databaseConnection.query(checkTokens, [id], (error, result) => {
