@@ -7,7 +7,7 @@ import Input from '../components/Input'
 function FogrotPassword() {
     const [loading,setLoading] = useState(false)
     const [email, setEmail] = useState({
-        email_p:''
+        email:''
     })
     
     const handleEmail = (event) => {
@@ -18,6 +18,8 @@ function FogrotPassword() {
         }))
     }
 
+    console.log(email)
+
     return (
       <div className='flex justify-center items-center h-screen px-2'>
         <form  className='max-w-md w-full rounded-xl shadow-xl p-2 bg-white/50 backdrop-blur-2xl'>       
@@ -26,6 +28,7 @@ function FogrotPassword() {
                 icon={Mail}
                 type="email"
                 name="email"
+                onChange={handleEmail}
                 placeholder="Email"
             />             
             <button disabled={loading} className='w-full text-white bg-gradient-to-r from-blue-400 to-blue-600 py-2
