@@ -137,11 +137,26 @@ export const resetPasswordLink = (request,response) => {
 }
 
 export const changePassword = (request,response) => {
+    const { password, password_p} = request.body
     const { id } = request.params
+    
+    if (!password || !password_p) {
+        return response.status(200).json({success: false, message: "Please fill the required fields"})
+    }
+
     try {
         const checkTokens = "SELECT verificationToken, verificationTokenExpiresAT FROM patients WHERE verificationToken = ?"
         databaseConnection.query(checkTokens, [id], (error, result) => {
             if (error) return response.status(500).json({success: false, message: error})
+            if (result.length > 0) {
+                if (result[0].resetPasswordToken && result[0].resetPasswordTokenExpiresAT >=  new Date().getHours()) {
+                    
+                } else {
+                    return response.status(200).json({success: false, message: "Token expired or invalid"})
+                }
+            } else {
+                return response.status(200).json({success: false, message: "Invalid token"})
+            }
         })
         
     } catch (error) {
