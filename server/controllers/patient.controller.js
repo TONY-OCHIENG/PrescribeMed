@@ -100,4 +100,10 @@ export const resetPasswordLink = (request,response) => {
     if (!email) {
         return response.status(200).json({success: false, message: "Fill the required field"})
     }
+
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    
+    if (!regex.test(email)) {
+        return response.status(200).json({success: false, message: "Enter a valid email address"})
+    }
 }
