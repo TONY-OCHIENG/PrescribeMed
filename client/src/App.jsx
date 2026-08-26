@@ -11,6 +11,7 @@ import PatientRegistration from './auth/PatientRegistration'
 import VerificationPage from './pages/VerificationPage'
 import PatientLogin from './auth/PatientLogin'
 import FogrotPassword from './auth/FogrotPassword'
+import ResetPassword from './auth/ResetPassword'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Filter/>}/>
         <Route path='/forgot-password' element={<FogrotPassword/>}/>
+        <Route path='/reset-password/:id' element={<ResetPassword/>}/>
         <Route path='/register' element={<PatientRegistration/>}/>
         <Route path='/verify' element={<VerificationPage/>}/>
         <Route path='/login' element={<AdminLogin/>}/>
