@@ -144,6 +144,14 @@ export const changePassword = (request,response) => {
         return response.status(200).json({success: false, message: "Please fill the required fields"})
     }
 
+    if (password != password_p) {
+       return response.status(200).json({success: false, message: "Password didn't match"})
+    }
+
+    if (password.length < 6) {
+        return response.status(200).json({success: false, message: "Password must be greater than five characters"})
+    }
+
     try {
         const checkTokens = "SELECT verificationToken, verificationTokenExpiresAT FROM patients WHERE verificationToken = ?"
         databaseConnection.query(checkTokens, [id], (error, result) => {
