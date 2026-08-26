@@ -126,6 +126,8 @@ export const resetPasswordLink = (request,response) => {
                         return response.status(200).json({success: true, message: "Reset password link has been sent to your email"})
                     }
                 })
+            } else {
+                return response.status(200).json({success: false, message: "Email doesn't exist"})
             }
         })
     } catch (error) {
