@@ -5,5 +5,5 @@ import { codeVerification, registerPatient, resetPasswordLink } from '../control
 const patientRoute = express.Router()
 patientRoute.post("/registerPatient",upload.single('image_p'),registerPatient)
 patientRoute.post("/verifyEmail",codeVerification)
-patientRoute.post("/reset-password",resetPasswordLink)
+patientRoute.post("/reset-link",resetPasswordLink)
 export default patientRoute
