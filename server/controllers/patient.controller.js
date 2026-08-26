@@ -1,8 +1,10 @@
 import databaseConnection from "../configs/db.js"
 import { hashPassword } from "../configs/hashPassword.js"
 import { generateVerificationCode } from "../configs/OTP.js"
-import { verificationCodeEmail, welcomeEmail } from "../mail/Mail.js"
+import { resetPassword, verificationCodeEmail, welcomeEmail } from "../mail/Mail.js"
 import crypto from 'crypto'
+import dotenv from 'dotenv'
+dotenv.config()
 
 export const registerPatient = (request,response) => {
     const {first_name,last_name,email_p,phone_p,age,password} = request.body
@@ -120,6 +122,7 @@ export const resetPasswordLink = (request,response) => {
                 databaseConnection.query(updateResetTokens,[resetPasswordToken,resetPasswordTokenExpiresAT,email], (errors,results) => {
                     if (errors) return response.status(500).json({success: false, message: "Internal server error"})
                     if (results) {
+                        resetPassword(email,`${process.env.CLIENT_URL }/reset-password/${resetPasswordToken}`)
                         return response.status(200).json({success: true, message: "Reset password link has been sent to your email"})
                     }
                 })
