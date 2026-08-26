@@ -135,3 +135,8 @@ export const resetPasswordLink = (request,response) => {
         return response.status(500).json({success: false, message: "Internal server error"})
     }
 }
+
+export const changePassword = (request,response) => {
+    const { id } = request.params
+    
+}
