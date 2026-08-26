@@ -3,6 +3,8 @@ import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Input from '../components/Input'
+import axios from 'axios'
+import toast from 'react-hot-toast'
 
 function FogrotPassword() {
     const [loading,setLoading] = useState(false)
@@ -18,7 +20,21 @@ function FogrotPassword() {
         }))
     }
 
-    console.log(email)
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        axios.post('http://localhost:5000/api/patients/reset-link',email)
+        .then((response) => {
+            if (response.data.success) {
+                toast.success(response.data.message)
+            } else {
+                toast.error(response.data.error)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+            toast.error("An error occured")
+        })
+    }
 
     return (
       <div className='flex justify-center items-center h-screen px-2'>
