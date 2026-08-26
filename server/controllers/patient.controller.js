@@ -2,6 +2,7 @@ import databaseConnection from "../configs/db.js"
 import { hashPassword } from "../configs/hashPassword.js"
 import { generateVerificationCode } from "../configs/OTP.js"
 import { verificationCodeEmail, welcomeEmail } from "../mail/Mail.js"
+import crypto from 'crypto'
 
 export const registerPatient = (request,response) => {
     const {first_name,last_name,email_p,phone_p,age,password} = request.body
@@ -91,5 +92,12 @@ export const codeVerification = (request,response) => {
     } catch (error) {
         console.log(error)
         return response.status(500).json({success: false, message: "Internal server error"})
+    }
+}
+
+export const resetPasswordLink = (request,response) => {
+    const { email } = request.body
+    if (!email) {
+        return response.status(200).json({success: false, message: "Fill the required field"})
     }
 }
