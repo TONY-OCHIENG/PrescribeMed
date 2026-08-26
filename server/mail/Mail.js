@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 import dotenv from 'dotenv'
-import { VERIFICATION_CODE, WELCOME_EMAIL } from './EmailTamplates.js'
+import { RESET, VERIFICATION_CODE, WELCOME_EMAIL } from './EmailTamplates.js'
 dotenv.config()
 
 //Function that sends email containing verification code
@@ -72,6 +72,15 @@ export const resetPassword = async (email,url) => {
                 pass: process.env.APP_PASSWORD
             }
         })
+        
+        const message = {
+            to: email,
+            subject: "Reset Password",
+            html:RESET.replace("{RESET_LINK}",url)
+        };
+
+        const info = await transporter.sendMail(message)
+        console.log("Message sent, ", info.messageId)
     } catch (error) {
         console.log(error)
         throw new Error(error)
