@@ -10,12 +10,14 @@ import Filter from './pages/Filter'
 import PatientRegistration from './auth/PatientRegistration'
 import VerificationPage from './pages/VerificationPage'
 import PatientLogin from './auth/PatientLogin'
+import FogrotPassword from './auth/FogrotPassword'
 
 function App() {
   return (
     <div className='bg-gray-100 h-[100vh]'>
       <Routes>
         <Route path='/' element={<Filter/>}/>
+        <Route path='/forgot-password' element={<FogrotPassword/>}/>
         <Route path='/register' element={<PatientRegistration/>}/>
         <Route path='/verify' element={<VerificationPage/>}/>
         <Route path='/login' element={<AdminLogin/>}/>

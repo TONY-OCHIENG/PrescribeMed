@@ -30,7 +30,7 @@ function PatientLogin() {
                     <span className='text-sm text-gray-600 font-extrabold'>Remember me</span>
                     
                 </div>
-                <Link className='font-extrabold text-blue-600'>Forgot Password?</Link>
+                <Link to={"/forgot-password"} className='font-extrabold text-blue-600'>Forgot Password?</Link>
             </div>
             <button disabled={loading} className='w-full text-white bg-gradient-to-r from-blue-400 to-blue-600 py-2
             font-extrabold cursor-pointer rounded-md text-xl flex justify-center items-center
