@@ -27,7 +27,7 @@ function FogrotPassword() {
             if (response.data.success) {
                 toast.success(response.data.message)
             } else {
-                toast.error(response.data.error)
+                toast.error(response.data.message)
             }
         })
         .catch((error) => {
@@ -38,7 +38,7 @@ function FogrotPassword() {
 
     return (
       <div className='flex justify-center items-center h-screen px-2'>
-        <form  className='max-w-md w-full rounded-xl shadow-xl p-2 bg-white/50 backdrop-blur-2xl'>       
+        <form  onSubmit={handleSubmit} className='max-w-md w-full rounded-xl shadow-xl p-2 bg-white/50 backdrop-blur-2xl'>       
             <p className='text-gray-600 font-extrabold text-center text-sm mb-2'>Enter your email address to recieve reset link</p>
               <Input
                 icon={Mail}
