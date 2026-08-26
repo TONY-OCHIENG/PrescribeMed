@@ -111,7 +111,11 @@ export const resetPasswordLink = (request,response) => {
         const checkEmail = "SELECT email_p FROM patients WHERE email_p = ?"
         databaseConnection.query(checkEmail,[email], (error,result) => {
             if (error) return response.status(500).json({success: false, message: error})
-            
+            if (result.length > 0) {
+                //assigning tokens and expiry date 
+                const resetPasswordToken = crypto.randomBytes(20).toString('hex')
+                const resetPasswordTokenExpiresAT = new Date( Date.now() + 1 * 60 * 60 * 1000)
+            }
         })
     } catch (error) {
         console.log(error)
