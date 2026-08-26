@@ -117,7 +117,12 @@ export const resetPasswordLink = (request,response) => {
                 const resetPasswordTokenExpiresAT = new Date( Date.now() + 1 * 60 * 60 * 1000)
 
                 const updateResetTokens = "UPDATE patients SET resetPasswordToken = ? , resetPasswordTokenExpiresAT = ? WHERE email_p = ?"
-                
+                databaseConnection.query(updateResetTokens,[resetPasswordToken,resetPasswordTokenExpiresAT,email], (errors,results) => {
+                    if (errors) return response.status(500).json({success: false, message: "Internal server error"})
+                    if (results) {
+                        return response.status(200).json({success: true, message: "Reset password link has been sent to your email"})
+                    }
+                })
             }
         })
     } catch (error) {

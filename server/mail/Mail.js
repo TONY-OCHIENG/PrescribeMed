@@ -58,3 +58,9 @@ export const welcomeEmail = async (email, fullname) => {
         throw new Error(error)
     }
 }
+
+// A function that sends a reset-password email
+
+export const resetPassword = async (email,url) => {
+    
+}
