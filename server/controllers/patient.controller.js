@@ -163,6 +163,7 @@ export const changePassword = (request,response) => {
                     const updatePassword = "UPDATE patients SET password = ? WHERE resetPasswordToken = ?"
                     databaseConnection.query(updatePassword, [hpassword,id],(error,results) => {
                         if (error) return response.status(500).json({success: false, message: error})
+                        return response.status(200).json({success: true, message: "Password updated successfully"})
                     })
                 } else {
                     return response.status(200).json({success: false, message: "Token expired or invalid"})
