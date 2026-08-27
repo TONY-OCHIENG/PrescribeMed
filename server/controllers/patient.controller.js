@@ -155,11 +155,11 @@ export const changePassword = (request,response) => {
     const hpassword = hashPassword(password)
 
     try {
-        const checkTokens = "SELECT verificationToken, verificationTokenExpiresAT FROM patients WHERE verificationToken = ?"
+        const checkTokens = "SELECT resetPasswordToken, resetPasswordTokenExpiresAT FROM patients WHERE resetPasswordToken = ?"
         databaseConnection.query(checkTokens, [id], (error, result) => {
             if (error) return response.status(500).json({success: false, message: error})
             if (result.length > 0) {
-                if (result[0].verificationTokenToken && result[0].verificationTokenExpiresAT >=  new Date().getHours()) {
+                if (result[0].resetPasswordToken && result[0].resetPasswordTokenExpiresAT >=  new Date().getHours()) {
                     
                 } else {
                     return response.status(200).json({success: false, message: "Token expired or invalid"})
