@@ -2,6 +2,8 @@ import { Loader, Lock, Mail, User } from 'lucide-react'
 import React, { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Input from '../components/Input'
+import axios from 'axios'
+import toast from 'react-hot-toast'
 
 function ResetPassword() {
     const { id } = useParams()
@@ -18,7 +20,26 @@ function ResetPassword() {
         [name] : value
       }))
     }
-    
+
+    const handleSubmit = (event) => {
+      event.preventDefault()
+      setloading(true)
+      axios.post(`http://localhost:5000/api/patients/updatePassword/${id}`,password)
+      .then((response) => {
+        if (response.data.success) {
+          setloading(false)
+          toast.success(response.data.message)
+        } else {
+          setloading(false)
+          toast.error(response.data.message)
+        }
+      })
+      .catch((error) => {
+        setloading(false)
+        toast.error("An error occured")
+      })
+    }
+
   return (
          <div className='flex justify-center items-center h-screen px-2'>
         <form  className='max-w-md w-full rounded-xl shadow-xl p-2 bg-white/50 backdrop-blur-2xl'>
@@ -28,12 +49,14 @@ function ResetPassword() {
                 icon={Lock}
                 type="password"
                 name="password"
+                onChange ={handleChange}
                 placeholder="New password"
             />
              <Input
                 icon={Lock}
                 type="password"
                 name="password_p"
+                onChange ={handleChange}
                 placeholder="Confirm password"
         
             />
