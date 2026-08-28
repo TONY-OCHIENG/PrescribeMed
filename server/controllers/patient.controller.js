@@ -4,6 +4,7 @@ import { generateVerificationCode } from "../configs/OTP.js"
 import { resetPassword, verificationCodeEmail, welcomeEmail } from "../mail/Mail.js"
 import crypto from 'crypto'
 import dotenv from 'dotenv'
+import jwt from 'jsonwebtoken'
 dotenv.config()
 
 export const registerPatient = (request,response) => {
