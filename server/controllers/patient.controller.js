@@ -216,3 +216,10 @@ export const loginPatient = (request,response) => {
         return response.status(500).json({success: false, message: "Internal server error"})
     }
 }
+
+export const authenticatePatient = (request,response) => {
+    return response.status(200).json({success: true, details: {
+        lastName: request.lastName,
+        patientID: request.patientID
+    }})
+}
