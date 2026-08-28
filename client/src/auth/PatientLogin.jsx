@@ -5,6 +5,7 @@ import Input from '../components/Input'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
+import { useEffect } from 'react'
 
 function PatientLogin() {
     const [loading,setLoading] = useState(false)
@@ -24,6 +25,21 @@ function PatientLogin() {
     }
     
     const navigate = useNavigate()
+
+
+    useEffect(() => {
+            axios.get('http://localhost:5000/api/patients/authPatient')
+            .then((response) => {
+                if (response.data.success) {
+                    navigate('/patient')
+                } else {
+                  navigate('/patient-Login')
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    },[])
     
     const handleSubmit = (event) => {
         event.preventDefault()
