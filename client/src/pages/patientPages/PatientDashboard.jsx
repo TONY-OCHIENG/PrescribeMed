@@ -17,7 +17,7 @@ function PatientDashboard() {
     ]
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/patient/authPatient')
+        axios.get('http://localhost:5000/api/patients/authPatient')
         .then((response) => {
             if (response.data.success) {
                 setLastName(response.data.details)
@@ -52,6 +52,7 @@ function PatientDashboard() {
             <div className='w-[80%] md:w-[85%] overflow-x-auto'>
                 <div className='fixed w-full z-50 h-[8%] shadow-md p-4 flex items-center bg-white border-b'>
                     <div className='w-[80%]  flex justify-end items-center'>
+                        <h1 className='text-xl text-gray-600 mr-5 font-extrabold'>Hi,{lastName.lastName}</h1>
                         <button className='py-2 px-6 cursor-pointer bg-blue-500 flex justify-between items-center rounded-full'>
                          <Power className='mr-2 text-white'/>
                          <p className='text-white font-extrabold'>Logout</p>
