@@ -1,6 +1,6 @@
 import { Loader, Lock, Mail, User } from 'lucide-react'
 import React, { useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Input from '../components/Input'
 import axios from 'axios'
 import toast from 'react-hot-toast'
@@ -12,6 +12,7 @@ function ResetPassword() {
       password:"",
       password_p: ""
     })
+    const navigate = useNavigate()
 
     const handleChange = (event) => {
       const { name, value} = event.target
@@ -29,6 +30,7 @@ function ResetPassword() {
         if (response.data.success) {
           setloading(false)
           toast.success(response.data.message)
+          navigate("/patient-login")
         } else {
           setloading(false)
           toast.error(response.data.message)

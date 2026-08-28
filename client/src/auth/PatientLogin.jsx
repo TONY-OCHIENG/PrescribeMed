@@ -6,6 +6,18 @@ import { Link } from 'react-router-dom'
 
 function PatientLogin() {
     const [loading,setLoading] = useState(false)
+    const [value, setValue] = useState({
+        email_p:"",
+        password:""
+    })
+
+    const handleValues = (event) => {
+        const { name, value } = event.target
+        setValue((prev) => ({
+            ...prev,
+            [name]: value
+        }))
+    }
   return (
         <div className='flex justify-center items-center h-screen px-2'>
         <form  className='max-w-md w-full rounded-xl shadow-xl p-2 bg-white/50 backdrop-blur-2xl'>
@@ -14,7 +26,7 @@ function PatientLogin() {
               <Input
                 icon={Mail}
                 type="email"
-                name="email"
+                name="email_p"
                 placeholder="Email"
             />
              <Input
