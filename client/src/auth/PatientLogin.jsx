@@ -2,7 +2,7 @@ import { Loader, Lock, Mail } from 'lucide-react'
 import React from 'react'
 import { useState } from 'react'
 import Input from '../components/Input'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
 
@@ -23,6 +23,8 @@ function PatientLogin() {
         }))
     }
     
+    const navigate = useNavigate()
+    
     const handleSubmit = (event) => {
         event.preventDefault()
         setLoading(true)
@@ -31,6 +33,7 @@ function PatientLogin() {
             if (response.data.success) {
                 setLoading(false)
                 toast.success(response.data.message)
+                navigate("/patient")
             } else {
                 setLoading(false)
                 toast.error(response.data.message)
