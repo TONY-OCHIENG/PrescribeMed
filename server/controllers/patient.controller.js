@@ -203,6 +203,7 @@ export const loginPatient = (request,response) => {
                         sameSite: "strict",
                         maxAge: 1 * 24 * 60 * 60 * 1000
                     }))
+                    return response.status(200).json({success: true, message: "login successfully"})
                 } else {
                     return response.status(200).json({success: false, message: "Invalid credentials"})
                 }
