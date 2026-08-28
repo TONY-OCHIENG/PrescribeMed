@@ -1,14 +1,35 @@
+import axios from 'axios'
 import { LayoutDashboard, NotebookPenIcon, Power, User, VideoIcon } from 'lucide-react'
 import React from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 
 function PatientDashboard() {
-        const navLinks = [
+    const [lastName,setLastName] = useState([])
+    const navigate = useNavigate()
+    axios.defaults.withCredentials = true
+    const navLinks = [
         {name:"Dashboard",link:"/patient",icon:LayoutDashboard},
         {name:"Appointments",link:"/patient/appointments",icon:NotebookPenIcon},
         {name:"Video call",link:"/patient/meet",icon:VideoIcon},
         {name:"Profile",link:"/patient/profile",icon:User}
     ]
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/patient/authPatient')
+        .then((response) => {
+            if (response.data.success) {
+                setLastName(response.data.details)
+            } else {
+              navigate('/patient-Login')
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    },[])
+    
   return (
       <div className='flex w-[100%] h-screen'>
             <div className='bg-white inset-y-0 left-0 w-[20%] md:w-[15%] border border-l'>
@@ -30,7 +51,7 @@ function PatientDashboard() {
             </div>
             <div className='w-[80%] md:w-[85%] overflow-x-auto'>
                 <div className='fixed w-full z-50 h-[8%] shadow-md p-4 flex items-center bg-white border-b'>
-                    <div className='w-[80%]  flex justify-end '>
+                    <div className='w-[80%]  flex justify-end items-center'>
                         <button className='py-2 px-6 cursor-pointer bg-blue-500 flex justify-between items-center rounded-full'>
                          <Power className='mr-2 text-white'/>
                          <p className='text-white font-extrabold'>Logout</p>
