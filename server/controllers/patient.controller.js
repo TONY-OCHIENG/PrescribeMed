@@ -1,5 +1,5 @@
 import databaseConnection from "../configs/db.js"
-import { hashPassword } from "../configs/hashPassword.js"
+import { comparePassword, hashPassword } from "../configs/hashPassword.js"
 import { generateVerificationCode } from "../configs/OTP.js"
 import { resetPassword, verificationCodeEmail, welcomeEmail } from "../mail/Mail.js"
 import crypto from 'crypto'
@@ -191,7 +191,7 @@ export const loginPatient = (request,response) => {
         databaseConnection.query(checkUser, [email_p], (error,results) => {
             if (error) return response.status(500).json({success: false, message: error})
             if (results.length > 0) {
-                const password = results[0].password
+                const patientPassword = comparePassword(password,results[0].password)
                 
             } else {
                 return response.status(200).json({success: false , message: "user not found"})
