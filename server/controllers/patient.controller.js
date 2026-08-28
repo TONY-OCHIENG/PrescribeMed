@@ -194,9 +194,9 @@ export const loginPatient = (request,response) => {
             if (results.length > 0) {
                 const patientPassword = comparePassword(password,results[0].password)
                 if (patientPassword) {
-                    const patientID = request[0]?.patient_id
-                    const lastName = request[0]?.last_name
-                    const token = jwt.sign({patientID,lastName},process.env.SECRET,{expiresIn:"1d"})
+                    const patientID = results[0].patient_id
+                    const lastName = results[0].last_name
+                    const token = jwt.sign({patientID,lastName},process.env.SECRET_USER,{expiresIn:"1d"})
                     response.cookie("token",token,({
                         httpOnly: true,
                         secure:process.env.NODE_ENV === "production",
