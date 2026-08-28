@@ -190,6 +190,12 @@ export const loginPatient = (request,response) => {
         const checkUser = "SELECT * FROM patients WHERE email_p = ?"
         databaseConnection.query(checkUser, [email_p], (error,results) => {
             if (error) return response.status(500).json({success: false, message: error})
+            if (results.length > 0) {
+                const password = results[0].password
+                
+            } else {
+                return response.status(200).json({success: false , message: "user not found"})
+            }
         })
     } catch (error) {
         console.log(error)
