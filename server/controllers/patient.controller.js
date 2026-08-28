@@ -181,8 +181,18 @@ export const changePassword = (request,response) => {
 
 export const loginPatient = (request,response) => {
     const { email_p, password } = request.body
-    
+
     if (!email_p || !password) {
         return response.status(200).json({success: false, message: "Fill all fields"})
     } 
+
+    try {
+        const checkUser = "SELECT * FROM patients WHERE email_p = ?"
+        databaseConnection.query(checkUser, [email_p], (error,results) => {
+            if (error) return response.status(500).json({success: false, message: error})
+        })
+    } catch (error) {
+        console.log(error)
+        return response.status(500).json({success: false, message: "Internal server error"})
+    }
 }
