@@ -3,6 +3,7 @@ import { LayoutDashboard, NotebookPenIcon, Power, User, VideoIcon } from 'lucide
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 
 function PatientDashboard() {
@@ -30,6 +31,20 @@ function PatientDashboard() {
         })
     },[])
     
+    const handleLogout = () => {
+        axios.get("http://localhost:5000/api/patients/logoutpatient")
+        .then((response) => {
+            if (response.data.success) {
+                toast.success(response.data.message)
+            } else {
+                toast.error("An error occured")
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+            toast.error("An error occured")
+        })
+    }
   return (
       <div className='flex w-[100%] h-screen'>
             <div className='bg-white inset-y-0 left-0 w-[20%] md:w-[15%] border border-l'>
