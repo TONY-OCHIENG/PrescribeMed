@@ -13,6 +13,7 @@ import PatientLogin from './auth/PatientLogin'
 import FogrotPassword from './auth/FogrotPassword'
 import ResetPassword from './auth/ResetPassword'
 import PatientDashboard from './pages/patientPages/PatientDashboard'
+import PDashboard from './pages/patientPages/PDashboard'
 
 function App() {
   return (
@@ -25,7 +26,9 @@ function App() {
         <Route path='/verify' element={<VerificationPage/>}/>
         <Route path='/login' element={<AdminLogin/>}/>
         <Route path='/patient-login' element={<PatientLogin/>}/>
-        <Route path='/patient' element={<PatientDashboard/>}></Route>
+        <Route path='/patient' element={<PatientDashboard/>}>
+          <Route path='' element={<PDashboard/>}/>
+        </Route>
         <Route path='/admin' element={<Admin/>}>
          <Route path='' element={<Dashboard/>}/>
          <Route path='/admin/appointments' element={<Appointments/>}/>
