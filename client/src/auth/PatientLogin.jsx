@@ -13,6 +13,8 @@ function PatientLogin() {
         password:""
     })
 
+    axios.defaults.withCredentials = true
+
     const handleValues = (event) => {
         const { name, value } = event.target
         setValue((prev) => ({
