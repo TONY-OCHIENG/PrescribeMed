@@ -192,7 +192,17 @@ export const loginPatient = (request,response) => {
             if (error) return response.status(500).json({success: false, message: error})
             if (results.length > 0) {
                 const patientPassword = comparePassword(password,results[0].password)
-                
+                if (patientPassword) {
+                    const patientID = request[0]?.patient_id
+                    const lastName = request[0]?.last_name
+                    const token = jwt.sign({patientID,lastName},process.env.SECRET,{expiresIn:"1d"})
+                    response.cookie("token",token,({
+                        httpOnly: true,
+                        secure:process.env.NODE_ENV === "production",
+                        sameSite: "strict",
+                        maxAge: 1 * 24 * 60 * 60 * 1000
+                    }))
+                }
             } else {
                 return response.status(200).json({success: false , message: "user not found"})
             }
