@@ -178,3 +178,11 @@ export const changePassword = (request,response) => {
         return response.status(500).json({success: false, message: "Internal server error"})
     }
 }
+
+export const loginPatient = (request,response) => {
+    const { email_p, password } = request.body
+    
+    if (!email_p || !password) {
+        return response.status(200).json({success: false, message: "Fill all fields"})
+    } 
+}
