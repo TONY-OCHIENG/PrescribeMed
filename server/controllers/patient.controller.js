@@ -223,3 +223,8 @@ export const authenticatePatient = (request,response) => {
         patientID: request.patientID
     }})
 }
+
+export const logoutPatient = (request,response) => {
+    response.clearCookie("token")
+    return response.status(200).json({success: true, message: "logout successfully"})
+}
