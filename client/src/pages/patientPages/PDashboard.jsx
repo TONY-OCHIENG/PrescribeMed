@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import LoaderPage from '../../components/LoaderPage'
 
 function PDashboard() {
     const [doctors,setDoctors] = useState([])
@@ -16,7 +17,25 @@ function PDashboard() {
         })
     },[])
   return (
-    <div className=''>PDashboard</div>
+    <div className='relative'>
+        <div className='mt-16 max-w-7xl md:max-w-[90%] mx-auto w-full px-2'>
+            <div className='w-full h-full grid grid-cols-2 md:grid-cols-5 gap-2'>
+                {
+                    loading ? <LoaderPage/> : doctors.map((item) => (
+                          <div  key={item.doctors_id} className='rounded-md shadow-md p-2 cursor-pointer bg-white'>
+                                <img src={`http://localhost:5000/images/`+ item.image}  alt="" className='w-full h-50 object-cover'/>
+                                <h1 className='text-gray-800 font-extrabold mt-2'>Dr, <span className='text-sm'>{item.firstName} {item.lastName}</span></h1>
+                                <h3 className='text-gray-600 font-bold text-sm'>{item.speciality}</h3>
+                                <span className='flex items-center text-sm gap-2 text-gray-600'>
+                                    <input type="checkbox" disabled={item.isAvaliable === 0} checked={item.isAvaliable === 1}/>
+                                    Available
+                                </span>
+                          </div>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
   )
 }
 
