@@ -1,10 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import LoaderPage from '../../components/LoaderPage'
+import toast from 'react-hot-toast'
 
 function PDashboard() {
     const [doctors,setDoctors] = useState([])
     const [loading,setLoading] = useState(false)
+    const [singleDoctor,setSingleDoctor] = useState([])
     useEffect(() => {
         axios.get('http://localhost:5000/api/actions/getAllDoctors')
         .then((response) => {
@@ -16,6 +18,19 @@ function PDashboard() {
             console.log(error)
         })
     },[])
+    const fetchSingleDoctor = (id) => {
+        axios.get(`http://localhost:5000/api/actions/getSingleDoctor/${id}`)
+        .then((response) => {
+            if (response.data.success) {
+                setSingleDoctor(response.data.result)
+            } else {
+                toast.error(response.data.message)
+            }
+        })
+        .catch((error) => {
+           toast.error(error)
+        })        
+    }
   return (
     <div className='relative'>
         <div className='mt-16 max-w-7xl md:max-w-[90%] mx-auto w-full px-2'>
