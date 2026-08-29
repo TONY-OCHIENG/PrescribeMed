@@ -83,6 +83,7 @@ function PDashboard() {
                 }
             </div>
         </div>
+         <div className={`${open ? "block" : "hidden"} absolute top-0 w-full h-screen bg-black/50`}></div>  
     </div>
   )
 }
