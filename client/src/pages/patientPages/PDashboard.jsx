@@ -36,7 +36,7 @@ function PDashboard() {
     }
   return (
     <div className='relative'>
-        <div className='relative mt-18 max-w-7xl md:max-w-[90%] mx-auto w-full px-2 flex justify-center items-center'>
+        <div className='relative mt-20 max-w-7xl md:max-w-[90%] mx-auto w-full px-2 flex justify-center items-center'>
              <div className={`absolute top-20 z-10 md:h-[500px] w-full md:w-[50%] bg-white rounded-xl shadow-md p-4 ${open ? "block" : "hidden"}`}>
                 <h1 className='text-center font-extrabold'>Doctor's Details</h1>
                 <X onClick={() => setOpen(!open)} className='absolute top-5 right-5 text-blue-600 cursor-pointer'/>
@@ -60,7 +60,10 @@ function PDashboard() {
                         </span>
                         <h3 className='text-gray-600 font-bold text-sm mt-3 border-b w-full'>About</h3>
                         <p className='text-sm mt-2 text-gray-500'>{item.about}</p>
-                        <button onClick={() => {handleDelete(item.doctors_id),setOpen(!open)}} className='mt-4 px-6 py-1 cursor-pointer rounded-md bg-red-400 text-white font-extrabold text-sm'>Delete</button>
+                       <div className='flex flex-col'>
+                         <input type="datetime-local" className='mt-2' />
+                        <button onClick={() => {setOpen(!open)}} className='mt-3 px-6 py-2 cursor-pointer rounded-md bg-blue-400 text-white font-extrabold text-sm'>Book Appointment</button>
+                       </div>
                     </div>
                     </div>
                     ))
