@@ -81,6 +81,12 @@ function PDashboard() {
             setOpen(false)
             appointment.push({
                 id: singleDoctor.map((id) => id.doctors_id)[0],
+                image:singleDoctor.map((image) => image.image)[0],
+                firstName:singleDoctor.map((item) => item.firstName)[0],
+                lastName:singleDoctor.map((item) => item.lastName)[0],
+                speciality:singleDoctor.map((item) => item.speciality)[0],
+                phone:singleDoctor.map((phone) => phone.phone)[0],
+                fee:singleDoctor.map((fee) => fee.appointmentFee)[0],
                 time: time.time,
             })
 
