@@ -14,6 +14,9 @@ function PDashboard() {
         time:""
     })
     const navigate = useNavigate()
+    const [category,setCategory] = useState([])
+    const [active,setActive] = useState(false)
+
     const handleTimeInput = (event) => {
         const {name, value} = event.target
         setTime((prev) => ({
@@ -24,16 +27,22 @@ function PDashboard() {
     useEffect(() => {     
         fetchAllDoctors()
     },[])
-    
+
     const fetchAllDoctors = () => {
+        setLoading(true)
         axios.get('http://localhost:5000/api/actions/getAllDoctors')
         .then((response) => {
             if (response.data.success) {
+                setLoading(false)
                 setDoctors(response.data.results)
+                setCategory(response.data.results)
+            } else {
+                setLoading(true)
             }
         })
         .catch((error) => {
             console.log(error)
+            setLoading(true)
         })
     }
     const fetchSingleDoctor = (id) => {
@@ -50,6 +59,12 @@ function PDashboard() {
            toast.error(error)
         })        
     }
+    
+     const menuItems = [...new Set(category.map((name) => name.speciality))]
+     const filterItems = (item) => {
+         const newItem = category.filter((categories) => categories.speciality === item)
+         setDoctors(newItem)
+     }
 
     let appointment = JSON.parse(localStorage.getItem("appointment")) || []
     const bookAppointment = () => {
