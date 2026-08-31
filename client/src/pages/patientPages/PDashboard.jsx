@@ -21,7 +21,11 @@ function PDashboard() {
             [name] : value
         }))
     }
-    useEffect(() => {
+    useEffect(() => {     
+        fetchAllDoctors()
+    },[])
+    
+    const fetchAllDoctors = () => {
         axios.get('http://localhost:5000/api/actions/getAllDoctors')
         .then((response) => {
             if (response.data.success) {
@@ -31,7 +35,7 @@ function PDashboard() {
         .catch((error) => {
             console.log(error)
         })
-    },[])
+    }
     const fetchSingleDoctor = (id) => {
         axios.get(`http://localhost:5000/api/actions/getSingleDoctor/${id}`)
         .then((response) => {
@@ -46,13 +50,17 @@ function PDashboard() {
            toast.error(error)
         })        
     }
+
     let appointment = JSON.parse(localStorage.getItem("appointment")) || []
     const bookAppointment = () => {
 
         if (!time.time) {
+
             toast.error("Date and Time cannot be empty")
             setOpen(true)
+
         } else {
+
             setOpen(false)
             appointment.push({
                 id: singleDoctor.map((id) => id.doctors_id)[0],
