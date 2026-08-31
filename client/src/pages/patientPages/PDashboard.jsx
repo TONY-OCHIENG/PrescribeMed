@@ -24,7 +24,7 @@ function PDashboard() {
         axios.get(`http://localhost:5000/api/actions/getSingleDoctor/${id}`)
         .then((response) => {
             if (response.data.success) {
-                 setOpen(!open)
+                setOpen(!open)
                 setSingleDoctor(response.data.result)
             } else {
                 toast.error(response.data.message)
@@ -79,7 +79,7 @@ function PDashboard() {
                                 <h3 className='text-gray-600 font-bold text-sm'>{item.speciality}</h3>
                                 <span className='flex items-center text-sm gap-2 text-gray-600'>
                                     <input type="checkbox" disabled={item.isAvaliable === 0} checked={item.isAvaliable === 1}/>
-                                    Available
+                                    <span className=''>{item.isAvaliable === 1 ? "Available" : "Not Available"}</span>
                                 </span>
                           </div>
                     ))
