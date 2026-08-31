@@ -55,6 +55,7 @@ function Doctors() {
   const filterItems = (item) => {
     const newItem = category.filter((categories) => categories.speciality === item)
     setDoctor(newItem)
+    setActive(item)
   }
 
   const handleDelete = (id) => {
