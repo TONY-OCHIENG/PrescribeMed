@@ -7,6 +7,7 @@ function PAppointment() {
     const cancelAppointment = (id) => {
         const newAppointment = appointment.filter((item) => item.id !== id)
         localStorage.setItem("appointment",JSON.stringify(newAppointment))
+        window.location.reload()
     }  
   return (
     <div className='mt-20 max-w-7xl md:w-[90%] mx-auto w-full px-2 flex flex-col gap-2'>
