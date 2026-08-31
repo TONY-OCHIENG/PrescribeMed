@@ -44,6 +44,22 @@ function PDashboard() {
            toast.error(error)
         })        
     }
+    let appointment = JSON.parse(localStorage.getItem("appointment")) || []
+    const bookAppointment = () => {
+
+        if (!time.time) {
+            toast.error("Date and Time cannot be empty")
+            setOpen(true)
+        } else {
+            setOpen(false)
+            appointment.push({
+                time: time.time
+            })
+            
+            localStorage.setItem("appointment",JSON.stringify(appointment))
+
+        } 
+    }
   return (
     <div className='relative'>
         <div className='relative mt-20 max-w-7xl md:max-w-[90%] mx-auto w-full px-2 flex justify-center items-center'>
@@ -71,8 +87,8 @@ function PDashboard() {
                         <h3 className='text-gray-600 font-bold text-sm mt-3 border-b w-full'>About</h3>
                         <p className='text-sm mt-2 text-gray-500'>{item.about}</p>
                        <div className='flex flex-col'>
-                         <input type="datetime-local" className='mt-2' />
-                        <button onClick={() => {setOpen(!open)}} className='mt-3 px-6 py-2 cursor-pointer rounded-md bg-blue-400 text-white font-extrabold text-sm'>Book Appointment</button>
+                         <input name='time' onChange={handleTimeInput} type="datetime-local" className='mt-2' />
+                        <button onClick={() => bookAppointment()} className='mt-3 px-6 py-2 cursor-pointer rounded-md bg-blue-400 text-white font-extrabold text-sm'>Book Appointment</button>
                        </div>
                     </div>
                     </div>
