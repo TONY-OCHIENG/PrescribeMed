@@ -12,12 +12,14 @@ function Doctors() {
   const [open, setOpen] = useState(false)
   const [singleDoctor,setSingleDoctor] = useState([])
   const [category,setCategory] = useState([])
-  const [active,setActive] = useState(false)
+  const [active,setActive] = useState("All")
   useEffect(() => {
     fetchAllDoctors()
   },[])
 
   const fetchAllDoctors = () => {
+    setloading(true)
+    setActive("All")
      axios.get('http://localhost:5000/api/actions/getAllDoctors')
     .then((response) => {
       if (response.data.success) {
@@ -73,10 +75,10 @@ function Doctors() {
     <div className='relative'>
       <div className='relative mt-20 max-w-[90%] mx-auto screen flex flex-col justify-center items-center'>
            <div className='w-full p-2 mb-10 grid grid-cols-1 md:grid-cols-6 gap-4'>
-               <button className={`border ${active ? "bg-blue-600 text-white" : ""} border-blue-600 rounded-full text-blue-600 p-2`} onClick={() => fetchAllDoctors()}>All</button>     
+               <button className={`border ${active === "All" ? "bg-blue-600 text-white" : ""} border-blue-600 rounded-full text-blue-600 p-2`} onClick={() => fetchAllDoctors()}>All</button>     
                   {
                       menuItems.map((val) => (
-                          <button key={val} className={`border ${active ? "bg-blue-600 text-white" : "" } border-blue-600 cursor-pointer text-blue-600 font-bold p-2 rounded-full`} onClick={() => {filterItems(val)}}>{val}</button>
+                          <button key={val} className={`border ${active === val ? "bg-blue-600 text-white" : "" } border-blue-600 cursor-pointer text-blue-600 font-bold p-2 rounded-full`} onClick={() => {filterItems(val)}}>{val}</button>
                       ))
                   }                    
           </div>          
