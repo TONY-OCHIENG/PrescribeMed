@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import LoaderPage from '../../components/LoaderPage'
 import toast from 'react-hot-toast'
 import { X } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 function PDashboard() {
     const [doctors,setDoctors] = useState([])
@@ -12,6 +13,7 @@ function PDashboard() {
     const [time,setTime] = useState({
         time:""
     })
+    const navigate = useNavigate()
     const handleTimeInput = (event) => {
         const {name, value} = event.target
         setTime((prev) => ({
@@ -53,11 +55,12 @@ function PDashboard() {
         } else {
             setOpen(false)
             appointment.push({
-                time: time.time
+                id: singleDoctor.map((id) => id.doctors_id)[0],
+                time: time.time,
             })
-            
-            localStorage.setItem("appointment",JSON.stringify(appointment))
 
+            localStorage.setItem("appointment",JSON.stringify(appointment))   
+            navigate("/patient/appointments")
         } 
     }
   return (
