@@ -4,17 +4,10 @@ import { formatDate } from '../../components/Date';
 
 function PAppointment() {
     let appointment = JSON.parse(localStorage.getItem("appointment")) || []
-    const now = new Date()
-    const formatted = now.toLocaleString('en-US', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true
-        });
+    const cancelAppointment = (id) => {
+        const newAppointment = appointment.filter((item) => item.id !== id)
+        localStorage.setItem("appointment",JSON.stringify(newAppointment))
+    }  
   return (
     <div className='mt-20 max-w-7xl md:w-[90%] mx-auto w-full px-2 flex flex-col gap-2'>
         <div className='w-full bg-white p-4 shadow-md rounded-md h-[300px]'>
@@ -33,7 +26,10 @@ function PAppointment() {
                                 <h1 className='text-xs text-gray-600'>Time: {formatDate(items.time)}</h1>
                             </div>
                         </div>
-                        <div>hello</div>
+                        <div className='flex flex-col gap-2 mt-2'>
+                            <button className='text-sm bg-green-200 text-gray-600 font-extrabold py-2 px-4 rounded-md cursor-pointer'>KSH  {items.fee}</button>
+                            <button onClick={() => cancelAppointment(items.id)} className='text-sm bg-red-200 text-gray-600 font-extrabold py-2 px-4 rounded-md cursor-pointer'>Cancel</button>
+                        </div>
                         
                     </div>)) : <div className='w-full h-full flex justify-center items-center'>
                         <div className='flex flex-col gap-2 items-center'>
