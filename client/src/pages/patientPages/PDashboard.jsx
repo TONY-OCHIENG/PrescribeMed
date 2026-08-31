@@ -9,6 +9,16 @@ function PDashboard() {
     const [loading,setLoading] = useState(false)
     const [singleDoctor,setSingleDoctor] = useState([])
     const [open,setOpen] = useState(false)
+    const [time,setTime] = useState({
+        time:""
+    })
+    const handleTimeInput = (event) => {
+        const {name, value} = event.target
+        setTime((prev) => ({
+            ...prev,
+            [name] : value
+        }))
+    }
     useEffect(() => {
         axios.get('http://localhost:5000/api/actions/getAllDoctors')
         .then((response) => {
