@@ -1,4 +1,4 @@
-import databaseConnection from "../configs/db"
+import databaseConnection from "../configs/db.js"
 
 export const bookAppointment = (request,response) => {
     const { doctors_id, patient_id, date, appointmentFee } = request.body
