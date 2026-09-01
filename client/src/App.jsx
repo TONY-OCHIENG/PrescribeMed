@@ -6,7 +6,6 @@ import Dashboard from './pages/Dashboard'
 import Appointments from './pages/Appointments'
 import Doctors from './pages/Doctors'
 import AddDoctors from './pages/AddDoctors'
-import Filter from './pages/Filter'
 import PatientRegistration from './auth/PatientRegistration'
 import VerificationPage from './pages/VerificationPage'
 import PatientLogin from './auth/PatientLogin'
@@ -16,11 +15,11 @@ import PatientDashboard from './pages/patientPages/PatientDashboard'
 import PDashboard from './pages/patientPages/PDashboard'
 import PAppointment from './pages/patientPages/PAppointment'
 
+
 function App() {
   return (
     <div className='bg-gray-100 h-[100vh]'>
       <Routes>
-        <Route path='/' element={<Filter/>}/>
         <Route path='/forgot-password' element={<FogrotPassword/>}/>
         <Route path='/reset-password/:id' element={<ResetPassword/>}/>
         <Route path='/register' element={<PatientRegistration/>}/>
