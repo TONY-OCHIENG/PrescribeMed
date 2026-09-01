@@ -4,7 +4,13 @@ import { formatDate } from '../../components/Date';
 import axios from 'axios';
 
 function PAppointment() {
-    const [patient_id, setPatientID] = useState(null)
+    const [patient_id, setPatientID] = useState([])
+    const [appointments,setAppointment] = useState({
+        patient_id: null,
+        doctors_id: null,
+        date:"",
+        appointmentFee: null, 
+    })
     let appointment = JSON.parse(localStorage.getItem("appointment")) || []
     const cancelAppointment = (id) => {
         const newAppointment = appointment.filter((item) => item.id !== id)
@@ -25,6 +31,16 @@ function PAppointment() {
                 console.log(error)
             })
     },[])
+
+    const handleBookAppointment = (id) => {
+       setAppointment({
+        patient_id: patient_id.patientID,
+        doctors_id: id,
+        date: appointment.map((time) => time.time)[0],
+        appointmentFee: appointment.map((item) => item.fee)[0]
+       })
+    }
+    
   return (
     <div className='mt-20 max-w-7xl md:w-[90%] mx-auto w-full px-2 flex flex-col gap-2'>
         <div className='w-full bg-white p-4 shadow-md rounded-md h-[300px]'>
@@ -44,7 +60,7 @@ function PAppointment() {
                             </div>
                         </div>
                         <div className='flex flex-col gap-2 mt-2'>
-                            <button className='text-sm bg-green-200 text-gray-600 font-extrabold py-2 px-4 rounded-md cursor-pointer'>Pay {items.fee}/=</button>
+                            <button onClick={() => handleBookAppointment(items.id)} className='text-sm bg-green-200 text-gray-600 font-extrabold py-2 px-4 rounded-md cursor-pointer'>Pay {items.fee}/=</button>
                             <button onClick={() => cancelAppointment(items.id)} className='text-sm bg-red-200 text-gray-600 font-extrabold py-2 px-4 rounded-md cursor-pointer'>Cancel</button>
                         </div>
                         
