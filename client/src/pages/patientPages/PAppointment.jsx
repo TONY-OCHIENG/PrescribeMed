@@ -2,6 +2,7 @@ import { FolderOpen } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { formatDate } from '../../components/Date';
 import axios from 'axios';
+import { toast } from 'react-hot-toast'
 
 function PAppointment() {
     const [patient_id, setPatientID] = useState([])
@@ -33,12 +34,25 @@ function PAppointment() {
     },[])
 
     const handleBookAppointment = (id) => {
-       setAppointment({
-        patient_id: patient_id.patientID,
-        doctors_id: id,
-        date: appointment.map((time) => time.time)[0],
-        appointmentFee: appointment.map((item) => item.fee)[0]
-       })
+        const items = {
+          patient_id: patient_id.patientID,
+          doctors_id: id,
+          date: appointment.map((time) => time.time)[0],
+          appointmentFee: appointment.map((item) => item.fee)[0]
+        }
+        
+    axios.post('http://localhost:5000/api/appointment/bookAppointment',items)
+        .then((response) => {
+                if (response.data.success) {
+                    toast.success(response.data.message)
+                } else {
+                    toast.error("An error occured")
+                }
+        })
+        .catch((error) => {
+                console.log(error)
+        })
+       
     }
     
   return (
