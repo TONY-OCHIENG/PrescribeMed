@@ -45,6 +45,7 @@ function PAppointment() {
         .then((response) => {
                 if (response.data.success) {
                     toast.success(response.data.message)
+                    setTimeout(() => { cancelAppointment(id)},3000)
                 } else {
                     toast.error("An error occured")
                 }
