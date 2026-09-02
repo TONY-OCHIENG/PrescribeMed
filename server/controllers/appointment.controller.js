@@ -18,7 +18,7 @@ export const bookAppointment = (request,response) => {
 
 export const appointmentHistory = (request,response) => {
     try {
-        const appointments = "SELECT d.firstName AS doctor_first_name,d.lastName AS doctor_last_name, d.image AS doctor_image, p.first_name  AS patient_first_name, p.last_name AS patient_last_name, p.image_p AS patient_image, a.appointmentDate, a.appointmentStatus, a.appointmentFee FROM appointments a INNER JOIN doctors d ON d.doctors_id = a.doctors_id INNER JOIN patients p ON p.patient_id = a.patient_id"
+        const appointments = "SELECT d.firstName AS doctor_first_name,d.lastName AS doctor_last_name, d.image AS doctor_image, p.first_name  AS patient_first_name, p.last_name AS patient_last_name, p.image_p AS patient_image, a.appointmentDate, a.appointmentStatus, a.appointmentFee FROM appointments a INNER JOIN doctors d ON d.doctors_id = a.doctors_id INNER JOIN patients p ON p.patient_id = a.patient_id ORDER BY a.appointmentDate DESC;"
         databaseConnection.query(appointments,(error,results) => {
             if (error) return response.status(500).json({success: false, message: "Internal server error"})
             if (results.length > 0) {
