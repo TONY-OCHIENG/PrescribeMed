@@ -88,7 +88,27 @@ function PAppointment() {
                 }
             </div>
         </div>
-        <div className='w-full bg-white p-4 shadow-md rounded-md h-[350px]'></div>
+        <div className='w-full bg-white p-4 shadow-md rounded-md h-[350px]'>
+            <h1 className='text-gray-600 font-extrabold'>Appointment History</h1>
+          <div className='mt-2 overflow-auto bg-white shadow-md rounded-md h-[290px] p-2'>
+              <table className='w-full text-left text-gray-600'>
+                <thead>
+                    <th>Image</th>
+                    <th>Patient</th>
+                    <th>Image</th>
+                    <th>Doctor</th>
+                    <th>Date</th>
+                    <th>Fee</th>
+                    <th>Status</th>
+                </thead>
+                <tbody className='p-2 even:bg-gray-100'>
+                    <tr>
+                        
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
     </div>
   )
 }
