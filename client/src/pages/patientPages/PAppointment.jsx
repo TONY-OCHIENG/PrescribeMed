@@ -101,23 +101,31 @@ function PAppointment() {
             <h1 className='text-gray-600 font-extrabold'>Appointment History</h1>
           <div className='mt-2 overflow-auto bg-white shadow-md rounded-md h-[290px] p-2'>
            {
-            appointments.length > 0 ? 
-               <table className='w-full text-left text-gray-600'>
-                <thead>
-                    <th>Image</th>
-                    <th>Patient</th>
-                    <th>Image</th>
-                    <th>Doctor</th>
-                    <th>Date</th>
-                    <th>Fee</th>
-                    <th>Status</th>
-                </thead>
-                <tbody className='p-2 even:bg-gray-100'>
-                    <tr>
-                        
-                    </tr>
-                </tbody>
-            </table> : <div className='w-full h-full flex justify-center items-center'>
+            appointments.length > 0 ? appointments.map((item) => (
+                <table className='w-full text-left text-gray-600'>
+                    <thead>
+                        <th>Image</th>
+                        <th>Patient</th>
+                        <th>Image</th>
+                        <th>Doctor</th>
+                        <th>Date</th>
+                        <th>Fee</th>
+                        <th>Status</th>
+                    </thead>
+                    <tbody className='p-2 even:bg-gray-100'>
+                        <tr>
+                            <td>
+                            <img src={`http://localhost:5000/images/`+ item.patient_image}  alt="" className='h-[50px] w-[50px]' />
+                            </td>   
+                            <td>{item.patient_first_name} {item.patient_last_name}</td>
+                            <td><img src={`http://localhost:5000/images/`+ item.doctor_image}  alt="" className='h-[50px] w-[50px]' /></td>
+                            <td>{item.doctor_first_name} {item.doctor_last_name}</td>
+                            <td>{formatDate(item.appointmentDate)}</td>                     
+                        </tr>
+                    </tbody>
+                </table>
+            ))
+               : <div className='w-full h-full flex justify-center items-center'>
                <FolderOpen className='h-20 w-20 text-blue-400'/>
             </div>
            }
