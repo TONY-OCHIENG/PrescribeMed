@@ -1,6 +1,7 @@
 import express from 'express'
-import { bookAppointment } from '../controllers/appointment.controller.js'
+import { appointmentHistory, bookAppointment } from '../controllers/appointment.controller.js'
 
 const appointmentRoute = express.Router()
 appointmentRoute.post("/bookAppointment",bookAppointment)
+appointmentRoute.get("/appointmentHistory",appointmentHistory)
 export default appointmentRoute
