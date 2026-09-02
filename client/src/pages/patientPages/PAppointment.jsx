@@ -6,12 +6,7 @@ import { toast } from 'react-hot-toast'
 
 function PAppointment() {
     const [patient_id, setPatientID] = useState([])
-    const [appointments,setAppointment] = useState({
-        patient_id: null,
-        doctors_id: null,
-        date:"",
-        appointmentFee: null, 
-    })
+    const [appointments,setAppointment] = useState([])
     let appointment = JSON.parse(localStorage.getItem("appointment")) || []
     const cancelAppointment = (id) => {
         const newAppointment = appointment.filter((item) => item.id !== id)
@@ -55,6 +50,20 @@ function PAppointment() {
         })
        
     }
+
+    useEffect(() => {
+        axios.get("http://localhost:5000/api/appointment/appointmentHistory")
+        .then((response) => {
+            if (response.data.success) {
+                setAppointment(response.data.results)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    },[])
+
+    console.log(appointments)
     
   return (
     <div className='mt-20 max-w-7xl md:w-[90%] mx-auto w-full px-2 flex flex-col gap-2'>
@@ -91,7 +100,9 @@ function PAppointment() {
         <div className='w-full bg-white p-4 shadow-md rounded-md h-[350px]'>
             <h1 className='text-gray-600 font-extrabold'>Appointment History</h1>
           <div className='mt-2 overflow-auto bg-white shadow-md rounded-md h-[290px] p-2'>
-              <table className='w-full text-left text-gray-600'>
+           {
+            appointments.length > 0 ? 
+               <table className='w-full text-left text-gray-600'>
                 <thead>
                     <th>Image</th>
                     <th>Patient</th>
@@ -106,7 +117,10 @@ function PAppointment() {
                         
                     </tr>
                 </tbody>
-            </table>
+            </table> : <div className='w-full h-full flex justify-center items-center'>
+               <FolderOpen className='h-20 w-20 text-blue-400'/>
+            </div>
+           }
           </div>
         </div>
     </div>
