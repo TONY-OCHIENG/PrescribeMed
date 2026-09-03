@@ -250,4 +250,11 @@ export const patientProfile = (request,response) => {
 export const editPatientProfile = (request,response) => {
     const { id } = request.params
     const { first_name,last_name,phone_p,email_p,age,image_p} = request.body
+
+    try {
+        
+    } catch (error) {
+        console.log(error)
+        return response.status(500).json({success: false, message: "Internal server error"})
+    }
 }
