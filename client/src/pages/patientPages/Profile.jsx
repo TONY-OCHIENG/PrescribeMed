@@ -2,6 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import toast from 'react-hot-toast'
 
 function Profile() {
     const [patientId, setPatientID] = useState([])
@@ -34,11 +35,35 @@ function Profile() {
             console.log(error)
         })
     },[patientId])
-    
+
+    //function that send update request
+
+    const handleSubmit = (event) => {
+        const formData = new FormData()
+        formData.append("first_name",profile.first_name)
+        formData.append("last_name",profile.last_name)
+        formData.append('email_p',profile.email_p)
+        formData.append("phone_p",profile.phone_p)
+        formData.append("image_p",profile.image_p)
+        formData.append("age",profile.age)
+
+        event.preventDefault()
+        axios.post(`http://localhost:5000/api/patients/updateProfile/${patientId.patientID}`,formData)
+        .then((response) => {
+            if (response.data.success) {
+                toast.success(response.data.message)
+            } else {
+                toast.error("An error occured")
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
   return (
     <div className='mt-20 w-full'>
         <div className='max-w-7xl md:w-[90%] mx-auto bg-white p-4 shadow-md rounded-xl flex justify-center items-center'>
-          <form action="" className='p-4 rounded-md shadow-md max-w-md'>
+          <form action="" className='p-4 rounded-md shadow-md max-w-md' onSubmit={handleSubmit}>
             <div className='flex justify-center items-center'>
                 <img src={`http://localhost:5000/images/`+ image}   alt="" className='h-[100px] w-[100px] mb-2 rounded-full'/>
             </div>
@@ -53,7 +78,7 @@ function Profile() {
             <label htmlFor="age">Age</label>
             <input type="number" name='age' value={profile.age}  onChange={(event) => setProfile({...profile, age: event.target.value})} id='age' className='p-2 rounded-md border w-full'/>
             <label htmlFor="image">Image</label>
-            <input type="file" name='image_p' onChange={(event) => setProfile({...profile, image_p: event.target.value})} id='image' className='p-2 rounded-md border w-full'/>
+            <input type="file" name='image_p' onChange={(event) => {setProfile({...profile, image_p: event.target.files[0]})}} id='image' className='p-2 rounded-md border w-full'/>
             <button className='w-full py-2 bg-blue-500 font-extrabold text-white mt-4 rounded-md cursor-pointer'>Edit Profile</button>
           </form>
         </div>
