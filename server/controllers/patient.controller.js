@@ -250,10 +250,10 @@ export const patientProfile = (request,response) => {
 export const editPatientProfile = (request,response) => {
     const { id } = request.params
     const { first_name,last_name,phone_p,email_p,age,image_p} = request.body
-
+    const { filename } = request.file
     try {
         const updatePatientDetails = "UPDATE patients SET first_name = ?, last_name = ?, phone_p = ?, email_p = ?, age = ?, image_p = ? WHERE patient_id = ?"
-        databaseConnection.query(updatePatientDetails,[first_name,last_name,phone_p,email_p,age,image_p,id], (error,results) => {
+        databaseConnection.query(updatePatientDetails,[first_name,last_name,phone_p,email_p,age,filename,id], (error,results) => {
             if (error) return response.status(500).json({success: false, message: error})
             return response.status(200).json({success: true, message: "Profile updated successfully"})
         })        
