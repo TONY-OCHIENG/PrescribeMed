@@ -252,7 +252,11 @@ export const editPatientProfile = (request,response) => {
     const { first_name,last_name,phone_p,email_p,age,image_p} = request.body
 
     try {
-        
+        const updatePatientDetails = "UPDATE patients SET first_name = ?, last_name = ?, phone_p = ?, email_p = ?, age = ?, image_p = ? WHERE patient_id = ?"
+        databaseConnection.query(updatePatientDetails,[first_name,last_name,phone_p,email_p,age,image_p,id], (error,results) => {
+            if (error) return response.status(500).json({success: false, message: error})
+            return response.status(200).json({success: true, message: "Profile updated successfully"})
+        })        
     } catch (error) {
         console.log(error)
         return response.status(500).json({success: false, message: "Internal server error"})
