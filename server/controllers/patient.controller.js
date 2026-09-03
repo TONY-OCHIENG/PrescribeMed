@@ -236,7 +236,7 @@ export const patientProfile = (request,response) => {
         databaseConnection.query(patientProfile,[id],(error,results) => {
             if (error) return response.status(500).json({success: false, message: error})
             if (results.length > 0) {
-                return response.status(200).json({success: false, results: results})
+                return response.status(200).json({success: true, results: results})
             } else {
                 return response.status(404).json({success: false , message: "User not found"})
             }
@@ -245,4 +245,9 @@ export const patientProfile = (request,response) => {
         console.log(error)
         return response.status(500).json({success: false, message: "Internal server error"})
     }
+}
+
+export const editPatientProfile = (request,response) => {
+    const { id } = request.params
+    const { first_name,last_name,phone_p,email_p,age,image_p} = request.body
 }
