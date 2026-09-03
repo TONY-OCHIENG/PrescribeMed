@@ -52,6 +52,7 @@ function Profile() {
         .then((response) => {
             if (response.data.success) {
                 toast.success(response.data.message)
+                setTimeout(() => {window.location.reload()},2000)
             } else {
                 toast.error("An error occured")
             }
