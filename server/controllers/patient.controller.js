@@ -232,7 +232,15 @@ export const logoutPatient = (request,response) => {
 export const patientProfile = (request,response) => {
     const { id } = request.params
     try {
-        
+        const patientProfile = "SELECT first_name,last_name,email_p,phone_p,image_p,age FROM patients WHERE patient_id = ?"
+        databaseConnection.query(patientProfile,[id],(error,results) => {
+            if (error) return response.status(500).json({success: false, message: error})
+            if (results.length > 0) {
+                return response.status(200).json({success: false, results: results})
+            } else {
+                return response.status(404).json({success: false , message: "User not found"})
+            }
+        })
     } catch (error) {
         console.log(error)
         return response.status(500).json({success: false, message: "Internal server error"})
