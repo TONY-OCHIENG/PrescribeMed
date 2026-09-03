@@ -14,6 +14,7 @@ import ResetPassword from './auth/ResetPassword'
 import PatientDashboard from './pages/patientPages/PatientDashboard'
 import PDashboard from './pages/patientPages/PDashboard'
 import PAppointment from './pages/patientPages/PAppointment'
+import Profile from './pages/patientPages/Profile'
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Route path='/patient' element={<PatientDashboard/>}>
           <Route path='' element={<PDashboard/>}/>
           <Route path='/patient/appointments' element={<PAppointment/>}/>
+          <Route path='/patient/profile' element={<Profile/>}/>
         </Route>
         <Route path='/admin' element={<Admin/>}>
          <Route path='' element={<Dashboard/>}/>
