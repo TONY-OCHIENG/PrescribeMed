@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
+    "@zegocloud/zego-uikit-prebuilt": "^2.18.4",
     "axios": "^1.19.0",
     "lucide-react": "^1.31.0",
     "react": "^19.2.8",
