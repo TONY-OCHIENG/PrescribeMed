@@ -1,6 +1,7 @@
 import databaseConnection from "../configs/db.js"
 import dotenv from 'dotenv'
 import { comparePassword } from "../configs/hashPassword.js"
+import jwt from 'jsonwebtoken'
 dotenv.config()
 
 export const loginDoctor = (request,response) => {
