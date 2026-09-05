@@ -19,12 +19,13 @@ function DoctorLogin() {
             [name] : value
         }))
     }
+    
     const handleSubmit = (event) => {
         event.preventDefault()
         setLoading(true)
         axios.post('http://localhost:5000/api/doctors/loginDoctor',doctor)
         .then((response) => {
-            if (response.status.success) {
+            if (response.data.success) {
                 setLoading(false)
                 toast.success(response.data.message)
             } else {

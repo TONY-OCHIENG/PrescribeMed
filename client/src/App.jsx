@@ -17,6 +17,7 @@ import PAppointment from './pages/patientPages/PAppointment'
 import Profile from './pages/patientPages/Profile'
 import Meet from './pages/patientPages/Meet'
 import DoctorLogin from './auth/DoctorLogin'
+import DDashboard from './pages/DoctorPages/DDashboard'
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path='/login' element={<AdminLogin/>}/>
         <Route path='/patient-login' element={<PatientLogin/>}/>
         <Route path='/doctor-login' element={<DoctorLogin/>}/>
+        <Route path='/doctor' element={<DDashboard/>}></Route>
         <Route path='/patient' element={<PatientDashboard/>}>
           <Route path='' element={<PDashboard/>}/>
           <Route path='/patient/appointments' element={<PAppointment/>}/>
