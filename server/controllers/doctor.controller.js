@@ -47,3 +47,8 @@ export const authDoctorLogin = (request,response) => {
         doctorID: request.doctorID
     }})
 }
+
+export const logoutDoctor = (request,response) => {
+    response.clearCookie("token")
+    return response.status(200).json({success: true, message: "logout successfully"})
+}
