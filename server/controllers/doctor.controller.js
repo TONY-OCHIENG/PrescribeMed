@@ -41,7 +41,7 @@ export const loginDoctor = (request,response) => {
     }
 } 
 
-export const authDoctor = (request,response) => {
+export const authDoctorLogin = (request,response) => {
        return response.status(200).json({success: true, details: {
         lastName: request.lastName,
         doctorID: request.doctorID
