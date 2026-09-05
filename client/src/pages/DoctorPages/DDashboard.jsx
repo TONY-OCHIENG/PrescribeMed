@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { BriefcaseMedical, LayoutDashboard, NotebookPen, Power, SquarePlus } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 
 function DDashboard() {
@@ -29,6 +30,22 @@ function DDashboard() {
             navigate('/doctor-login')
         })
     },[])
+
+    const handleLogout = () => {
+        axios.get("http://localhost:5000/api/doctors/logoutDoctor")
+        .then((response) => {
+            if (response.data.success) {
+                toast.success(response.data.message)
+                navigate("/doctor-login")
+            } else {
+                toast.error("An error occured")
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+            toast.error("An error occured")
+        })
+    }
     
   return (
      <div className='flex w-[100%] h-screen'>
