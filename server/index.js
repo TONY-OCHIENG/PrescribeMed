@@ -6,6 +6,7 @@ import authRoutes from './routes/auth.route.js'
 import adminActions from './routes/adminActions.route.js'
 import patientRoute from './routes/patient.route.js'
 import appointmentRoute from './routes/appointment.route.js'
+import doctorRoutes from './routes/doctor.route.js'
 dotenv.config()
 
 const app = express()
@@ -21,6 +22,7 @@ app.use("/api/auth",authRoutes)
 app.use("/api/actions",adminActions)
 app.use("/api/patients",patientRoute)
 app.use("/api/appointment",appointmentRoute)
+app.use("/api/doctors",doctorRoutes)
 app.listen(process.env.PORT, () => {
     console.log("Server is running")
 })
