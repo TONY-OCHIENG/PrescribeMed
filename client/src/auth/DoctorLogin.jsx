@@ -3,6 +3,7 @@ import Input from '../components/Input'
 import { Loader, Lock, Mail } from 'lucide-react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 function DoctorLogin() {
     const [doctor,setDoctor] = useState({
@@ -11,6 +12,7 @@ function DoctorLogin() {
     })
     const [loading,setLoading] = useState(false)
     axios.defaults.withCredentials = true
+    const navigate = useNavigate()
 
     const handleChange = (event) => {
         const { name, value} = event.target
@@ -19,7 +21,7 @@ function DoctorLogin() {
             [name] : value
         }))
     }
-    
+
     const handleSubmit = (event) => {
         event.preventDefault()
         setLoading(true)
@@ -28,6 +30,7 @@ function DoctorLogin() {
             if (response.data.success) {
                 setLoading(false)
                 toast.success(response.data.message)
+                navigate("/doctor")
             } else {
                 setLoading(false)
                 toast.error(response.data.message)
