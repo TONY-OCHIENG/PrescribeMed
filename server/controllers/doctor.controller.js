@@ -40,3 +40,10 @@ export const loginDoctor = (request,response) => {
         return response.status(500).json({success: false, message: "Internal server error"})
     }
 } 
+
+export const authDoctor = (request,response) => {
+       return response.status(200).json({success: true, details: {
+        lastName: request.lastName,
+        doctorID: request.doctorID
+    }})
+}
