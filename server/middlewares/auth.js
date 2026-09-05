@@ -34,3 +34,20 @@ export const authPatient = (request,response,next) => {
         })
     }
 }
+
+export const authDoctor = (request,response,next) => {
+    const token = request.cookies.token
+    if (!token) {
+        return response.status(200).json({success: false, message: "Access denied"})
+    } else {
+        jwt.verify(token,process.env.SECRET_USER,(err,decoded) => {
+            if (err) {
+                return response.status(200).json({success: false, message: "Access denied"})
+            } else {
+                request.lastName = decoded.lastName
+                request.doctorID = decoded.doctorID
+                next()
+            }
+        })
+    }
+}
