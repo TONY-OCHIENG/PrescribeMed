@@ -10,7 +10,7 @@ function DoctorLogin() {
         email: "",
         password: ""
     })
-    
+
     const [loading,setLoading] = useState(false)
     axios.defaults.withCredentials = true
     const navigate = useNavigate()
@@ -22,6 +22,21 @@ function DoctorLogin() {
             [name] : value
         }))
     }
+
+     useEffect(() => {
+        axios.get('http://localhost:5000/api/doctors/authDoctor')
+        .then((response) => {
+            if (response.data.success) {
+                 navigate("/doctor")
+            } else {
+                navigate("/doctor-login")
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+            navigate('/doctor-login')
+        })
+    },[])
 
     const handleSubmit = (event) => {
         event.preventDefault()
