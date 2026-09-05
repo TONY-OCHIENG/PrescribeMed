@@ -1,5 +1,6 @@
 import React from 'react'
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
+import { useEffect } from 'react';
 
 function randomID(len) {
   let result = '';
@@ -50,6 +51,9 @@ function Meet() {
         },
       });
 
+      useEffect(() => {
+        myMeeting
+      },[])
     
   };
   return (
