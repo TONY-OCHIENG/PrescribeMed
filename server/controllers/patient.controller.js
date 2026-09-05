@@ -249,7 +249,7 @@ export const patientProfile = (request,response) => {
 
 export const editPatientProfile = (request,response) => {
     const { id } = request.params
-    const { first_name,last_name,phone_p,email_p,age,image_p} = request.body
+    const { first_name,last_name,phone_p,email_p,age} = request.body
     const { filename } = request.file
     try {
         const updatePatientDetails = "UPDATE patients SET first_name = ?, last_name = ?, phone_p = ?, email_p = ?, age = ?, image_p = ? WHERE patient_id = ?"
