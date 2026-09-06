@@ -1,12 +1,31 @@
+import { HospitalIcon, NotebookPenIcon, Wallet } from 'lucide-react'
 import React from 'react'
 
 function Doctor() {
   return (
     <div className='mt-20 max-w-7xl md:w-[90%] mx-auto px-2'>
         <div className='w-full grid grid-cols-1 md:grid-cols-3 gap-5'>
-            <div className='rounded-md p-4 shadow-md bg-white'></div>
-            <div className='rounded-md p-4 shadow-md bg-white'></div>
-            <div className='rounded-md p-4 shadow-md bg-white'></div>
+            <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
+                <Wallet className='h-10 w-10 text-blue-500'/>
+                <div className='flex flex-col'>
+                    <h1 className='md:text-4xl text-3xl font-extrabold'>KSH 1000</h1>
+                    <p>Earnings</p>
+                </div>
+             </div>
+               <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
+                <NotebookPenIcon className='h-10 w-10 text-blue-500'/>
+                <div className='flex flex-col'>
+                    <h1 className='md:text-4xl text-3xl font-extrabold'>10</h1>
+                    <p>Appointments</p>
+                </div>
+             </div>
+               <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
+                <HospitalIcon className='h-10 w-10 text-blue-500'/>
+                <div className='flex flex-col'>
+                    <h1 className='md:text-4xl text-3xl font-extrabold'> 10</h1>
+                    <p>Patients</p>
+                </div>
+             </div>          
         </div>
     </div>
   )
