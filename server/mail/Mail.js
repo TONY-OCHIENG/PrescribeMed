@@ -44,7 +44,7 @@ export const welcomeEmail = async (email, fullname) => {
             }
         })
         
-        const message = {
+        const message = { 
             to: email,
             subject: "Welcome Onboard",
             html:WELCOME_EMAIL.replace("{FULLNAME}",fullname)
