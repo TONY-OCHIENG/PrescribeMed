@@ -6,6 +6,7 @@ import { useState } from 'react'
 
 function Doctor() {
     const [doctor_id,setDoctorID] = useState([])
+    const [appointment,setAppointment] = useState([])
     useEffect(() => {
             axios.get('http://localhost:5000/api/doctors/authDoctor')
             .then((response) => {
@@ -20,6 +21,18 @@ function Doctor() {
                 navigate('/doctor-login')
             })
     },[])
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/appointment/appointmentDoctor/${doctor_id.doctorID}`)
+        .then((response) => {
+            if (response.data.success) {
+                setAppointment(response.data.results)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    },[doctor_id.doctorID])
     
   return (
     <div className='mt-20 max-w-7xl md:w-[90%] mx-auto px-2'>
