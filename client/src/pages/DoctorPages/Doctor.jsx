@@ -135,7 +135,7 @@ function Doctor() {
                                     <td>{item.appointmentStatus}</td>   
                                     <td>
                                    <div className='flex gap-4'>
-                                     <Check onClick={() => approveAppointment(item.id)} className='h-5 w-5  text-green-600 font-extrabold bg-green-100 rounded-full cursor-pointer'>
+                                     <Check onClick={() => approveAppointment(item.appointment_id)} className='h-5 w-5  text-green-600 font-extrabold bg-green-100 rounded-full cursor-pointer'>
                                         <title>Approve</title>
                                      </Check>
                                     <X className='h-5 w-5 text-red-600 font-extrabold bg-red-100 rounded-full cursor-pointer'>
@@ -149,8 +149,9 @@ function Doctor() {
                       
                     </tbody>
                 </table>
-               : <div className='w-full h-full flex justify-center items-center'>
+               : <div className='w-full h-full flex flex-col justify-center items-center'>
                <FolderOpen className='h-20 w-20 text-blue-400'/>
+               <h1 className='text-sm text-gray-600 '>No recent appointments</h1>
             </div>
            }
           </div>
