@@ -55,6 +55,24 @@ function Doctor() {
             toast.error("An error occured")
         })
     }
+
+    const cancelAppointment = (id) => {
+           axios.put(`http://localhost:5000/api/appointment/cancelAppointment/${id}`)
+        .then((response) => {
+            if (response.data.success) {
+                toast.success(response.data.message)
+                setTimeout(() => { 
+                    window.location.reload()
+                },2000)
+            } else {
+                toast.error("An error occured")
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+            toast.error("An error occured")
+        })
+    }
     
   return (
     <div className='mt-20 max-w-7xl md:w-[90%] mx-auto px-2'>
