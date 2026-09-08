@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { FolderOpen, HospitalIcon, NotebookPenIcon, Wallet } from 'lucide-react'
+import { Check, FolderOpen, HospitalIcon, NotebookPenIcon, Wallet, X } from 'lucide-react'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -98,11 +98,12 @@ function Doctor() {
                         <th>Date</th>
                         <th>Fee</th>
                         <th>Status</th>
+                        <th>Actions</th>
                     </thead>
                     <tbody className='p-2 '>
                         {
                             appointment.map((item) => (
-                                 <tr className='text-xs even:bg-gray-100'>
+                                 <tr className='text-xs even:bg-gray-100 even:bg-gray-100'>
                                     <td className='p-2'>
                                     <img src={`http://localhost:5000/images/`+ item.patient_image}  alt="" className='h-[50px] w-[50px] rounded-full' />
                                     </td>   
@@ -112,7 +113,17 @@ function Doctor() {
                                     <td>{item.doctor_first_name} {item.doctor_last_name}</td>
                                     <td className='w-[200px]'>{formatDate(item.appointmentDate)}</td> 
                                     <td>{item.appointmentFee}</td>
-                                    <td>{item.appointmentStatus}</td>                    
+                                    <td>{item.appointmentStatus}</td>   
+                                    <td>
+                                   <div className='flex gap-4'>
+                                     <Check className='h-5 w-5  text-green-600 font-extrabold bg-green-100 rounded-full cursor-pointer'>
+                                        <title>Approve</title>
+                                     </Check>
+                                    <X className='h-5 w-5 text-red-600 font-extrabold bg-red-100 rounded-full cursor-pointer'>
+                                    <title>Cancel</title>
+                                    </X>    
+                                   </div>
+                                    </td>                 
                                 </tr>               
                             ))
                         }
