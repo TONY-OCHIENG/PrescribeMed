@@ -55,6 +55,11 @@ export const appointmentHistroryDoctor = (request,response) => {
 export const approveAppointment = (request,response) => {
     const { id } = request.params
     try {
+        const approveAppointment = "UPDATE appointments SET appointmentStatus = 'approved' WHERE appointment_id = ?"
+        databaseConnection.query(approveAppointment,[id], (error,result) => {
+            if (error) return response.status(500).json({success: false, message: error})
+            return response.status(200).json({success: true, message: "Appointment Approved"})
+        })
         
     } catch (error) {
         console.log(error)
