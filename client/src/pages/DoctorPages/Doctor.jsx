@@ -43,6 +43,9 @@ function Doctor() {
         .then((response) => {
             if (response.data.success) {
                 toast.success(response.data.message)
+                setTimeout(() => { 
+                    window.location.reload()
+                },2000)
             } else {
                 toast.error("An error occured")
             }
@@ -132,7 +135,7 @@ function Doctor() {
                                     <td>{item.appointmentStatus}</td>   
                                     <td>
                                    <div className='flex gap-4'>
-                                     <Check className='h-5 w-5  text-green-600 font-extrabold bg-green-100 rounded-full cursor-pointer'>
+                                     <Check onClick={() => approveAppointment(item.id)} className='h-5 w-5  text-green-600 font-extrabold bg-green-100 rounded-full cursor-pointer'>
                                         <title>Approve</title>
                                      </Check>
                                     <X className='h-5 w-5 text-red-600 font-extrabold bg-red-100 rounded-full cursor-pointer'>
