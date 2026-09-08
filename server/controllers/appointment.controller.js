@@ -55,7 +55,7 @@ export const appointmentHistroryDoctor = (request,response) => {
 export const appointments = (request,response) => {
       const { id } = request.params
     try {
-        const appointmentDoctor = "SELECT d.firstName AS doctor_first_name, d.lastName AS doctor_last_name, d.image AS doctor_image, p.first_name AS patient_first_name, p.last_name AS patient_last_name, p.phone_p AS patient_phone, p.image_p AS patient_image, a.appointmentDate,a.appointment_id, a.appointmentStatus, a.appointmentFee FROM appointments a INNER JOIN doctors d ON d.doctors_id = a.doctors_id INNER JOIN patients p ON p.patient_id = a.patient_id WHERE a.appointmentStatus = 'pending' AND d.doctors_id = ? ORDER BY a.appointmentDate DESC"
+        const appointmentDoctor = "SELECT d.firstName AS doctor_first_name, d.lastName AS doctor_last_name, d.image AS doctor_image, p.first_name AS patient_first_name, p.last_name AS patient_last_name, p.phone_p AS patient_phone, p.image_p AS patient_image, a.appointmentDate,a.appointment_id, a.appointmentStatus, a.appointmentFee FROM appointments a INNER JOIN doctors d ON d.doctors_id = a.doctors_id INNER JOIN patients p ON p.patient_id = a.patient_id WHERE d.doctors_id = ? ORDER BY a.appointmentDate DESC"
         databaseConnection.query(appointmentDoctor,[id],(error,results) => {
             if (error) return response.status(500).json({success: false, message: error})
             if (results.length > 0) {
