@@ -156,7 +156,7 @@ function Doctor() {
                                      <Check onClick={() => approveAppointment(item.appointment_id)} className='h-5 w-5  text-green-600 font-extrabold bg-green-100 rounded-full cursor-pointer'>
                                         <title>Approve</title>
                                      </Check>
-                                    <X className='h-5 w-5 text-red-600 font-extrabold bg-red-100 rounded-full cursor-pointer'>
+                                    <X onClick={() => cancelAppointment(item.appointment_id)} className='h-5 w-5 text-red-600 font-extrabold bg-red-100 rounded-full cursor-pointer'>
                                     <title>Cancel</title>
                                     </X>    
                                    </div>

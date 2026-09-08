@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { BriefcaseMedical, LayoutDashboard, NotebookPen, Power, SquarePlus } from 'lucide-react'
+import { BriefcaseMedical, LayoutDashboard, NotebookPen, Power, SquarePlus, User, User2 } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
@@ -9,9 +9,8 @@ function DDashboard() {
     const navigate = useNavigate()
       const navLinks = [
         {name:"Dashboard",link:"/doctor",icon:LayoutDashboard},
-        {name:"Appointments",link:"/admin/appointments",icon:NotebookPen},
-        {name:"Doctors",link:"/admin/doctors",icon:BriefcaseMedical},
-        {name:"Add doctors",link:"/admin/add-doctors",icon:SquarePlus}
+        {name:"Appointments",link:"/doctor/appointment",icon:NotebookPen},
+        {name:"Profile",link:"/doctor/profile",icon:User},
     ]
 
     axios.defaults.withCredentials = true
