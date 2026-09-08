@@ -4,6 +4,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { formatDate } from '../../components/Date'
+import { toast } from 'react-hot-toast'
 
 function Doctor() {
     const [doctor_id,setDoctorID] = useState([])
@@ -36,6 +37,21 @@ function Doctor() {
             console.log(error)
         })
     },[doctor_id])
+
+    const approveAppointment = (id) => {
+        axios.put(`http://localhost:5000/api/appointment/approveAppointment/${id}`)
+        .then((response) => {
+            if (response.data.success) {
+                toast.success(response.data.message)
+            } else {
+                toast.error("An error occured")
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+            toast.error("An error occured")
+        })
+    }
     
   return (
     <div className='mt-20 max-w-7xl md:w-[90%] mx-auto px-2'>
