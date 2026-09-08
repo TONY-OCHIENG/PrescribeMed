@@ -72,7 +72,7 @@ export const cancelAppointment = (request,response) => {
         const approveAppointment = "UPDATE appointments SET appointmentStatus = 'canceled' WHERE appointment_id = ?"
         databaseConnection.query(approveAppointment,[id], (error,result) => {
             if (error) return response.status(500).json({success: false, message: error})
-            return response.status(200).json({success: true, message: "Appointment Approved"})
+            return response.status(200).json({success: true, message: "Appointment canceled"})
         })        
     } catch (error) {
         console.log(error)
