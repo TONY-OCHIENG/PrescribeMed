@@ -52,3 +52,8 @@ export const logoutDoctor = (request,response) => {
     response.clearCookie("token")
     return response.status(200).json({success: true, message: "logout successfully"})
 }
+
+export const doctorsProfile = (request,response) => {
+    const { id } = request.params
+    
+}
