@@ -94,10 +94,25 @@ export const EditDoctorsDetails = (request,response) => {
 export const available = (request,response) => {
     const { id } = request.params
     try {
-        const updateStatus = "UPDATE doctors SET isAvailable = True WHERE doctors_id = ?"
+        const updateStatus = "UPDATE doctors SET isAvaliable = True WHERE doctors_id = ?"
         databaseConnection.query(updateStatus,[id],(error,result) => {
             if (error) return response.status(500).json({success: false, message: error})
             return response.status(200).json({success: true, message: "Doctor available"})
+        })
+        
+    } catch (error) {
+        console.log(error)
+        return response.status(500).json({success: false, message: "Internal server error"})
+    }
+}
+
+export const NotAvailable = (request,response) => {
+    const { id } = request.params
+    try {
+        const updateStatus = "UPDATE doctors SET isAvaliable = False WHERE doctors_id = ?"
+        databaseConnection.query(updateStatus,[id],(error,result) => {
+            if (error) return response.status(500).json({success: false, message: error})
+            return response.status(200).json({success: true, message: "Doctor not available"})
         })
         
     } catch (error) {
