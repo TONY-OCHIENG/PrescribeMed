@@ -70,6 +70,22 @@ function DProfile() {
       .then((response) => {
         if (response.data.success) {
           toast.success(response.data.message)
+          setTimeout(() => { window.location.reload()},2000)
+        } else {
+          toast.error("An error occured")
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    }
+    
+    const Available = () => {
+      axios.put(`http://localhost:5000/api/doctors/available/${doctor_id.doctorID}`)
+      .then((response) => {
+        if (response.data.success) {
+          toast.success(response.data.message)
+          setTimeout(() => { window.location.reload()},2000)
         } else {
           toast.error("An error occured")
         }
@@ -137,7 +153,7 @@ function DProfile() {
             <button type='submit' className='w-full py-2 bg-blue-500 font-extrabold text-white mt-4 rounded-md cursor-pointer'>Edit Profile</button>
           </form>
           <div className='flex gap-2'>
-            <button className='border p-2 rounded-md cursor-pointer text-sm bg-green-300 text-white font-extrabold'>Available</button>
+            <button onClick={() => Available()} className='border p-2 rounded-md cursor-pointer text-sm bg-green-300 text-white font-extrabold'>Available</button>
             <button  onClick={() => notAvailable()} className='border p-2 rounded-md cursor-pointer text-sm bg-red-300 text-white font-extrabold'>Not available</button>
           </div>
          </div>
