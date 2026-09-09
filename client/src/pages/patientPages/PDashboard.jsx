@@ -124,7 +124,7 @@ function PDashboard() {
                         <h3 className='text-gray-600 font-bold text-sm'>Fee: {item.appointmentFee} KSH</h3>
                         <span className='flex items-center text-sm gap-2 text-gray-600'>
                             <input type="checkbox" disabled={item.isAvaliable === 0} checked={item.isAvaliable === 1} readOnly/>
-                            Available
+                              {item.isAvaliable === 1 ? "Available" : "Not available"}
                         </span>
                         <h3 className='text-gray-600 font-bold text-sm mt-3 border-b w-full'>About</h3>
                         <p className='text-sm mt-2 text-gray-500'>{item.about}</p>

@@ -87,10 +87,18 @@ function DProfile() {
                 <input type="number" name='appointmentFee' value={profile.appointmentFee} onChange={(event) => {setProfile({...profile, appointmentFee: event.target.value})}} id='appointmentFee' className='p-2 rounded-md border w-full'/>
               </div>            
             </div>  
+             <span className='flex items-center text-sm gap-2 text-gray-600'>
+              <input type="checkbox" disabled={profile.isAvaliable === 0} checked={profile.isAvaliable === 1} readOnly/>
+               {profile.isAvaliable === 1 ? "Available" : "Not available"}
+            </span>
             <label htmlFor="about">About</label>
-            <textarea name="aboute" id="about" value={profile.about} className='w-full h-[200px] border rounded-md p-2'></textarea>            
-            <button className='w-full py-2 bg-blue-500 font-extrabold text-white mt-4 rounded-md cursor-pointer'>Edit Profile</button>
+            <textarea name="aboute" id="about" value={profile.about} className='w-full h-[200px] border rounded-md p-2'></textarea>        
+            <button type='submit' className='w-full py-2 bg-blue-500 font-extrabold text-white mt-4 rounded-md cursor-pointer'>Edit Profile</button>
           </form>
+          <div className='flex gap-2'>
+            <button className='border p-2 rounded-md cursor-pointer text-sm bg-green-300 text-white font-extrabold'>Available</button>
+            <button className='border p-2 rounded-md cursor-pointer text-sm bg-red-300 text-white font-extrabold'>Not available</button>
+          </div>
          </div>
         </div>
     </div>
