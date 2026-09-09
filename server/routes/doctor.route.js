@@ -1,5 +1,5 @@
 import express from 'express'
-import { authDoctorLogin, available, doctorsProfile, EditDoctorsDetails, loginDoctor, logoutDoctor, } from '../controllers/doctor.controller.js'
+import { authDoctorLogin, available, doctorsProfile, EditDoctorsDetails, loginDoctor, logoutDoctor, NotAvailable, } from '../controllers/doctor.controller.js'
 import { authDoctor } from '../middlewares/auth.js'
 import { upload } from '../configs/imageUpload.js'
 
@@ -10,4 +10,5 @@ doctorRoutes.get("/logoutDoctor",logoutDoctor)
 doctorRoutes.get("/doctorProfile/:id",doctorsProfile)
 doctorRoutes.post("/updateDoctor/:id",upload.single('image'),EditDoctorsDetails)
 doctorRoutes.put("/available/:id",available)
+doctorRoutes.put("/notAvailable/:id",NotAvailable)
 export default doctorRoutes
