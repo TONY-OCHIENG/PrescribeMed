@@ -71,13 +71,13 @@ export const doctorsProfile = (request,response) => {
     }
 }
 
-export const updateDoctorsDetails = (response,request) => {
-    const { firstName, lastName, email, phone, experience, speciality, about, appointmentFee} = request.body
+export const EditDoctorsDetails = (request,response) => {
     const { id } = request.params
+    const {firstName, lastName, email, phone, experience, speciality, about, appointmentFee} = request.body
     const { filename } = request.file
 
     try {
-        const updateDoctor = "UPDATE doctors SET firstName = ?, lastName = ?, email = ?, phone = ?, experience = ?, speciality = ?, about = ?, appointmentFee = ? image = ? WHERE doctors_id = ?"
+        const updateDoctor = "UPDATE doctors SET firstName = ?, lastName = ?, email = ?, phone = ?, experience = ?, speciality = ?, about = ?, appointmentFee = ?, image = ? WHERE doctors_id = ?"
         databaseConnection.query(updateDoctor, [firstName,lastName,email,phone,experience,
             speciality,about,appointmentFee,filename,id
         ], (error, result) => {
