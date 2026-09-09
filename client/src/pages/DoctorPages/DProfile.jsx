@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 
 function DProfile() {
@@ -48,7 +49,18 @@ function DProfile() {
       formData.append('appointmentFee',profile.appointmentFee)
       formData.append('about',profile.about)
 
-      
+      axios.post(`http://localhost:5000/api/doctors/updateDoctor/${doctor_id.doctorID}`,formData)
+      .then((response) => {
+        if (response.data.success) {
+          toast.success(response.data.message)
+        } else {
+          toast.error("An error occured")
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+        toast.error("An error occured")
+      })
     }
 
   return (
