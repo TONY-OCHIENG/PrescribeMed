@@ -9,10 +9,10 @@ import { toast } from 'react-hot-toast'
 function Doctor() {
     const [doctor_id,setDoctorID] = useState([])
     const [appointment,setAppointment] = useState([])
+    const [earnings,setEarnings] = useState(null)
     useEffect(() => {
             axios.get('http://localhost:5000/api/doctors/authDoctor')
             .then((response) => {
-                console.log(response)
                 if (response.data.success) {
                      setDoctorID(response.data.details)
                 } else {
@@ -28,9 +28,24 @@ function Doctor() {
     useEffect(() => {
         axios.get(`http://localhost:5000/api/appointment/appointmentDoctor/${doctor_id.doctorID}`)
         .then((response) => {
-            console.log(response)
             if (response.data.success) {
                 setAppointment(response.data.results)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    },[doctor_id])
+
+    //getting total earnings
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/appointment/totalEarnings/${doctor_id.doctorID}`)
+        .then((response) => {
+            if (response.data.success) {
+                setEarnings(response.data.results)
+            } else {
+                setEarnings(null)
             }
         })
         .catch((error) => {
