@@ -65,6 +65,20 @@ function DProfile() {
       })
     }
 
+    const notAvailable = () => {
+      axios.put(`http://localhost:5000/api/doctors/notAvailable/${doctor_id.doctorID}`)
+      .then((response) => {
+        if (response.data.success) {
+          toast.success(response.data.message)
+        } else {
+          toast.error("An error occured")
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    }
+
   return (
      <div className='mt-20 w-full'>
         <div className='max-w-7xl md:w-[90%] mx-auto bg-white p-4 shadow-md rounded-xl flex justify-center items-center'>
@@ -124,7 +138,7 @@ function DProfile() {
           </form>
           <div className='flex gap-2'>
             <button className='border p-2 rounded-md cursor-pointer text-sm bg-green-300 text-white font-extrabold'>Available</button>
-            <button className='border p-2 rounded-md cursor-pointer text-sm bg-red-300 text-white font-extrabold'>Not available</button>
+            <button  onClick={() => notAvailable()} className='border p-2 rounded-md cursor-pointer text-sm bg-red-300 text-white font-extrabold'>Not available</button>
           </div>
          </div>
         </div>
