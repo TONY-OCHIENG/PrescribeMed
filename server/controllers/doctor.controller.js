@@ -108,9 +108,11 @@ export const available = (request,response) => {
 
 export const NotAvailable = (request,response) => {
     const { id } = request.params
+
     try {
         const updateStatus = "UPDATE doctors SET isAvaliable = False WHERE doctors_id = ?"
         databaseConnection.query(updateStatus,[id],(error,result) => {
+            console.log(error)
             if (error) return response.status(500).json({success: false, message: error})
             return response.status(200).json({success: true, message: "Doctor not available"})
         })
