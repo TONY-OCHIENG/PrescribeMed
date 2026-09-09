@@ -37,20 +37,22 @@ function DProfile() {
     },[doctor_id])
 
     const handleSubmit = (event) => {
-      event.preventDefault()
+     
       const formData = new FormData()
       formData.append("firstName",profile.firstName)
-      formData.append('lastName',profile.lastName)
-      formData.append('email',profile.email)
-      formData.append('phone',profile.phone)
-      formData.append('experience',profile.experience)
-      formData.append('image',profile.image)
-      formData.append('speciality',profile.speciality)
-      formData.append('appointmentFee',profile.appointmentFee)
-      formData.append('about',profile.about)
+      formData.append("lastName",profile.lastName)
+      formData.append("email",profile.email)
+      formData.append("phone",profile.phone)
+      formData.append("experience",profile.experience)
+      formData.append("image",profile.image)
+      formData.append("speciality",profile.speciality)
+      formData.append("appointmentFee",profile.appointmentFee)
+      formData.append("about",profile.about)
 
+      event.preventDefault()
       axios.post(`http://localhost:5000/api/doctors/updateDoctor/${doctor_id.doctorID}`,formData)
       .then((response) => {
+        console.log(response)
         if (response.data.success) {
           toast.success(response.data.message)
         } else {
@@ -70,18 +72,15 @@ function DProfile() {
           <div>
             <img src={`http://localhost:5000/images/`+ image}   alt="" className='h-[200px] w-[200px]'/>
           </div>
-            <form action="" className='p-4 rounded-md shadow-md'>
-            <div className='flex justify-center items-center'>
-               
-            </div>
+            <form onSubmit={handleSubmit} className='p-4 rounded-md shadow-md'>         
             <div className='flex gap-5'>
               <div>
                  <label htmlFor="firstname">First name</label>
-                 <input type="text" name='firstName' value={profile.firstName} onChange={(event) => setProfile({...profile, firstName: event.target.value})} id='firstname' className='p-2 rounded-md border w-full'/>
+                 <input type="text" name='firstName' value={profile.firstName} onChange={(event) => setProfile({...profile, firstName: event.target.value})} id='firstName' className='p-2 rounded-md border w-full'/>
               </div>
               <div>
                  <label htmlFor="lastname">Last name</label>
-                 <input type="text" name='lastName' value={profile.lastName} onChange={(event) => setProfile({...profile, lastName: event.target.value})} id='lastname' className='p-2 rounded-md border w-full'/>
+                 <input type="text" name='lastName' value={profile.lastName} onChange={(event) => setProfile({...profile, lastName: event.target.value})} id='lastNname' className='p-2 rounded-md border w-full'/>
               </div>
             </div>
             <div className='flex gap-5'>
@@ -102,7 +101,7 @@ function DProfile() {
               </div>
               <div className='w-[50%]'>
                 <label htmlFor="image">Image</label>
-                <input type="file" name='image' onChange={(event) => {setProfile({...profile, image_p: event.target.files[0]})}} id='image' className='p-2 rounded-md border w-full'/>
+                <input type="file" name='image' onChange={(event) => {setProfile({...profile, image: event.target.files[0]})}} id='image' className='p-2 rounded-md border w-full'/>
               </div>            
             </div>   
              <div className='flex gap-5 '>
