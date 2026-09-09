@@ -72,10 +72,17 @@ export const doctorsProfile = (request,response) => {
 }
 
 export const updateDoctorsDetails = (response,request) => {
-    const { firstName, lastName, email, phone, experience, speciality, image, about, appointmentFee} = request.body
+    const { firstName, lastName, email, phone, experience, speciality, about, appointmentFee} = request.body
     const { id } = request.params
+    const { filename } = request.file
 
     try {
+        const updateDoctor = "UPDATE doctors SET firstName = ?, lastName = ?, email = ?, phone = ?, experience = ?, speciality = ?, about = ?, appointmentFee = ? image = ? WHERE doctors_id = ?"
+        databaseConnection.query(updateDoctor, [firstName,lastName,email,phone,experience,
+            speciality,about,appointmentFee,filename,id
+        ], (error, result) => {
+            if (error) return response.status(500).json({success: false, message: error})
+        })
         
     } catch (error) {
         console.log(error)
