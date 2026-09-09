@@ -122,6 +122,15 @@ export const totalEarnings = (request,response) => {
 export const totalAppointment = (request,response) => {
     const { id } = request.params
     try {
+        const totalAppointment = "SELECT COUNT(appointmentStatus) AS totalAppointments FROM appointments WHERE doctors_id = ? AND appointmentStatus = 'pending'"
+        databaseConnection.query(totalAppointment,[id],(error,result) => {
+            if (error) return response.status(500).json({success: false, message: error})
+            if (result.length > 0) {
+                return response.status(200).json({success: true, result:result[0].totalAppointments })
+            } else {
+                return response.status(200).json({success: false})
+            }
+        })
         
     } catch (error) {
         console.log(error)
