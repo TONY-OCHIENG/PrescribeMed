@@ -11,6 +11,7 @@ function Doctor() {
     const [appointment,setAppointment] = useState([])
     const [earnings,setEarnings] = useState(null)
     const [totalAppointment,setTotalAppointment] = useState(null)
+    const [totalPatients,setTotalPatients] = useState(null)
     useEffect(() => {
             axios.get('http://localhost:5000/api/doctors/authDoctor')
             .then((response) => {
@@ -72,7 +73,24 @@ function Doctor() {
 
     },[doctor_id.doctorID])
 
-    console.log(totalAppointment)
+    //total patients
+
+      useEffect(() => {
+        axios.get(`http://localhost:5000/api/appointment/totalPatients/${doctor_id.doctorID}`)
+        .then((response) => {
+            console.log(response)
+            if (response.data.success) {
+                setTotalPatients(response.data.results)
+            } else {
+                setTotalPatients(null)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+
+    },[doctor_id.doctorID])
+
 
     const approveAppointment = (id) => {
         axios.put(`http://localhost:5000/api/appointment/approveAppointment/${id}`)
@@ -123,14 +141,14 @@ function Doctor() {
                <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
                 <NotebookPenIcon className='h-10 w-10 text-blue-500'/>
                 <div className='flex flex-col'>
-                    <h1 className='md:text-4xl text-3xl font-extrabold'>10</h1>
+                    <h1 className='md:text-4xl text-3xl font-extrabold'>{totalAppointment}</h1>
                     <p>Appointments</p>
                 </div>
              </div>
                <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
                 <HospitalIcon className='h-10 w-10 text-blue-500'/>
                 <div className='flex flex-col'>
-                    <h1 className='md:text-4xl text-3xl font-extrabold'> 10</h1>
+                    <h1 className='md:text-4xl text-3xl font-extrabold'> {totalPatients}</h1>
                     <p>Patients</p>
                 </div>
              </div>     
