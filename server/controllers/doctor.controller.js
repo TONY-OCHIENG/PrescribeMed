@@ -70,3 +70,15 @@ export const doctorsProfile = (request,response) => {
         return response.status(500).json({success: false, message: "Internal server error"})
     }
 }
+
+export const updateDoctorsDetails = (response,request) => {
+    const { firstName, lastName, email, phone, experience, speciality, image, about, appointmentFee} = request.body
+    const { id } = request.params
+
+    try {
+        
+    } catch (error) {
+        console.log(error)
+        return response.status(500).json({success: true, message: "Internal server error"})
+    }
+}
