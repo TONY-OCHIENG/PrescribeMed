@@ -20,6 +20,7 @@ import DoctorLogin from './auth/DoctorLogin'
 import DDashboard from './pages/DoctorPages/DDashboard'
 import Doctor from './pages/DoctorPages/Doctor'
 import DAppointment from './pages/DoctorPages/DAppointment'
+import DProfile from './pages/DoctorPages/DProfile'
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route path='/doctor' element={<DDashboard/>}>
           <Route path='' element={<Doctor/>}/>
           <Route path='/doctor/appointment' element={<DAppointment/>}/>
+          <Route path='/doctor/profile' element={<DProfile/>}/>
         </Route>
         <Route path='/patient' element={<PatientDashboard/>}>
           <Route path='' element={<PDashboard/>}/>
