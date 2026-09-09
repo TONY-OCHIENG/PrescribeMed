@@ -10,6 +10,7 @@ function Doctor() {
     const [doctor_id,setDoctorID] = useState([])
     const [appointment,setAppointment] = useState([])
     const [earnings,setEarnings] = useState(null)
+    const [totalAppointment,setTotalAppointment] = useState(null)
     useEffect(() => {
             axios.get('http://localhost:5000/api/doctors/authDoctor')
             .then((response) => {
@@ -53,6 +54,26 @@ function Doctor() {
         })
     },[doctor_id])
 
+    // total appointments
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/appointment/totalAppointments/${doctor_id.doctorID}`)
+        .then((response) => {
+            console.log(response)
+            if (response.data.success) {
+                setTotalAppointment(response.data.result)
+            } else {
+                setTotalAppointment(null)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+
+    },[doctor_id.doctorID])
+
+    console.log(totalAppointment)
+
     const approveAppointment = (id) => {
         axios.put(`http://localhost:5000/api/appointment/approveAppointment/${id}`)
         .then((response) => {
@@ -95,7 +116,7 @@ function Doctor() {
             <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
                 <Wallet className='h-10 w-10 text-blue-500'/>
                 <div className='flex flex-col'>
-                    <h1 className='md:text-4xl text-3xl font-extrabold'>KSH 1000</h1>
+                    <h1 className='md:text-4xl text-3xl font-extrabold'>KSH {earnings}</h1>
                     <p>Earnings</p>
                 </div>
              </div>
