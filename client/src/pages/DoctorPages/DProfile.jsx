@@ -35,6 +35,22 @@ function DProfile() {
         })
     },[doctor_id])
 
+    const handleSubmit = (event) => {
+      event.preventDefault()
+      const formData = new FormData()
+      formData.append("firstName",profile.firstName)
+      formData.append('lastName',profile.lastName)
+      formData.append('email',profile.email)
+      formData.append('phone',profile.phone)
+      formData.append('experience',profile.experience)
+      formData.append('image',profile.image)
+      formData.append('speciality',profile.speciality)
+      formData.append('appointmentFee',profile.appointmentFee)
+      formData.append('about',profile.about)
+
+      
+    }
+
   return (
      <div className='mt-20 w-full'>
         <div className='max-w-7xl md:w-[90%] mx-auto bg-white p-4 shadow-md rounded-xl flex justify-center items-center'>
@@ -92,7 +108,7 @@ function DProfile() {
                {profile.isAvaliable === 1 ? "Available" : "Not available"}
             </span>
             <label htmlFor="about">About</label>
-            <textarea name="aboute" id="about" value={profile.about} className='w-full h-[200px] border rounded-md p-2'></textarea>        
+            <textarea name="about" id="about" value={profile.about} className='w-full h-[200px] border rounded-md p-2'></textarea>        
             <button type='submit' className='w-full py-2 bg-blue-500 font-extrabold text-white mt-4 rounded-md cursor-pointer'>Edit Profile</button>
           </form>
           <div className='flex gap-2'>
