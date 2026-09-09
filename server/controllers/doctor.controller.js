@@ -82,6 +82,7 @@ export const updateDoctorsDetails = (response,request) => {
             speciality,about,appointmentFee,filename,id
         ], (error, result) => {
             if (error) return response.status(500).json({success: false, message: error})
+            return response.status(200).json({success: true, message: "Profile updated successfully"})
         })
         
     } catch (error) {
