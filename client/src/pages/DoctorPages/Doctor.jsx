@@ -13,6 +13,7 @@ function Doctor() {
     const [totalAppointment,setTotalAppointment] = useState(null)
     const [totalPatients,setTotalPatients] = useState(null)
     const [approvedAppointment,setApprovedAppointments] = useState(null)
+    const [cancel,setCancel] = useState(null)
     useEffect(() => {
             axios.get('http://localhost:5000/api/doctors/authDoctor')
             .then((response) => {
@@ -107,6 +108,22 @@ function Doctor() {
         })
 
     },[doctor_id.doctorID])
+    
+    //canceled appointments
+       useEffect(() => {
+        axios.get(`http://localhost:5000/api/appointment/caneledAppointments/${doctor_id.doctorID}`)
+        .then((response) => {
+            if (response.data.success) {
+                setCancel(response.data.results)
+            } else {
+                setCancel(null)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+
+    },[doctor_id.doctorID])
 
 
     const approveAppointment = (id) => {
@@ -186,7 +203,7 @@ function Doctor() {
                <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
                 <CircleX className='h-10 w-10 text-blue-500'/>
                 <div className='flex flex-col'>
-                    <h1 className='md:text-4xl text-3xl font-extrabold'> 10</h1>
+                    <h1 className='md:text-4xl text-3xl font-extrabold'> {cancel}</h1>
                     <p>Canceled</p>
                 </div>
              </div>       
