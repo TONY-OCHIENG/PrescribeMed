@@ -159,7 +159,15 @@ export const totalPatients = (request, response) => {
 export const approvedAppointments = (request,response) => {
     const { id } = request.params
     try {
-        
+        const approvedAppointment = "SELECT COUNT(appointmentStatus) AS approvedAppointments FROM appointments WHERE doctors_id = ? AND appointmentStatus = 'approved'"
+        databaseConnection.query(approvedAppointment,[id],(error,results) => {
+            if (error) return response.status(500).json({success: false, message: error})
+            if (results.length > 0) {
+                return response.status(200).json({success: true, results:results[0].approvedAppointments})
+            } else {
+                return response.status(200).json({success: false})
+            }
+        })
     } catch (error) {
         console.log(error)
         return response.status(500).json({success: false, message: "Internal server error"})
