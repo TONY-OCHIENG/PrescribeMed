@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Check, FolderOpen, HospitalIcon, NotebookPenIcon, Wallet, X } from 'lucide-react'
+import { Check, CheckCircle2, CircleDotDashed, CircleX, Clock10Icon, FolderOpen, HospitalIcon, NotebookPenIcon, Wallet, X } from 'lucide-react'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -12,6 +12,7 @@ function Doctor() {
     const [earnings,setEarnings] = useState(null)
     const [totalAppointment,setTotalAppointment] = useState(null)
     const [totalPatients,setTotalPatients] = useState(null)
+    const [approvedAppointment,setApprovedAppointments] = useState(null)
     useEffect(() => {
             axios.get('http://localhost:5000/api/doctors/authDoctor')
             .then((response) => {
@@ -78,11 +79,27 @@ function Doctor() {
       useEffect(() => {
         axios.get(`http://localhost:5000/api/appointment/totalPatients/${doctor_id.doctorID}`)
         .then((response) => {
-            console.log(response)
             if (response.data.success) {
                 setTotalPatients(response.data.results)
             } else {
                 setTotalPatients(null)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+
+    },[doctor_id.doctorID])
+
+    //approved Appointments
+
+     useEffect(() => {
+        axios.get(`http://localhost:5000/api/appointment/approvedAppointments/${doctor_id.doctorID}`)
+        .then((response) => {
+            if (response.data.success) {
+                setApprovedAppointments(response.data.results)
+            } else {
+                setApprovedAppointments(null)
             }
         })
         .catch((error) => {
@@ -153,24 +170,24 @@ function Doctor() {
                 </div>
              </div>     
                <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
-                <Wallet className='h-10 w-10 text-blue-500'/>
+                <CheckCircle2 className='h-10 w-10 text-blue-500'/>
                 <div className='flex flex-col'>
-                    <h1 className='md:text-4xl text-3xl font-extrabold'>KSH 1000</h1>
-                    <p>Earnings</p>
+                    <h1 className='md:text-4xl text-3xl font-extrabold'>{approvedAppointment}</h1>
+                    <p>Approved</p>
                 </div>
              </div>
                <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
-                <NotebookPenIcon className='h-10 w-10 text-blue-500'/>
+                <CircleDotDashed className='h-10 w-10 text-blue-500'/>
                 <div className='flex flex-col'>
-                    <h1 className='md:text-4xl text-3xl font-extrabold'>10</h1>
-                    <p>Appointments</p>
+                    <h1 className='md:text-4xl text-3xl font-extrabold'>{totalAppointment}</h1>
+                    <p>Pending</p>
                 </div>
              </div>
                <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
-                <HospitalIcon className='h-10 w-10 text-blue-500'/>
+                <CircleX className='h-10 w-10 text-blue-500'/>
                 <div className='flex flex-col'>
                     <h1 className='md:text-4xl text-3xl font-extrabold'> 10</h1>
-                    <p>Patients</p>
+                    <p>Canceled</p>
                 </div>
              </div>       
         </div>
