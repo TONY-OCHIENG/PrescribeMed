@@ -33,6 +33,24 @@ export const appointmentHistory = (request,response) => {
     }
 }
 
+export const appointmentPatientHistory = (request,response) => {
+    const { id } = request.params
+    try {
+        const appointments = "SELECT d.firstName AS doctor_first_name,d.lastName AS doctor_last_name, d.image AS doctor_image, p.first_name  AS patient_first_name, p.last_name AS patient_last_name, p.image_p AS patient_image, a.appointmentDate, a.appointmentStatus, a.appointmentFee FROM appointments a INNER JOIN doctors d ON d.doctors_id = a.doctors_id INNER JOIN patients p ON p.patient_id = a.patient_id WHERE p.patient_id = ? ORDER BY a.appointmentDate DESC"
+        databaseConnection.query(appointments,[id],(error,results) => {
+            if (error) return response.status(500).json({success: false, message: "Internal server error"})
+            if (results.length > 0) {
+                return response.status(200).json({success: true, results: results})
+            } else {
+                return response.status(200).json({success: false})
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        return response.status(500).json({success: false, message: "Internal server error"})
+    }
+}
+
 export const appointmentHistroryDoctor = (request,response) => {
     const { id } = request.params
     try {
