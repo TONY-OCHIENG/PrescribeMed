@@ -81,6 +81,19 @@ function Dashboard() {
         })    
     },[])
 
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/actions/totalCanceled')
+        .then((response) => {
+            if (response.data.success) {
+                setCanceled(response.data.results)
+            } else {
+                setCanceled(null)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })    
+    },[])
 
     
   return (
