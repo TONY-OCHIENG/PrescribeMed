@@ -113,3 +113,20 @@ export const numberofDoctors = (request,response) => {
         return response.status(500).json({success: false, message: "Internal server error"})
     }
 }
+
+export const numberofPatients = (request,response) => {
+    try {
+        const numberofDoctors = "SELECT COUNT(patient_id) AS totalPatients FROM patients"
+        databaseConnection.query(numberofDoctors,(error,results) => {
+            if (error) return response.status(500).json({success: false, message: error})
+            if (results.length > 0) {
+                return response.status(200).json({success: true, results: results[0].totalPatients})
+            } else {
+                return response.status(200).json({success: false})
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        return response.status(500).json({success: false, message: "Internal server error"})
+    }
+}
