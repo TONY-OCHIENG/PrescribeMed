@@ -53,7 +53,7 @@ function Dashboard() {
         })    
     },[])
 
-     useEffect(() => {
+    useEffect(() => {
         axios.get('http://localhost:5000/api/actions/totalPending')
         .then((response) => {
             if (response.data.success) {
@@ -66,6 +66,21 @@ function Dashboard() {
             console.log(error)
         })    
     },[])
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/actions/totalApproved')
+        .then((response) => {
+            if (response.data.success) {
+                setApproved(response.data.results)
+            } else {
+                setApproved(null)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })    
+    },[])
+
 
     
   return (
