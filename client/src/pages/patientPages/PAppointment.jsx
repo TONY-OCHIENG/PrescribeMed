@@ -50,9 +50,8 @@ function PAppointment() {
         })
        
     }
-
     useEffect(() => {
-        axios.get("http://localhost:5000/api/appointment/appointmentHistory")
+        axios.get(`http://localhost:5000/api/appointment/appointmentPatientHistory/${patient_id.patientID}`)
         .then((response) => {
             if (response.data.success) {
                 setAppointment(response.data.results)
@@ -61,9 +60,7 @@ function PAppointment() {
         .catch((error) => {
             console.log(error)
         })
-    },[])
-
-    console.log(appointments)
+    },[patient_id])
     
   return (
     <div className='mt-20 max-w-7xl md:w-[90%] mx-auto w-full px-2 flex flex-col gap-2'>
