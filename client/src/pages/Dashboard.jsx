@@ -21,7 +21,8 @@ function Dashboard() {
             console.log(error)
         })    
     },[])
-     useEffect(() => {
+    
+    useEffect(() => {
         axios.get('http://localhost:5000/api/actions/totalPatients')
         .then((response) => {
             if (response.data.success) {
@@ -34,7 +35,21 @@ function Dashboard() {
             console.log(error)
         })    
     },[])
-    
+
+     useEffect(() => {
+        axios.get('http://localhost:5000/api/actions/totalAppointments')
+        .then((response) => {
+            if (response.data.success) {
+                setTotalAppointments(response.data.results)
+            } else {
+                setTotalAppointments(null)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })    
+    },[])
+
     
   return (
     <div className='w-full md:max-w-[90%] px-2 mx-auto '>
@@ -56,7 +71,7 @@ function Dashboard() {
          <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
             <NotebookPenIcon className='h-10 w-10 text-blue-500'/>
             <div className='flex flex-col'>
-                <h1 className='md:text-4xl text-3xl font-extrabold'>10</h1>
+                <h1 className='md:text-4xl text-3xl font-extrabold'>{totalAppointments}</h1>
                 <p>Appointments</p>
             </div>
         </div>
