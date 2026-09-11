@@ -1,14 +1,32 @@
 import { BookmarkX, BriefcaseMedicalIcon, CircleCheckBig, CircleDashed, NotebookPenIcon, Users2 } from 'lucide-react'
 import React from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import axios from 'axios'
 
 function Dashboard() {
+    const [totalDoctors,setTotalDoctors] = useState(0)
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/actions/totalDoctors')
+        .then((response) => {
+            if (response.data.success) {
+                setTotalDoctors(response.data.results)
+            } else {
+                setTotalDoctors(null)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })    
+    },[])
+    
   return (
     <div className='w-full md:max-w-[90%] px-2 mx-auto '>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-25'>
         <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
             <BriefcaseMedicalIcon className='h-10 w-10 text-blue-500'/>
             <div className='flex flex-col'>
-                <h1 className='md:text-4xl text-3xl font-extrabold'>10</h1>
+                <h1 className='md:text-4xl text-3xl font-extrabold'>{totalDoctors}</h1>
                 <p>Doctors</p>
             </div>
         </div>
