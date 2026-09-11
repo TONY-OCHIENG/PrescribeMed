@@ -1,8 +1,9 @@
-import { BookmarkX, BriefcaseMedicalIcon, CircleCheckBig, CircleDashed, NotebookPenIcon, Users2 } from 'lucide-react'
+import { BookmarkX, BriefcaseMedicalIcon, CircleCheckBig, CircleDashed, FolderOpen, NotebookPenIcon, Users2 } from 'lucide-react'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
+import { formatDate, formatDates } from './../components/Date';
 
 function Dashboard() {
     const [totalDoctors,setTotalDoctors] = useState(0)
@@ -11,6 +12,7 @@ function Dashboard() {
     const [pending,setPending] = useState(0)
     const [approved,setApproved] = useState(0)
     const [canceled,setCanceled] = useState(0)
+    const [appointments, setAppointment] = useState([])
     useEffect(() => {
         axios.get('http://localhost:5000/api/actions/totalDoctors')
         .then((response) => {
@@ -95,6 +97,18 @@ function Dashboard() {
         })    
     },[])
 
+    useEffect(() => {
+        axios.get("http://localhost:5000/api/appointment/recentAppointment")
+        .then((response) => {
+            if (response.data.success) {
+                setAppointment(response.data.results)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    },[])
+
     
   return (
     <div className='w-full md:max-w-[90%] px-2 mx-auto '>
@@ -142,20 +156,47 @@ function Dashboard() {
             </div>
         </div>
       </div>
-      <h1 className='text-gray-600 mt-10 font-extrabold'>Recent Appointments</h1>
-      <div className='p-4 rounded-md shadow-md mt-5 bg-white h-[320px] overflow-y-auto overflow-x-auto'>
-        <table className='w-full'>
-            <thead className='text-xs text-left'>
-                <th>Doctor's Image</th>
-                <th>Doctor's Name</th>
-                <th>Patient's Image</th>
-                <th>Patient's Name</th>
-                <th>Appointment Date</th>
-                <th>Appointment Fee</th>
-                <th>Status</th>
-            </thead>
-        </table>
-      </div>      
+    <div className='w-full bg-white p-4 shadow-md rounded-md h-[400px] mt-5'>
+            <h1 className='text-gray-600 font-extrabold'>Recent Appointments</h1>
+          <div className='mt-2 overflow-auto bg-white shadow-md rounded-md h-[330px] p-2'>
+           {
+            appointments.length > 0 ?
+                <table className='w-full text-left text-gray-600'>
+                    <thead>
+                        <th>Image</th>
+                        <th>Patient</th>
+                        <th>Image</th>
+                        <th>Doctor</th>
+                        <th>Date</th>
+                        <th>Fee</th>
+                        <th>Status</th>
+                    </thead>
+                    <tbody className='p-2 '>
+                        {
+                            appointments.map((item) => (
+                                 <tr className='text-xs even:bg-gray-100'>
+                                    <td className='p-2'>
+                                    <img src={`http://localhost:5000/images/`+ item.patient_image}  alt="" className='h-[50px] w-[50px] rounded-full' />
+                                    </td>   
+                                    <td>{item.patient_first_name} {item.patient_last_name}</td>
+                                    <td><img src={`http://localhost:5000/images/`+ item.doctor_image}  alt="" className='h-[50px] w-[50px] rounded-full' /></td>
+                                    <td>{item.doctor_first_name} {item.doctor_last_name}</td>
+                                    <td className='w-[200px]'>{formatDate(item.appointmentDate)}</td> 
+                                    <td>{item.appointmentFee}</td>
+                                    <td>{item.appointmentStatus}</td>                    
+                                </tr>               
+                            ))
+                        }
+                      
+                    </tbody>
+                </table>
+               : <div className='w-full h-full flex justify-center items-center flex-col'>
+               <FolderOpen className='h-20 w-20 text-blue-400'/>
+               <h1 className='text-sm text-gray-600 font-extrabold'>No recent appoinmtents</h1>
+            </div>
+           }
+          </div>
+        </div>
     </div>    
   )
 }
