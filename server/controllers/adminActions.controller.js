@@ -164,3 +164,20 @@ export const numberofPendingAppointments = (request,response) => {
         return response.status(500).json({success: false, message: "Internal server error"})
     }
 }
+
+export const numberofApprovedAppointments = (request,response) => {
+    try {
+        const numberofDoctors = "SELECT COUNT(appointmentStatus) AS approvedAppointment FROM appointments WHERE appointmentStatus = 'approved'"
+        databaseConnection.query(numberofDoctors,(error,results) => {
+            if (error) return response.status(500).json({success: false, message: error})
+            if (results.length > 0) {
+                return response.status(200).json({success: true, results: results[0].approvedAppointment})
+            } else {
+                return response.status(200).json({success: false})
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        return response.status(500).json({success: false, message: "Internal server error"})
+    }
+}
