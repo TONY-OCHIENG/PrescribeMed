@@ -191,3 +191,21 @@ export const canceledAppointments = (request,response) => {
         return response.status(500).json({success: false, message: "Internal server error"})
     }
 }
+
+export const recentAppointments = (request,response) => {
+    try {
+        const recentAppointments = "SELECT d.firstName AS doctor_first_name, d.lastName AS doctor_last_name, d.image AS doctor_image, p.first_name AS patient_first_name, p.last_name AS patient_last_name, p.phone_p AS patient_phone, p.image_p AS patient_image, a.appointmentDate,a.appointment_id, a.appointmentStatus, a.appointmentFee FROM appointments a INNER JOIN doctors d ON d.doctors_id = a.doctors_id INNER JOIN patients p ON p.patient_id = a.patient_id WHERE a.appointmentStatus = 'pending' ORDER BY a.appointmentDate DESC"
+        databaseConnection.query(recentAppointments,(error,results) => {
+            if (error) return response.status(500).json({success: false, message: error})
+            if (results.length > 0) {
+                return response.status(200).json({success: true, results: results})
+            } else {
+                return response.status(200).json({success: false, message: "No appointments made"})
+            }
+        })
+        
+    } catch (error) {
+        console.log(error)
+        return response.status(500).json({success: false, message: "Internal server error"})
+    }
+}
