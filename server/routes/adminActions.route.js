@@ -1,5 +1,5 @@
 import express from 'express'
-import { addDoctors, deleteDoctor, getDoctors, getSingleDoctor, numberofAppointments, numberofDoctors, numberofPatients } from '../controllers/adminActions.controller.js'
+import { addDoctors, deleteDoctor, getDoctors, getSingleDoctor, numberofAppointments, numberofDoctors, numberofPatients, numberofPendingAppointments } from '../controllers/adminActions.controller.js'
 import { upload } from '../configs/imageUpload.js'
 
 const adminActions = express.Router()
@@ -10,4 +10,5 @@ adminActions.delete("/deleteSingleDoctor/:id",deleteDoctor)
 adminActions.get("/totalDoctors",numberofDoctors)
 adminActions.get("/totalPatients",numberofPatients)
 adminActions.get("/totalAppointments",numberofAppointments)
+adminActions.get("/totalPending",numberofPendingAppointments)
 export default adminActions
