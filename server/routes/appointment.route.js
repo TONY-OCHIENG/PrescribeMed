@@ -1,5 +1,5 @@
 import express from 'express'
-import { appointmentHistory, appointmentHistroryDoctor, appointmentsMade, approveAppointment, approvedAppointments, bookAppointment,cancelAppointment, canceledAppointments, totalAppointment, totalEarnings, totalPatients, recentAppointments } from '../controllers/appointment.controller.js'
+import { appointmentHistory, appointmentHistroryDoctor, appointmentPatientHistory , appointmentsMade, approveAppointment, approvedAppointments, bookAppointment,cancelAppointment, canceledAppointments, totalAppointment, totalEarnings, totalPatients, recentAppointments } from '../controllers/appointment.controller.js'
 
 const appointmentRoute = express.Router()
 appointmentRoute.post("/bookAppointment",bookAppointment)
@@ -14,4 +14,5 @@ appointmentRoute.get("/totalPatients/:id",totalPatients)
 appointmentRoute.get("/approvedAppointments/:id",approvedAppointments)
 appointmentRoute.get("/caneledAppointments/:id",canceledAppointments)
 appointmentRoute.get("/recentAppointment",recentAppointments)
+appointmentRoute.get("/appointmentPatientHistory/:id",appointmentPatientHistory)
 export default appointmentRoute
