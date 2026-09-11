@@ -8,6 +8,9 @@ function Dashboard() {
     const [totalDoctors,setTotalDoctors] = useState(0)
     const [totalPatients,setTotalPatients] = useState(0)
     const [totalAppointments,setTotalAppointments] = useState(0)
+    const [pending,setPending] = useState(0)
+    const [approved,setApproved] = useState(0)
+    const [canceled,setCanceled] = useState(0)
     useEffect(() => {
         axios.get('http://localhost:5000/api/actions/totalDoctors')
         .then((response) => {
@@ -50,6 +53,20 @@ function Dashboard() {
         })    
     },[])
 
+     useEffect(() => {
+        axios.get('http://localhost:5000/api/actions/totalPending')
+        .then((response) => {
+            if (response.data.success) {
+                setPending(response.data.results)
+            } else {
+                setPending(null)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })    
+    },[])
+
     
   return (
     <div className='w-full md:max-w-[90%] px-2 mx-auto '>
@@ -78,21 +95,21 @@ function Dashboard() {
           <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
             <CircleDashed className='h-10 w-10 text-blue-500'/>
             <div className='flex flex-col'>
-                <h1 className='md:text-4xl text-3xl font-extrabold'>10</h1>
+                <h1 className='md:text-4xl text-3xl font-extrabold'>{pending}</h1>
                 <p>Pending</p>
             </div>
         </div>
        <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
             <CircleCheckBig className='h-10 w-10 text-blue-500'/>
             <div className='flex flex-col'>
-                <h1 className='md:text-4xl text-3xl font-extrabold'>10</h1>
+                <h1 className='md:text-4xl text-3xl font-extrabold'>{approved}</h1>
                 <p>Completed</p>
             </div>
         </div>
          <div className='p-4 bg-white rounded-md shadow-md flex items-center gap-5'>
             <BookmarkX className='h-10 w-10 text-blue-500'/>
             <div className='flex flex-col'>
-                <h1 className='md:text-4xl text-3xl font-extrabold'>10</h1>
+                <h1 className='md:text-4xl text-3xl font-extrabold'>{canceled}</h1>
                 <p>Canceled</p>
             </div>
         </div>
