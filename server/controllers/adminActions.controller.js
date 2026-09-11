@@ -98,9 +98,16 @@ export const deleteDoctor = (request,response) => {
 }
 
 export const numberofDoctors = (request,response) => {
-    const { id } = request.params
     try {
-        
+        const numberofDoctors = "SELECT COUNT(doctors_id) AS totalDoctors FROM doctors"
+        databaseConnection.query(numberofDoctors,(error,results) => {
+            if (error) return response.status(500).json({success: false, message: error})
+            if (results.length > 0) {
+                return response.status(200).json({success: true, results: results[0].totalDoctors})
+            } else {
+                return response.status(200).json({success: false})
+            }
+        })
     } catch (error) {
         console.log(error)
         return response.status(500).json({success: false, message: "Internal server error"})
