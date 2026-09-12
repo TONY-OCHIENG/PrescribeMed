@@ -22,14 +22,14 @@ function Navigation() {
     }
   return (
      <div className='relative'>
-    <div className='h-[10vh] w-full fixed shadow-md bg-gray-100 flex justify-center items-center'>
+    <div className='h-[10vh] z-10 w-full fixed shadow-md bg-white flex justify-center items-center'>
         <div className='max-w-7xl md:w-[90%] w-full px-2 flex justify-between items-center'>
             <h1 className='text-2xl font-extrabold'>PRESCRIBEMED</h1>
            <div>
             <ul className='hidden md:flex gap-10 text-md text-gray-600'>
                 {
                     navigationLink.map((item) => (
-                        <li className='cursor-pointer'>
+                        <li className='cursor-pointer font-extrabold'>
                             <Link
                             to={item.href}
                             spy
@@ -51,8 +51,8 @@ function Navigation() {
         </div>
         
      </div>
-     <div className={`absolute fixed h-[100vh] w-[80%] ${open ? 'left-0 transition-all duration-300 ' : 'left-[-100%] transition-all duration-300 '} shadow-md bg-white`}>
-         <h1 className='text-2xl font-extrabold m-10'>ROUTE<span className='text-red-600'>CAB</span></h1>
+     <div className={`absolute fixed h-[100vh] z-20 w-[80%] ${open ? 'left-0 transition-all duration-300 ' : 'left-[-100%] transition-all duration-300 '} shadow-md bg-white`}>
+         <h1 className='text-2xl font-extrabold m-10'>PRESCRIBEMED</h1>
           <ul className='m-10 text-md text-gray-600 text-xl'>
                 {
                     navigationLink.map((item) => (
