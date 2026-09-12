@@ -26,6 +26,19 @@ function About() {
     <div className='py-16 max-w-7xl mx-auto md:w-[90%] px-2'>
         <h1 className='text-center text-4xl font-extrabold text-gray-800'>About</h1>
         <p className='text-center mt-5 text-gray-600 text-xl font-extrabold'>Care that meets you where you are</p>
+        <div className='w-full grid grid-cols-2 md:grid-cols-4 gap-5 mt-10'>
+            {
+                aboutContent.map((item) => (
+                    <div className='bg-white rounded-md p-4 shadow-md flex items-center flex-col'>
+                        <div className='p-2 h-15 w-15 flex justify-center items-center bg-blue-100 rounded-full'>
+                            <item.icon className='text-blue-600'/>
+                        </div>
+                        <p className='text-sm text-blue-600 font-extrabold mt-2'>{item.name}</p>
+                        <p className='text-sm text-gray-600'>{item.text}</p>
+                    </div>
+                ))
+            }
+        </div>
     </div>
   )
 }
