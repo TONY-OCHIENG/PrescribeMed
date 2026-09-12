@@ -21,12 +21,14 @@ import DDashboard from './pages/DoctorPages/DDashboard'
 import Doctor from './pages/DoctorPages/Doctor'
 import DAppointment from './pages/DoctorPages/DAppointment'
 import DProfile from './pages/DoctorPages/DProfile'
+import Home from './pages/Home'
 
 
 function App() {
   return (
     <div className='bg-gray-100 h-[100vh]'>
       <Routes>
+        <Route path='' element={<Home/>}/>
         <Route path='/forgot-password' element={<FogrotPassword/>}/>
         <Route path='/reset-password/:id' element={<ResetPassword/>}/>
         <Route path='/register' element={<PatientRegistration/>}/>
