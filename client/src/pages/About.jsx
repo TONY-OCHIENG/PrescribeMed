@@ -43,7 +43,7 @@ function About() {
         }
     ]
   return (
-    <div className='py-16 max-w-7xl mx-auto h-[100vh] md:w-[90%] px-2'>
+    <div className='py-16 max-w-7xl mx-auto md:w-[90%] px-2'>
         <h1 className='text-center text-4xl font-extrabold text-gray-800'>About</h1>
         <p className='text-center mt-5 text-gray-600 text-xl font-extrabold'>Care that meets you where you are</p>
         <div className='w-full grid grid-cols-2 md:grid-cols-4 gap-5 mt-10'>
