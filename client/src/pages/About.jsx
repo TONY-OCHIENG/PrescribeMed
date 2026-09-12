@@ -1,4 +1,4 @@
-import { Calendar, Heart, Notebook, Shield } from 'lucide-react'
+import { Calendar, CirclePlus, Clock, Heart, Lock, Notebook, Shield, Sun } from 'lucide-react'
 import { name } from 'nodemailer/lib/package-info.js'
 import React from 'react'
 
@@ -22,6 +22,26 @@ function About() {
             icon:Heart
         }
     ]
+
+    const patientChoose = [
+        {
+            name:"Privacy by default",
+            text:"Your health data is encrypted end-to-end and never sold or shared with advertisers.",
+            icon:Lock
+        }, {
+            name:"Clear pricing",
+            text:"You see the consultation fee before you book no surprise charges afterward.",
+            icon:CirclePlus
+        }, {
+            name:"Always reachable",
+            text:"Support is available around the clock for booking help or technical issues.",
+            icon:Clock
+        }, {
+            name:"Built with clinicians",
+            text:"Our booking flow and triage questions are shaped by practicing physicians, not just designers.",
+            icon:Sun
+        }
+    ]
   return (
     <div className='py-16 max-w-7xl mx-auto md:w-[90%] px-2'>
         <h1 className='text-center text-4xl font-extrabold text-gray-800'>About</h1>
@@ -34,10 +54,30 @@ function About() {
                             <item.icon className='text-blue-600'/>
                         </div>
                         <p className='text-sm text-blue-600 font-extrabold mt-2'>{item.name}</p>
-                        <p className='text-sm text-gray-600'>{item.text}</p>
+                        <p className='text-sm mt-2 text-gray-600'>{item.text}</p>
                     </div>
                 ))
             }
+        </div>
+        <div className='w-full p-4 shadow-md mt-10 bg-blue-50 border-l-4 rounded-l-xl border-l-blue-600'>
+            <h1 className='text-xl font-extrabold text-gray-700'>Why patients stick with us</h1>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-8'>
+                {
+                    patientChoose.map((item) => (
+                        <div className='flex gap-6'>
+                            <div>
+                               <item.icon className='text-blue-600'/>
+                            </div>
+                           <div>
+                             <h1 className='text-gray-900 font-extrabold text-xl'>                                
+                                {item.name}
+                            </h1>
+                            <p className='text-gray-600'>{item.text}</p>
+                           </div>
+                        </div>
+                    ))
+                }
+            </div>
         </div>
     </div>
   )
