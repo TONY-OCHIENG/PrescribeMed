@@ -4,6 +4,7 @@ import Navigation from '../components/Navigation'
 import About from './About'
 import MeetDoctors from './MeetDoctors'
 import Testimonials from './Testimonials'
+import Contact from './Contact'
 
 function Home() {
   return (
@@ -13,6 +14,7 @@ function Home() {
      <About/>
      <MeetDoctors/>    
      <Testimonials/>   
+     <Contact/>
     </div>
   )
 }

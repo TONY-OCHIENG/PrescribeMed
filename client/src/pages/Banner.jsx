@@ -4,7 +4,7 @@ import React from 'react'
 function Banner() {
   return (
     <div className='w-full h-[100vh] bg-white'>
-        <img src="/public/consultation_prescribemed.png" alt="" className='h-full w-full object-cover'/> 
+        <img src="/public/ChatGPT Image Sep 13, 2026, 08_33_50 AM.png" alt="" className='h-full w-full object-cover'/> 
         <div className='relative top-[-100%] p-4 rounded-md w-[100%] shadow-md bg-gradient-to-r from-white/50 via-white/80 to-transparent h-[100vh]'>
           <div className='md:w-[90%] mx-auto w-full h-full flex items-center'>
             <div className=' flex flex-col'>
