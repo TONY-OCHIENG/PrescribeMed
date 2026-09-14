@@ -5,8 +5,8 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 
-const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/auth" : "/api/auth"
-
+const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/doctors/authDoctor" : "/api/doctors/authDoctor"
+const LOGIN_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/doctors/loginDoctor" : "/api/doctors/loginDoctor"
 function DoctorLogin() {
     const [doctor,setDoctor] = useState({
         email: "",
@@ -26,7 +26,7 @@ function DoctorLogin() {
     }
 
      useEffect(() => {
-        axios.get('http://localhost:5000/api/doctors/authDoctor')
+        axios.get(`${API_URL}/api/doctors/authDoctor`)
         .then((response) => {
             if (response.data.success) {
                  navigate("/doctor")
@@ -43,7 +43,7 @@ function DoctorLogin() {
     const handleSubmit = (event) => {
         event.preventDefault()
         setLoading(true)
-        axios.post('http://localhost:5000/api/doctors/loginDoctor',doctor)
+        axios.post(`${LOGIN_URL}/api/doctors/loginDoctor`,doctor)
         .then((response) => {
             if (response.data.success) {
                 setLoading(false)

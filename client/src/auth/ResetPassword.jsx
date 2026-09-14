@@ -25,7 +25,7 @@ function ResetPassword() {
     const handleSubmit = (event) => {
       event.preventDefault()
       setloading(true)
-      axios.post(`http://localhost:5000/api/patients/updatePassword/${id}`,password)
+      axios.post(`https://prescribemed.onrender.com/api/patients/updatePassword/${id}`,password)
       .then((response) => {
         if (response.data.success) {
           setloading(false)

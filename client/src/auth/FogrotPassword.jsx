@@ -22,7 +22,7 @@ function FogrotPassword() {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        axios.post('http://localhost:5000/api/patients/reset-link',email)
+        axios.post('https://prescribemed.onrender.com/api/patients/reset-link',email)
         .then((response) => {
             if (response.data.success) {
                 toast.success(response.data.message)

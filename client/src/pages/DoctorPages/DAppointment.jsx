@@ -6,7 +6,7 @@ function DAppointment() {
     const [doctor_id, setDoctorID] = useState([])
     const [appointment, setAppointment] = useState([])
     useEffect(() => {
-            axios.get('http://localhost:5000/api/doctors/authDoctor')
+            axios.get('https://prescribemed.onrender.com/api/doctors/authDoctor')
             .then((response) => {
                 console.log(response)
                 if (response.data.success) {
@@ -22,7 +22,7 @@ function DAppointment() {
     },[])
 
      useEffect(() => {
-        axios.get(`http://localhost:5000/api/appointment/appointments/${doctor_id.doctorID}`)
+        axios.get(`https://prescribemed.onrender.com/api/appointment/appointments/${doctor_id.doctorID}`)
         .then((response) => {
             console.log(response)
             if (response.data.success) {

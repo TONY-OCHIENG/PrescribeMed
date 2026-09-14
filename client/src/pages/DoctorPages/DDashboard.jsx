@@ -16,7 +16,7 @@ function DDashboard() {
     axios.defaults.withCredentials = true
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/doctors/authDoctor')
+        axios.get('https://prescribemed.onrender.com/api/doctors/authDoctor')
         .then((response) => {
             if (response.data.success) {
                  setLastName(response.data.details)
@@ -31,7 +31,7 @@ function DDashboard() {
     },[])
 
     const handleLogout = () => {
-        axios.get("http://localhost:5000/api/doctors/logoutDoctor")
+        axios.get("https://prescribemed.onrender.com/api/doctors/logoutDoctor")
         .then((response) => {
             if (response.data.success) {
                 toast.success(response.data.message)

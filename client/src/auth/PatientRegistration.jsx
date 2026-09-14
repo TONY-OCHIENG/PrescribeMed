@@ -37,7 +37,7 @@ function PatientRegistration() {
     formData.append("age",patients.age)
     formData.append("password",patients.password)
 
-    axios.post("http://localhost:5000/api/patients/registerPatient",formData)
+    axios.post("https://prescribemed.onrender.com/api/patients/registerPatient",formData)
     .then((response) => {
       console.log(response)
       if (response.data.success){

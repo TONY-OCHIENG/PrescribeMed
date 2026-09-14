@@ -28,7 +28,7 @@ function PatientLogin() {
 
 
     useEffect(() => {
-            axios.get('http://localhost:5000/api/patients/authPatient')
+            axios.get('https://prescribemed.onrender.com/api/patients/authPatient')
             .then((response) => {
                 if (response.data.success) {
                     navigate('/patient')
@@ -44,7 +44,7 @@ function PatientLogin() {
     const handleSubmit = (event) => {
         event.preventDefault()
         setLoading(true)
-        axios.post('http://localhost:5000/api/patients/loginPatient',value)
+        axios.post('https://prescribemed.onrender.com/api/patients/loginPatient',value)
         .then((response) => {
             if (response.data.success) {
                 setLoading(false)
