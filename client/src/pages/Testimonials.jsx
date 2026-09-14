@@ -18,7 +18,7 @@ function Testimonials() {
         }
     ]
   return (
-    <div className='py-20 bg-white'>
+    <div id='testimonials' className='py-20 bg-white'>
     <div className='max-w-7xl md:w-[90%] mx-auto px-2'>
         <h1 className='text-center text-gray-800 font-extrabold text-3xl'>What our clients say</h1>
         <div className='grid grid-cols-1 md:grid-cols-4 gap-4 mt-10'>

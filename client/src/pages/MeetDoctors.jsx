@@ -22,7 +22,7 @@ function MeetDoctors() {
     }
   ]
   return (
-    <div className='bg-gray-50 py-20'>
+    <div id='doctors' className='bg-gray-50 py-20'>
      <div className='md:w-[90%] mx-auto'>
         <h1 className='text-center text-gray-800 font-extrabold text-3xl'>Meet Our Professional Doctors</h1>   
         <div className='mt-10 grid grid-cols-2 md:grid-cols-4 gap-5'>
