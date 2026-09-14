@@ -13,7 +13,6 @@ function PatientDashboard() {
     const navLinks = [
         {name:"Dashboard",link:"/patient",icon:LayoutDashboard},
         {name:"Appointments",link:"/patient/appointments",icon:NotebookPenIcon},
-        {name:"Video call",link:"/patient/meet",icon:VideoIcon},
         {name:"Profile",link:"/patient/profile",icon:User}
     ]
 
