@@ -7,6 +7,7 @@ import adminActions from './routes/adminActions.route.js'
 import patientRoute from './routes/patient.route.js'
 import appointmentRoute from './routes/appointment.route.js'
 import doctorRoutes from './routes/doctor.route.js'
+import path from 'path'
 dotenv.config()
 
 const app = express()

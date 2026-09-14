@@ -13,7 +13,7 @@ export const verificationCodeEmail = async (email,verificationCode) => {
             secure: true,
             auth: {
                 user: process.env.EMAIL_USER,
-                pass: process.env.APP_PASSWORD
+                pass: process.env.APP_PASSWORD 
             }
         })
         const message = {
