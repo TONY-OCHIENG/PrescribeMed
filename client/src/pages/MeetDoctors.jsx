@@ -5,19 +5,19 @@ function MeetDoctors() {
   const doctors = [
     {
       name:"John Doe",
-      image:"/public/doctor1.png",
+      image:"/images/doctor1.png",
       specialization:"Pediatrics"
     }, {
       name:"Audrey Anne",
-      image:"/public/doctor2.jpeg",
+      image:"/images/doctor2.jpeg",
       specialization:"Internal medicine"
     }, {
       name:"Mark Doe",
-      image:"/public/undefined_1787662651551.jpeg",
+      image:"/images/undefined_1787662651551.jpeg",
       specialization:"Pediatrics"
     }, {
       name:"Anne Gladys",
-      image:"/public/undefined_1788163620831.jpeg",
+      image:"/images/undefined_1788163620831.jpeg",
       specialization:"Neurologist"
     }
   ]

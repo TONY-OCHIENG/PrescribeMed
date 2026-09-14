@@ -17,7 +17,7 @@ function Footer() {
                         <ul className="text-sm space-y-2">
                             <li><a href="http://localhost:5173/doctor-login">Doctor's portal</a></li>
                             <li><a href="http://localhost:5173/patient-login">Patient's portal</a></li>
-                            <li><a href="#">Contact us</a></li>
+                            <li><a href="http://localhost:5173/login">Admin</a></li>
                             <li><a href="#">Privacy policy</a></li>
                         </ul>
                     </div>
