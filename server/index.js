@@ -25,6 +25,7 @@ app.use("/api/actions",adminActions)
 app.use("/api/patients",patientRoute)
 app.use("/api/appointment",appointmentRoute)
 app.use("/api/doctors",doctorRoutes)
+
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static(path.join(__dirname, "/client/dist")));
 	app.all("/*splat", (req, res) => {
