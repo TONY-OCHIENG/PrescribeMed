@@ -4,8 +4,7 @@ import LoaderPage from '../../components/LoaderPage'
 import toast from 'react-hot-toast'
 import { X } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-const ACTIONS_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/actions" : "/api/actions"
-const IMAGE_URL = import.meta.env.MODE === "development" ? "http://localhost:5000" : "https://prescribemed.onrender.com"
+
 function PDashboard() {
     const [doctors,setDoctors] = useState([])
     const [loading,setLoading] = useState(false)
@@ -32,7 +31,7 @@ function PDashboard() {
     const fetchAllDoctors = () => {
         setLoading(true)
         setActive("All")
-        axios.get(`${ACTIONS_URL}/getAllDoctors`)
+        axios.get('http://localhost:5000/api/actions/getAllDoctors')
         .then((response) => {
             if (response.data.success) {
                 setLoading(false)
@@ -48,7 +47,7 @@ function PDashboard() {
         })
     }
     const fetchSingleDoctor = (id) => {
-        axios.get(`${ACTIONS_URL}/getSingleDoctor/${id}`)
+        axios.get(`http://localhost:5000/api/actions/getSingleDoctor/${id}`)
         .then((response) => {
             if (response.data.success) {
                 setOpen(!open)
@@ -114,7 +113,7 @@ function PDashboard() {
                     singleDoctor.map((item) => (
                     <div key={item.doctors_id} className='mt-4 flex md:flex-row flex-col gap-10'>
                     <div className='md:w-[40%]'>
-                        <img src={`${IMAGE_URL}/images/`+ item.image}  alt="" className='h-[200px] w-full' />
+                        <img src={`http://localhost:5000/images/`+ item.image}  alt="" className='h-[200px] w-full' />
                     </div>
                     <div className='md:w-[80%]'>
                         <h1 className='text-gray-800 font-extrabold mt-2'>Dr, <span className='text-sm'>{item.firstName} {item.lastName}</span></h1>

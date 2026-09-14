@@ -3,7 +3,7 @@ import { BriefcaseMedical, LayoutDashboard, NotebookPen, Power, SquarePlus, User
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/doctors" : "/api/doctors"
+
 function DDashboard() {
     const [lastName, setLastName] = useState([])
     const navigate = useNavigate()
@@ -16,7 +16,7 @@ function DDashboard() {
     axios.defaults.withCredentials = true
 
     useEffect(() => {
-        axios.get(`${API_URL}/authDoctor`)
+        axios.get('http://localhost:5000/api/doctors/authDoctor')
         .then((response) => {
             if (response.data.success) {
                  setLastName(response.data.details)
@@ -31,7 +31,7 @@ function DDashboard() {
     },[])
 
     const handleLogout = () => {
-        axios.get(`${API_URL}/logoutDoctor`)
+        axios.get("http://localhost:5000/api/doctors/logoutDoctor")
         .then((response) => {
             if (response.data.success) {
                 toast.success(response.data.message)

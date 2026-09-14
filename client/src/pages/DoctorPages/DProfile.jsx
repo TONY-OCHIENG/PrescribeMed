@@ -2,15 +2,14 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
-const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/doctors" : "/api/doctors"
-const IMAGE_URL = import.meta.env.MODE === "development" ? "http://localhost:5000" : "https://prescribemed.onrender.com"
+
 function DProfile() {
    const [doctor_id,setDoctorID] = useState([])
    const [profile,setProfile] = useState([])
     const [image, setImage] = useState([])
    const navigate = useNavigate()
    useEffect(() => {
-            axios.get(`${API_URL}/authDoctor`)
+            axios.get('http://localhost:5000/api/doctors/authDoctor')
             .then((response) => {
                 if (response.data.success) {
                      setDoctorID(response.data.details)
@@ -25,7 +24,7 @@ function DProfile() {
     },[])
 
     useEffect(() => {
-        axios.get(`${API_URL}/doctorProfile/${doctor_id.doctorID}`)
+        axios.get(`http://localhost:5000/api/doctors/doctorProfile/${doctor_id.doctorID}`)
         .then((response) => {
             if (response.data.success) {
                 setProfile(response.data.result[0])
@@ -51,7 +50,7 @@ function DProfile() {
       formData.append("about",profile.about)
 
       event.preventDefault()
-      axios.post(`${API_URL}/updateDoctor/${doctor_id.doctorID}`,formData)
+      axios.post(`http://localhost:5000/api/doctors/updateDoctor/${doctor_id.doctorID}`,formData)
       .then((response) => {
         console.log(response)
         if (response.data.success) {
@@ -67,7 +66,7 @@ function DProfile() {
     }
 
     const notAvailable = () => {
-      axios.put(`${API_URL}/notAvailable/${doctor_id.doctorID}`)
+      axios.put(`http://localhost:5000/api/doctors/notAvailable/${doctor_id.doctorID}`)
       .then((response) => {
         if (response.data.success) {
           toast.success(response.data.message)
@@ -82,7 +81,7 @@ function DProfile() {
     }
     
     const Available = () => {
-      axios.put(`${API_URL}/available/${doctor_id.doctorID}`)
+      axios.put(`http://localhost:5000/api/doctors/available/${doctor_id.doctorID}`)
       .then((response) => {
         if (response.data.success) {
           toast.success(response.data.message)
@@ -101,7 +100,7 @@ function DProfile() {
         <div className='max-w-7xl md:w-[90%] mx-auto bg-white p-4 shadow-md rounded-xl flex justify-center items-center'>
          <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
           <div>
-            <img src={`${IMAGE_URL}/images/`+ image}   alt="" className='h-[200px] w-[200px]'/>
+            <img src={`http://localhost:5000/images/`+ image}   alt="" className='h-[200px] w-[200px]'/>
           </div>
             <form onSubmit={handleSubmit} className='p-4 rounded-md shadow-md'>         
             <div className='flex gap-5'>

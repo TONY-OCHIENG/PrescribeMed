@@ -5,7 +5,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { Link, useNavigate } from 'react-router-dom'
-const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/patients/registerPatient" : "/api/patients/registerPatient"
+
 function PatientRegistration() {
   const [patients,setPatients] = useState({
     first_name:"",
@@ -37,7 +37,7 @@ function PatientRegistration() {
     formData.append("age",patients.age)
     formData.append("password",patients.password)
 
-    axios.post(`${API_URL}`,formData)
+    axios.post("http://localhost:5000/api/patients/registerPatient",formData)
     .then((response) => {
       console.log(response)
       if (response.data.success){
@@ -52,6 +52,7 @@ function PatientRegistration() {
       toast.error("An error occured")
     })
   }
+  console.log(patients)
   return (
     <div className='flex justify-center items-center w-full h-full'>
         <form onSubmit={handleSubmit} className='md:max-w-md px-2 w-full bg-white/50 p-4 rounded-xl shadow-md'>

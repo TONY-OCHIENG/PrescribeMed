@@ -5,9 +5,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { formatDate } from '../../components/Date'
 import { toast } from 'react-hot-toast'
-const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/doctors" : "/api/doctors"
-const APP_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/appointment" : "/api/appointment"
-const IMAGE_URL = import.meta.env.MODE === "development" ? "http://localhost:5000" : "https://prescribemed.onrender.com"
+
 function Doctor() {
     const [doctor_id,setDoctorID] = useState([])
     const [appointment,setAppointment] = useState([])
@@ -17,7 +15,7 @@ function Doctor() {
     const [approvedAppointment,setApprovedAppointments] = useState(null)
     const [cancel,setCancel] = useState(null)
     useEffect(() => {
-            axios.get(`${API_URL}/authDoctor`)
+            axios.get('http://localhost:5000/api/doctors/authDoctor')
             .then((response) => {
                 if (response.data.success) {
                      setDoctorID(response.data.details)
@@ -32,7 +30,7 @@ function Doctor() {
     },[])
 
     useEffect(() => {
-        axios.get(`${APP_URL}/appointmentDoctor/${doctor_id.doctorID}`)
+        axios.get(`http://localhost:5000/api/appointment/appointmentDoctor/${doctor_id.doctorID}`)
         .then((response) => {
             if (response.data.success) {
                 setAppointment(response.data.results)
@@ -46,7 +44,7 @@ function Doctor() {
     //getting total earnings
 
     useEffect(() => {
-        axios.get(`${APP_URL}/totalEarnings/${doctor_id.doctorID}`)
+        axios.get(`http://localhost:5000/api/appointment/totalEarnings/${doctor_id.doctorID}`)
         .then((response) => {
             if (response.data.success) {
                 setEarnings(response.data.results)
@@ -62,7 +60,7 @@ function Doctor() {
     // total appointments
 
     useEffect(() => {
-        axios.get(`${APP_URL}/totalAppointments/${doctor_id.doctorID}`)
+        axios.get(`http://localhost:5000/api/appointment/totalAppointments/${doctor_id.doctorID}`)
         .then((response) => {
             console.log(response)
             if (response.data.success) {
@@ -80,7 +78,7 @@ function Doctor() {
     //total patients
 
       useEffect(() => {
-        axios.get(`${APP_URL}/totalPatients/${doctor_id.doctorID}`)
+        axios.get(`http://localhost:5000/api/appointment/totalPatients/${doctor_id.doctorID}`)
         .then((response) => {
             if (response.data.success) {
                 setTotalPatients(response.data.results)
@@ -97,7 +95,7 @@ function Doctor() {
     //approved Appointments
 
      useEffect(() => {
-        axios.get(`${APP_URL}/approvedAppointments/${doctor_id.doctorID}`)
+        axios.get(`http://localhost:5000/api/appointment/approvedAppointments/${doctor_id.doctorID}`)
         .then((response) => {
             if (response.data.success) {
                 setApprovedAppointments(response.data.results)
@@ -113,7 +111,7 @@ function Doctor() {
     
     //canceled appointments
        useEffect(() => {
-        axios.get(`${APP_URL}/caneledAppointments/${doctor_id.doctorID}`)
+        axios.get(`http://localhost:5000/api/appointment/caneledAppointments/${doctor_id.doctorID}`)
         .then((response) => {
             if (response.data.success) {
                 setCancel(response.data.results)
@@ -129,7 +127,7 @@ function Doctor() {
 
 
     const approveAppointment = (id) => {
-        axios.put(`${APP_URL}/approveAppointment/${id}`)
+        axios.put(`http://localhost:5000/api/appointment/approveAppointment/${id}`)
         .then((response) => {
             if (response.data.success) {
                 toast.success(response.data.message)
@@ -147,7 +145,7 @@ function Doctor() {
     }
 
     const cancelAppointment = (id) => {
-           axios.put(`${APP_URL}/cancelAppointment/${id}`)
+           axios.put(`http://localhost:5000/api/appointment/cancelAppointment/${id}`)
         .then((response) => {
             if (response.data.success) {
                 toast.success(response.data.message)
@@ -232,11 +230,11 @@ function Doctor() {
                             appointment.map((item) => (
                                  <tr className='text-xs even:bg-gray-100 even:bg-gray-100'>
                                     <td className='p-2'>
-                                    <img src={`${IMAGE_URL}/images/`+ item.patient_image}  alt="" className='h-[50px] w-[50px] rounded-full' />
+                                    <img src={`http://localhost:5000/images/`+ item.patient_image}  alt="" className='h-[50px] w-[50px] rounded-full' />
                                     </td>   
                                     <td>{item.patient_first_name} {item.patient_last_name}</td>
                                     <td>{item.patient_phone}</td>
-                                    <td><img src={`${IMAGE_URL}/images/`+ item.doctor_image}  alt="" className='h-[50px] w-[50px] rounded-full' /></td>
+                                    <td><img src={`http://localhost:5000/images/`+ item.doctor_image}  alt="" className='h-[50px] w-[50px] rounded-full' /></td>
                                     <td>{item.doctor_first_name} {item.doctor_last_name}</td>
                                     <td className='w-[200px]'>{formatDate(item.appointmentDate)}</td> 
                                     <td>{item.appointmentFee}</td>

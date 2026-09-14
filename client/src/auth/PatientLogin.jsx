@@ -7,9 +7,6 @@ import axios from 'axios'
 import { toast } from 'react-hot-toast'
 import { useEffect } from 'react'
 
-const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/patients/authPatient" : "/api/patients/authPatient"
-const LOGIN_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/patients/loginPatient" : "/api/patients/loginPatient"
-
 function PatientLogin() {
     const [loading,setLoading] = useState(false)
     const [value, setValue] = useState({
@@ -31,7 +28,7 @@ function PatientLogin() {
 
 
     useEffect(() => {
-            axios.get(`${API_URL}`)
+            axios.get('http://localhost:5000/api/patients/authPatient')
             .then((response) => {
                 if (response.data.success) {
                     navigate('/patient')
@@ -47,7 +44,7 @@ function PatientLogin() {
     const handleSubmit = (event) => {
         event.preventDefault()
         setLoading(true)
-        axios.post(`${LOGIN_URL}`,value)
+        axios.post('http://localhost:5000/api/patients/loginPatient',value)
         .then((response) => {
             if (response.data.success) {
                 setLoading(false)

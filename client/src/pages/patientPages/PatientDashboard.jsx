@@ -6,8 +6,6 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 
-const PATIENTS_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/patients" : "/api/patients"
-
 function PatientDashboard() {
     const [lastName,setLastName] = useState([])
     const navigate = useNavigate()
@@ -19,7 +17,7 @@ function PatientDashboard() {
     ]
 
     useEffect(() => {
-        axios.get(`${PATIENTS_URL}/authPatient`)
+        axios.get('http://localhost:5000/api/patients/authPatient')
         .then((response) => {
             if (response.data.success) {
                 setLastName(response.data.details)
@@ -33,7 +31,7 @@ function PatientDashboard() {
     },[])
     
     const handleLogout = () => {
-        axios.get(`${PATIENTS_URL}/logoutPatient`)
+        axios.get("http://localhost:5000/api/patients/logoutPatient")
         .then((response) => {
             if (response.data.success) {
                 toast.success(response.data.message)

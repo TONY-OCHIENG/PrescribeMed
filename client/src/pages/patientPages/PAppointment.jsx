@@ -3,9 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { formatDate, formatDates } from '../../components/Date';
 import axios from 'axios';
 import { toast } from 'react-hot-toast'
-const APOINTMENT_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/appointment" : "/api/appointment"
-const PATIENTS_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/patients" : "/api/patients"
-const IMAGE_URL = import.meta.env.MODE === "development" ? "http://localhost:5000" : "https://prescribemed.onrender.com"
+
 function PAppointment() {
     const [patient_id, setPatientID] = useState([])
     const [appointments,setAppointment] = useState([])
@@ -17,7 +15,7 @@ function PAppointment() {
     }
     //getting patient id
     useEffect(() => {
-            axios.get(`${PATIENTS_URL}/authPatient`)
+            axios.get('http://localhost:5000/api/patients/authPatient')
             .then((response) => {
                 if (response.data.success) {
                     setPatientID(response.data.details)
@@ -38,7 +36,7 @@ function PAppointment() {
           appointmentFee: appointment.map((item) => item.fee)[0]
         }
         
-    axios.post(`${APOINTMENT_URL}/bookAppointment`,items)
+    axios.post('http://localhost:5000/api/appointment/bookAppointment',items)
         .then((response) => {
                 if (response.data.success) {
                     toast.success(response.data.message)
@@ -53,7 +51,7 @@ function PAppointment() {
        
     }
     useEffect(() => {
-        axios.get(`${APOINTMENT_URL}/appointmentPatientHistory/${patient_id.patientID}`)
+        axios.get(`http://localhost:5000/api/appointment/appointmentPatientHistory/${patient_id.patientID}`)
         .then((response) => {
             if (response.data.success) {
                 setAppointment(response.data.results)
@@ -74,7 +72,7 @@ function PAppointment() {
                 {
                     appointment?.length > 0 ? appointment.map((items) => (<div className='flex justify-between md:flex-row flex-col mb-4'>
                         <div className='flex'>
-                            <div><img src={`${IMAGE_URL}/images/`+ items.image}  alt="" className='h-[100px] w-[100px] object-cover' /></div>
+                            <div><img src={`http://localhost:5000/images/`+ items.image}  alt="" className='h-[100px] w-[100px] object-cover' /></div>
                             <div className='ml-3'>
                                 <h1 className='text-md text-gray-600 mb-2 font-extrabold'>Dr, {items.firstName} {items.lastName}</h1>
                                 <h1 className='text-xs text-gray-600'>{items.speciality}</h1>
@@ -116,10 +114,10 @@ function PAppointment() {
                             appointments.map((item) => (
                                  <tr className='text-xs even:bg-gray-100'>
                                     <td className='p-2'>
-                                    <img src={`${IMAGE_URL}/images/`+ item.patient_image}  alt="" className='h-[50px] w-[50px] rounded-full' />
+                                    <img src={`http://localhost:5000/images/`+ item.patient_image}  alt="" className='h-[50px] w-[50px] rounded-full' />
                                     </td>   
                                     <td>{item.patient_first_name} {item.patient_last_name}</td>
-                                    <td><img src={`${IMAGE_URL}/images/`+ item.doctor_image}  alt="" className='h-[50px] w-[50px] rounded-full' /></td>
+                                    <td><img src={`http://localhost:5000/images/`+ item.doctor_image}  alt="" className='h-[50px] w-[50px] rounded-full' /></td>
                                     <td>{item.doctor_first_name} {item.doctor_last_name}</td>
                                     <td className='w-[200px]'>{formatDate(item.appointmentDate)}</td> 
                                     <td>{item.appointmentFee}</td>
