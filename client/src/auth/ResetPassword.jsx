@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import Input from '../components/Input'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-
+const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/patients" : "/api/patients"
 function ResetPassword() {
     const { id } = useParams()
     const [loading,setloading] = useState(false)
@@ -25,7 +25,7 @@ function ResetPassword() {
     const handleSubmit = (event) => {
       event.preventDefault()
       setloading(true)
-      axios.post(`https://prescribemed.onrender.com/api/patients/updatePassword/${id}`,password)
+      axios.post(`${API_URL}/updatePassword/${id}`,password)
       .then((response) => {
         if (response.data.success) {
           setloading(false)

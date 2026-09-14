@@ -26,7 +26,7 @@ function DoctorLogin() {
     }
 
      useEffect(() => {
-        axios.get(`${API_URL}/api/doctors/authDoctor`)
+        axios.get(`${API_URL}`)
         .then((response) => {
             if (response.data.success) {
                  navigate("/doctor")
@@ -43,7 +43,7 @@ function DoctorLogin() {
     const handleSubmit = (event) => {
         event.preventDefault()
         setLoading(true)
-        axios.post(`${LOGIN_URL}/api/doctors/loginDoctor`,doctor)
+        axios.post(`${LOGIN_URL}`,doctor)
         .then((response) => {
             if (response.data.success) {
                 setLoading(false)

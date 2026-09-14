@@ -3,14 +3,15 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import toast from 'react-hot-toast'
-
+const ACTIONS_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/patients" : "/api/patients"
+const IMAGE_URL = import.meta.env.MODE === "development" ? "http://localhost:5000" : "https://prescribemed.onrender.com"
 function Profile() {
     const [patientId, setPatientID] = useState([])
     const [profile, setProfile] = useState([])
     const [image, setImage] = useState([])
  
     useEffect(() => {
-        axios.get('http://localhost:5000/api/patients/authPatient')
+        axios.get(`${ACTIONS_URL}/authPatient`)
         .then((response) => {
             if (response.data.success) {
                 setPatientID(response.data.details)
@@ -24,7 +25,7 @@ function Profile() {
     },[])
     // fetching patient details from the database
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/patients/patientProfile/${patientId.patientID}`)
+        axios.get(`${ACTIONS_URL}/patientProfile/${patientId.patientID}`)
         .then((response) => {
             if (response.data.success) {
                 setProfile(response.data.results[0])
@@ -48,7 +49,7 @@ function Profile() {
         formData.append("age",profile.age)
 
         event.preventDefault()
-        axios.post(`http://localhost:5000/api/patients/updateProfile/${patientId.patientID}`,formData)
+        axios.post(`${ACTIONS_URL}/updateProfile/${patientId.patientID}`,formData)
         .then((response) => {
             if (response.data.success) {
                 toast.success(response.data.message)
@@ -66,7 +67,7 @@ function Profile() {
         <div className='max-w-7xl md:w-[90%] mx-auto bg-white p-4 shadow-md rounded-xl flex justify-center items-center'>
           <form action="" className='p-4 rounded-md shadow-md max-w-md' onSubmit={handleSubmit}>
             <div className='flex justify-center items-center'>
-                <img src={`http://localhost:5000/images/`+ image}   alt="" className='h-[100px] w-[100px] mb-2 rounded-full'/>
+                <img src={`${IMAGE_URL}/images/`+ image}   alt="" className='h-[100px] w-[100px] mb-2 rounded-full'/>
             </div>
             <label htmlFor="firstname">First name</label>
             <input type="text" name='first_name' value={profile.first_name} onChange={(event) => setProfile({...profile, first_name: event.target.value})} id='firstname' className='p-2 rounded-md border w-full'/>
